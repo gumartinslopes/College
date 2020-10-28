@@ -12,6 +12,7 @@ class Main{
 			s.show();
 			int removed = s.pop();
 			s.show();
+			System.out.println("\n\n\n");
 	
 		//------Working With Lists--------------
 			System.out.println("-------list-------");
@@ -28,8 +29,32 @@ class Main{
 			int a = l.removeAtEnding();
 			int b =l.removeAtBeginning();
 			int c = l.remove(3);
-			System.out.println(a + ","+ b + "and" + c + "were removed form the lis" );
+			System.out.println("\n" + a + ", "+ b + " and " + c + " were removed form the list" );
 			l.show();
+
+			System.out.println("\n\n\n");
+
+		//------Working With Queues--------------
+		
+			System.out.println("-------Queue-------");
+			Queue q= new Queue(10);
+			q.insert(1);
+			q.insert(2);
+			q.insert(3);
+			q.insert(4);
+			q.insert(5);
+			q.insert(6);
+			q.insert(7);
+			q.insert(8);
+			q.insert(9);
+			q.insert(10);
+			q.show();
+			int d = q.remove();
+			int e = q.remove();
+			int f = q.remove();
+			System.out.println(d +", " + e + ", " + f +" were removed");
+			q.show();
+
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
