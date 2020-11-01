@@ -1,20 +1,29 @@
 module function1;
-
-function [1:1] add1; // definir função
+function [1:1] equals; // definir função
     input e1, e2; // duas entradas
     reg A;
     begin
         A = 1;
         if ( e1 == e2 )
-        add1 = 1 & A;
+        equals = 1 & A;
         else
-        add1 = 0;
+        equals = 0;
     end
 endfunction
 
-initial begin:
-    reg B;
-    B = add1(1, 0); // invocação da função com dois argumentos
-    $display( "Saida = %b", B );
-end;
+task print;
+    input B;
+    if(B == 1)
+    $display("They are the same");
+    else 
+    $display("Different values bro");
+endtask
+
+ reg B;
+
+initial begin
+    B = equals(1, 1); // invocação da função com dois argumentos
+    print(B);
+    $display( "Output = %b", B );
+end
 endmodule // function1
