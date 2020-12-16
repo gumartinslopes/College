@@ -1,0 +1,213 @@
+2020-2_ARQ1_RCR_007
+
+Simplificação tabular
+
+Método de Quine-McCluskey (a.b + a.b')
+
+Exemplo 1:
+     
+SoP (0, 1, 2, 5, 6, 8,12,13,15)
+     ^  ^  ^  ^  ^  ^  ^  ^  ^
+     
+a.) Organizar os termos segundo a quantidade de bits
+
+Grupo 0: bits = 1 -> 0
+
+0  0000  x'y'w'z'  [X]
+
+Grupo 1: bits = 1 -> 1
+
+1  0001  x'y'w'z   [X]
+2  0010  x'y'w z'  [X]
+8  1000  x y'w'z'  [X]
+
+Grupo 2: bits = 1 -> 2
+
+5  0101  x'y w'z   [X]
+6  0110  x'y w z'  [X]
+12 1100  x y w'z'  [X]
+
+Grupo 3: bits = 1 -> 4
+
+13 1101  x y w'z   [X]
+
+Grupo 4: bits = 1 -> 5
+
+15 1111  x y w z   [X]
+
+b.) Formar pares com dH=1
+
+( 0, 1) -> (0000, 0001) = 000_    (Ga)
+( 0, 2) -> (0000, 0010) = 00_0    (Gb)
+( 0, 8) -> (0000, 1000) = _000    (Gc)
+
+( 1, 5) -> (0001, 0101) = 0_01    (Gd)
+( 2, 6) -> (0010, 0110) = 0_10    (Ge)
+( 8,12) -> (1000, 1100) = 1_00    (Gf)
+
+( 5,13) -> (0101, 1101) = _101    (Gg)
+(12,13) -> (1100, 1101) = 110_    (Gh)
+
+(13,15) -> (1101, 1111) = 11_1    (Gi)
+
+c.) Formar pares de pares com dH=1
+
+// não é possível formar mais pares
+
+d.) Mapear os termos remanescentes
+
+    0   1   2   5   6   8  12  13  15
+Ga  x   x
+Gb  x       x
+Gc  x                   x
+Gd      x       x
+Ge          x      [x]                 <- essenciais
+Gf                      x   x
+Gg              x               x
+Gh                          x   x
+Gi                              x  [x] <- essenciais
+______________________________________
+    3   2   2   2   1   2   2   3   1
+                    ^               ^
+d.1) Reservar para o resultado os de apenas 1 ocorrência:
+
+SoP( ) = Ge + Gi + ...
+
+    0   1   2   5   6   8  12  13  15
+Ga  o   o                              (-) descartar
+Gb  o   |   o                          (-) descartar
+Gc  x   |   |           o              <=  escolha arbitrária
+Gd      x   |   x       |              <=  escolha arbitrária
+Ge          x   |  [x]  |              <-
+Gf              |       x   x          <=  escolha arbitrária
+Gg              o           |   o      (-) descartar
+Gh                          o   o      (-) descartar
+Gi                              x  [x] <-
+______________________________________
+    3   2   2   2   1   2   2   3   1
+                    ^               ^
+d.2) Reservar as escolhas que simplificam linhas
+
+    0   1   2   5   6   8  12  13  15
+Gc  x                   o              <= escolha arbitrária
+Gd      x       x                      <= escolha arbitrária
+Ge          x      [x]                 <-
+Gf                      x   x          <= escolha arbitrária
+Gi                              x  [x] <-
+______________________________________
+    1   1   1   1   1   1   1   1   1
+
+SoP( ) = ( Ge  + Gi ) + ( Gc  + Gd  + Gf )
+          0_10  11_1     _000   0_01 1_00
+
+       =  x'wz'+xyz   +  y'w'z'+x'w'z+xw'z'
+
+e.) Comparar com o mapa de Veitch-Karnaugh
+
+xy\wz 00 01 11 10
+00     1  1     1
+01        1     1
+11     1  1  1   
+10     1         
+
+xy\wz 00 01 11 10
+00              1 <- Ge
+01              1
+11               
+10               
+
+xy\wz 00 01 11 10
+00               
+01               
+11        1  1    <- Gi  
+10               
+
+xy\wz 00 01 11 10
+00     1          <- Gc 
+01               
+11               
+10     1         
+
+xy\wz 00 01 11 10
+00               
+01        1       <- Gd
+11        1      
+10               
+
+xy\wz 00 01 11 10
+00               
+01               
+11     1          <- Gf     
+10     1         
+
+Exemplo 2:
+     
+SoP (0, 1, 2, 3, 6, 7, 8, 9)
+     ^  ^  ^  ^  ^  ^  ^  ^
+     
+a.) grupos
+
+0     0000  [X]
+
+1     0001  [X]
+2     0010  [X]
+8     1000  [X]
+
+3     0011  [X]
+6     0110  [X]
+9     1001  [X]
+
+7     0111  [X]
+
+b.) pares
+
+(0,1) 000_  [X]
+(0,2) 00_0  [X]
+(0,8) _000  [X]
+
+(1,3) 00_1  [X]
+(1,9) _001  [X]
+(2,3) 001_  [X]
+(2,6) 0_10  [X]
+(8,9) 100_  [X]
+
+(3,7) 0_11  [X]
+(6,7) 011_  [X]
+
+c.) pares de pares
+
+Ga: ((0,1),(2,3)) 00_ _ <- escolher  o ordenado
+    ((0,2),(1,3)) 00_ _ <- descartar o fora de ordem
+
+Gb: ((2,3),(6,7)) 0_1_  <- escolher  o ordenado
+    ((2,6),(3,7)) 0_1_  <- descartar o fora de ordem
+
+Gc: ((0,1),(8,9)) _00_  <- escolher  o ordenado
+    ((0,8),(1,9)) _00_  <- descartar o fora de ordem
+
+d.)
+   0  1  2  3  6  7  8  9
+Ga x  x  x  x               
+Gb       x  x [x][x]       <-  essenciais
+Gc x  x             [x][x] <-  essenciais
+__________________________
+   2  2  2  2  1  1  1  1
+
+   0  1  2  3  6  7  8  9
+Ga o  o  o  o              (-) descartar 
+Gb |  |  x  x  x  x        <-  essenciais
+Gc x  x              x  x  <-  essenciais
+__________________________
+   2  2  2  2  1  1  1  1
+
+   0  1  2  3  6  7  8  9
+Gb       x  x  x  x       <-   essenciais
+Gc x  x              x  x <-   essenciais
+__________________________
+   2  2  2  2  1  1  1  1
+
+SoP ( ) =  Gb  + Gc
+        = 0_1_ + _00_
+        = a'c  +  b'c'
+        
+        

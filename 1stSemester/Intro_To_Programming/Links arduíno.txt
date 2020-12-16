@@ -1,0 +1,20 @@
+Links extras Projeto arduíno- Gustavo Martins Lopes da Costa LIP Pucminas
+	
+1-Arduíno sendo usado para complementar um projeto para configurar o clock 
+de um processador de videogame 8 bits
+	https://www.youtube.com/watch?v=8G80nuEyDN4
+
+2-Vídeo do manual do mundo introdutório ao tinkercad(Primeiro vídeo que me inspirou a utilizar o arduuino)
+	https://www.youtube.com/watch?v=CrHJj4OQ6Sw
+Projeto feito:
+	https://www.tinkercad.com/things/6jvRrqBYlWx
+
+3-Curso de arduíno completo que foi de forte auxilio nos meus projetos
+	https://www.youtube.com/playlist?list=PL7CjOZ3q8fMc3OmT7gD7N6sLLFfXsXGZi
+
+5-Livro de iníciação ao arduíno "Arduino Projects for Dummies"
+	https://books.google.com.br/books?hl=pt-BR&lr=&id=YM8AQKa9nHIC&oi=fnd&pg=PT4&dq=Arduino++projects&ots=P-B1H6J5Tu&sig=-heGNof31v2_-f0WOdqWke5v9rQ#v=onepage&q&f=false
+
+6-Ted talks do Massimo Banzi do-fundador do arduino sobre esse projeto e a sua contribução para a"forma de pensar" open source e como ele auxilia diversas pessoas no aprendizado
+	https://www.ted.com/talks/massimo_banzi_how_arduino_is_open_sourcing_imagination?language=pt-br
+7-Tese de alunos da UFRGS sobre o arduíno como ferramenta de ensino da física 

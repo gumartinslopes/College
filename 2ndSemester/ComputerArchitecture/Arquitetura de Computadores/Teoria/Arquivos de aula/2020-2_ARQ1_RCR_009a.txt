@@ -1,0 +1,564 @@
+PUC-Minas - ICEI - Ciência da Computação
+Arquitetura de Computadores I - Aula 007a
+
+Operações lógicas
+
+                (')  (')    (.)   (+)            complementares 
+                (~)  (~)    (&)   (|)   (^)    (~&)   (~|)   (~^)
+                                                                
+termo      a b  NOT  NOT    AND    OR   XOR    NAND    NOR    XNOR 
+  0        0 0   1    1      0     0     0       1      1      1
+  1        0 1   1    0      0     1     1       1      0      0
+  2        1 0   0    1      0     1     1       1      0      0
+  3        1 1   0    0      1     1     0       0      0      1
+                           (01)  (07)  (06)    (14)   (08)   (09) 
+                 a'   b'    a.b   a+b   a^b  ~(a.b) ~(a+b) ~(a^b)
+
+mintermos (=1)  0,1  0,2     3   1,2,3  1,2   0,1,2    0     0,3 
+MAXTERMOS (=0)  2,3  1,3   0,1,2   0    0,3     3    1,2,3   1,2
+
+OBS.: mintermo -> posição em que a linha na tabela-verdade é igual a 1
+      MAXTERMO -> posição em que a linha na tabela-verdade é igual a 0
+
+______________________________________________________________________
+
+Operações aritméticas
+
+
+Considerar
+
+a  = 1 = true
+a' = 0 = false
+
+a and b = a & b = a.b
+a or  b = a | b = a+b
+
+Exemplo 1:
+
+Para a adição de 2 bits
+
+m mintermos a b (a+b) = s1 s0
+0  (a'.b')  0+0 = 00     0  0
+1  (a'.b )  0+1 = 01     0  1
+2  (a .b')  1+0 = 01     0  1
+3  (a .b )  1+1 = 10     1  0
+
+Forma normal disjuntiva canônica (cDNF)
+(saídas definidas por linhas com mintermos iguais a um)
+
+Considerar os termos na tabela com valor igual a 1
+
+Soma de Produtos ( SoP )
+                                                  3
+s1 = f1 (a, b) = 1 = m(3)        = m  { 3 }  =   a.b
+                                                 1   2
+s0 = f0 (a, b) = 1 = m(1) + m(2) = m { 1,2 } = a'.b+a.b'
+
+Expressões com as saídas definidas por mintermos:
+
+s1 =    a . b    = a & b = a and b
+s0 = a'.b + a.b' = a ^ b = a xor b (não é canônica!)
+
+Notações semelhantes
+
+s1 = f1 (a, b) = a & b =      a.b      = a and b = and (a, b)
+s0 = f0 (a, b) = a ^ b = (a'.b + a.b') = a xor b = xor (a, b)
+
+
+Equações características
+
+  Forma completa (ou canônica):
+  s1 = v =     a.b     (v -> "vai-um" )
+  s0 = r = a'.b + a.b' (r -> resultado)
+
+  Forma compacta (soma de produtos):
+  s1 = v = SoP (3)
+  s0 = r = SoP (1,2)
+
+
+De outra forma
+
+Considerar:
+
+A  = 0
+A' = 1
+
+A and B = A & B = A . B
+A or  B = A | B = A + B
+
+
+M MAXTERMOS A B  SOMA = S1 S0
+0  (A + B ) 0 0   00     0  0
+1  (A + B') 0 1   01     0  1
+2  (A'+ B ) 1 0   01     0  1
+3  (A'+ B') 1 1   10     1  0
+
+Forma normal conjuntiva canônica (cCNF)
+(saídas definidas por linhas com MAXTERMOS iguais a zero)
+
+Considerar os termos na tabela com valor igual a 0
+
+Produto de Somas ( PoS )
+                                           0      1       2
+S1 = F1 (A, B) = 0 = MAXTERMOS {0,1,2} = (A+B).(A +B').(A'+B)
+                                           0      3
+S0 = F0 (A, B) = 0 = MAXTERMOS {0 , 3} = (A+B).(A'+B')
+
+Para S1:
+
+A+B  .
+A+B'
+________________
+      A.B'+B.B'+          // contradição
+A.A + A.B                 // idempotência
+_______________
+      A.B'+  0 '+         // contradição
+A.1 + A.B + A.B'          // identidade
+____________________
+A.1 + A.B + A.B'
+____________________
+A.(1 + B + B' )           // distributividade
+A.     1                  // identidade
+ A
+
+A    .
+A'+B
+_________
+A.A'+A.B                  // contradição
+ 0  +A.B    
+     A.B
+
+S1 = A.B
+
+
+Para S0:     
+
+A +B .
+A'+B'
+__________________
+   A.B'+B.B'+              // contradição 
+A.A'+A'.B                  // contradição 
+___________________
+   A.B'+ 0  +               
+ 0  +A'.B                   
+___________________
+   A.B'+A'.B               // comutatividade
+   A'.B+A.B'
+
+S0 = A'.B+A.B'   
+
+
+S1 = A.B
+S0 = A'.B+A.B'
+
+______________________________________________________________________
+
+
+Para a adição de 3 bits
+
+  mintermos   MAXTERMOS  a b c s1 s0
+0 (a'.b'.c') (A +B +C )  0 0 0  0  0
+1 (a'.b'.c ) (A +B +C')  0 0 1  0  1
+2 (a'.b .c') (A +B'+C )  0 1 0  0  1
+3 (a'.b .c ) (A +B'+C')  0 1 1  1  0
+4 (a .b'.c') (A'+B +C )  1 0 0  0  1
+5 (a .b'.c ) (A'+B +C')  1 0 1  1  0
+6 (a .b .c') (A'+B'+C )  1 1 0  1  0
+7 (a .b .c ) (A'+B'+C')  1 1 1  1  1
+
+           Soma de Produtos (1)           Produto de Somas (0)
+
+  s1 = v = 1 -> { 3,5,6,7 }      S1 = V = 0 -> { 0,1,2,4 }
+  s0 = r = 1 -> { 1,2,4,7 }      S0 = R = 0 -> { 0,3,5,6 }
+
+
+  Equações características para mintermos
+
+  Forma compacta (soma de produtos):
+  v = SoP (3,5,6,7)
+  r = SoP (1,2,4,7)
+
+  Forma completa (ou canônica):
+         (3)      (5)        (6)       (7)
+  v = a'.b .c + a .b'.c  + a.b .c' + a .b .c
+         (1)      (2)        (4)       (7)
+  r = a'.b'.c + a'.b .c' + a.b'.c' + a .b .c
+
+  Observações:
+              __________        __________
+             |          |      |          |      // em evidência
+  v =  a'.b .c  + a .b'.c  + a .b .c' + a .b .c
+    = (a'.b     + a.b').c  +     (a.b).(c'+c)
+    = (a'.b+a.b').c        + (a.b).(c'+c)        // negação
+    =    (a^b)   .c        + (a.b).   1          // identidade
+    =    (a^b)   .c        + (a.b)
+
+             ______________________________
+            |          _________           |
+            |         |         |          |     // distribuição
+  r = a'.b'.c + a'.b .c' + a.b'.c' + a .b .c
+    = a'.b'.c +  (a'.b + a.b').c'  + a .b .c
+    = (a'.b'+a.b).c  +  (a'.b+a.b').c'
+    =  (a xnor b).c  +    (a xor b).c'
+    =  (a^b)'.c      +    (a^b).c'
+
+  OBS.:
+    a xor  b = (a'.b+a.b') = m {1,2} = (a^b)
+    a xnor b = (a'.b'+a.b) = m {0,3} = (a^b)'
+
+    se fizer (a^b) = k e substituir 
+
+  r =    k'.c        +      k.c'
+  r =    k^c
+
+    e se retornar o valor substituído
+
+  r = (a^b)^c
+
+    logo
+
+  v = (a^b).c + (a.b)
+  r = (a^b)^c
+
+
+Relações de recorrência
+
+ v3 v2 v1 v0  0
+  0 a3 a2 a1 a0 +
+  0 b3 b2 b1 b0
+ ______________
+ r4 r3 r2 r1 r0
+
+    supor a existência de uma primeira parcela
+
+  v0 = (a0.b0)
+  r0 = (a0^b0)
+
+    a segunda parcela será
+
+  v1 = (a1^b1).v0 + (a1.b1)
+  r1 = (a1^b1)^v0
+
+    e a seguinte
+
+  v2 = (a2^b2).v1 + (a2.b2)
+  r2 = (a2^b2)^v1
+
+    e assim por diante, para mais bits,
+    o que se poderá resumir pela relação de recorrência
+
+  a + b + v   = v r  <- para todos os bits no intervalo [n:0]
+   n   n   n-1   n n
+                        por definição, o primeiro v  = 0
+                                                   0
+                        e se considerar o último  v  = r
+                                                   n    (n+1)
+                        resposta = { r     r   r     r     ... r   }
+                                      (n+1) (n) (n-1) (n-2)     (0)
+
+
+  Equações características para MAXTERMOS
+
+  Forma compacta (produto de somas):
+  V  = PoS {0,1,2,4}
+  R  = PoS {0,3,5,6}
+
+  Forma completa (ou canônica):
+         (0)        (1)         (2)          (4)
+  V =  (A+B+C) . (A+B +C') . (A +B'+C ) . (A'+B +C)
+         (0)        (3)         (5)          (6)
+  R =  (A+B+C) . (A+B'+C') . (A'+B +C') . (A'+B'+C)
+
+  Observações:
+         __________________________________
+        |  ______________________          |
+        | |  __________          |         |
+        | | |          |         |         |        // distribuição   
+  V =  (A+B+C) . (A+B +C') . (A +B'+C ) . (A'+B +C)
+
+com M {0,1} :
+
+        A +B +C               (0)
+    *   A +B +C'              (1)
+    ____________________ 
+        A.C'+B.C'+C.C'     -> C.C' = 0              // contradição
+    +   A.B +B.B +B.C      -> B.B  = B = B.1        // idempotência/identidade
+        A.A +A.B +A.C      -> A.A  = A = A.1        // idempotência/identidade
+    ____________________ 
+        A.C'+B.C'+ 0     
+    +   A.B +B.1 +B.C    
+        A.1 +B.A +A.C    
+    ____________________ 
+        A.1 +A.C'+A.C              
+    +   B.C'+B.1+B.C+B.A 
+    ____________________ 
+        A.(1+C'+C)         -> C'+C = 1              // tautologia
+    +   B.(C'+1+C+A)       -> C'+C+1+A = 1          // identidade
+    ____________________
+        A.( 1 )                                     // identidade
+    +   B.( 1 )                                     // identidade 
+    ____________________ 
+        A + B              (parcial 1)
+
+de outra forma
+
+     ((A+B)+C).((A+B)+C')
+
+     K = (A+B)
+
+     (K+C).(K+C')
+
+     (K.K + K.C') + (C.K + C.C')
+ 
+     (K.1 + K.C') + (C.K +  0  )
+
+      K.1 + K.C'  +  K.C 
+
+      K.(1+   C'  +    C)
+
+      K.1
+
+      K
+
+      substituindo novamente
+
+      (A+B)
+
+com M {0,2} :
+
+        A +B +C               (0)
+    *   A +B'+C               (2)
+    ____________________ 
+        A.C +B.C+ C .C     -> C.C  = C = C.1        // idempotência/identidade  
+    +   A.B'+B.B'+B'.C     -> B.B' = 0              // contradição
+        A.A +A.B +A .C     -> A.A  = A = A.1        // idempotência/identidade
+    ____________________ 
+        A.C +B.C+ C .1   
+    +   A.B'+ 0 +B'.C    
+        A.1 +B.A+A .C
+    ____________________ 
+       (A+B+1+B'+A).C
+    +  (B'+ 1   +B).A    
+    ____________________ 
+       (    1     ).C                               // identidade 
+    +  (    1     ).A                               // identidade 
+    ____________________ 
+        A + C              -> (parcial 2 )
+
+
+com M {0,4}:
+
+        A +B +C               (0)
+    *   A'+B +C               (4)
+    ____________________ 
+        A.C +B.C +C .C     -> C.C  = C = C.1        // idempotência/identidade
+    +   A.B +B.B +B .C     -> B.B  = B = B.1        // idempotência/identidade
+        A'.A+A'.B+A'.C     -> A.A' = 0              // contradição
+    ____________________ 
+        A.C +B.C +C .1
+    +   A.B +B.1 +B .C
+         0  +A'.B+A'.C
+    ____________________ 
+       (A+B+1+B+A') .C
+    +  (A+  1  +A') .B   
+    ____________________
+       (    1     ) .C                              // identidade
+    +  (    1     ) .B                              // identidade
+    ____________________ 
+        B + C              -> (parcial 3)
+
+
+   Ao juntar os resultados parciais se obterá 
+
+     V = (A+B).(A+C).(B+C)
+
+   OBS.:
+     Verificar que esse resultado não se parece
+     com aquele obtido anteriormente por mintermos
+
+     v = (a^b).c + (a.b)
+
+     Entretanto,
+
+     V = (A+B).(A+C)      .(B+C)
+
+       = (A.A+B.A+A.C+B.C).(B+C)                     // distribução
+ 
+       = (A.1+A.B+A.C+B.C).(B+C)                     // identidade/comutativa
+
+       = (A.(1+B+C)  +B.C).(B+C)                     // distribuição
+
+       = (A.(  1  )  +B.C).(B+C)                     // identidade
+
+       = (A          +B.C).(B+C)
+
+       = A.(B+C)  +  (B.C).(B+C)                     // distribuição
+
+       = A.B+A.C  + B.C.B+B.C.C                      // distribuição
+  
+       = A.B+A.C  + B.B.C+B.C.C                      // comutatividade
+
+       = A.B+A.C  +(B.C) +(B.C)                      // idempotência
+
+       = A.B + A.C   +    B.C
+
+
+     Por inspeção, ao voltar à tabela-verdade,
+     observa-se que, para mintermos,
+
+ 
+  a b c  mintermos              s1 s0                      
+0 0 0 0  (a'.b'.c') (A +B +C )   0  0                      
+1 0 0 1  (a'.b'.c ) (A +B +C')   0  1                      
+2 0 1 0  (a'.b .c') (A +B'+C )   0  1                      
+3 0 1 1  (a'.b .c ) (A +B'+C')   1  0  <-             (b.c)
+4 1 0 0  (a .b'.c') (A'+B +C )   0  1                      
+5 1 0 1  (a .b'.c ) (A'+B +C')   1  0  <-       (a.c)      
+6 1 1 0  (a .b .c') (A'+B'+C )   1  0  <- (a.b)            
+7 1 1 1  (a .b .c ) (A'+B'+C')   1  1  <- (a.b) (a.c) (b.c)
+  A B C              MAXTERMOS                             
+
+     semelhante à expressão original, logo,
+     a outra forma de arranjar os termos,
+     que leva à equação encontrada acima
+ 
+ 
+         (3)        (5)        (6)        (7)
+  v =  a'.b .c  + a .b'.c  + a .b .c' + a .b .c
+            |        |         |__________||  |
+            |        |_____________________|  |                 
+            |_________________________________|
+        
+    =  (a.b).(c'+c) + (a.c).(b'+b) + (a'+a).(b.c)  
+
+    =  (a.b).(  1 ) + (a.c).(  1 ) + (  1 ).(b.c)
+
+    =  (a.b)        + (a.c)        +        (b.c)
+
+  
+  Para a outra expressão:        
+  
+             ____________________________________  
+            |                                    | 
+  R =  (A+B+C) . (A+B'+C') . (A'+B +C') . (A'+B'+C)
+                       |____________|
+  
+        A +B +C               (0)
+    *   A'+B'+C               (6)
+    ____________________ 
+        A.C +B .C +C. C    -> C.C  = C = C.1
+    +   A.B'+B .B'+C. B'   -> B.B' = 0
+        A'.A+A'.B +A'.C    -> A.A' = 0
+    ____________________
+        A.C +B .C +C. 1  
+    +   A.B'+  0  +C. B'
+         0  +A'.B +A'.C  
+    ____________________ 
+        A.C +B .C +C. 1  
+    +   A'.C+      C. B' 
+        A.B'+A'.B        
+    ____________________ 
+       (A+B+1+A'+B'). C  
+    +   A.B'+A'.B        
+    ____________________ 
+       (    1      ). C  
+    +   A.B'+A'.B        
+    ____________________ 
+        A.B'+A'.B   + C       (parcial 1)
+
+
+        A +B'+C'              (3)
+    *   A'+B +C'              (5)
+    ____________________
+        A.C'+B'.C'+C'.C'   -> C'.C' = C' = C'.1
+    +   A.B +B'.B +C'.B    -> B'.B  = 0
+        A.A'+B'.A'+C'.A'   -> A.A'  = 0
+    ____________________ 
+        A.C'+B'.C'+1 .C' 
+    +   A.B +  0  +B'.C' 
+         0  +A.B' +A'.C' 
+    ____________________ 
+        A.C'+B'.C'+1 .C'
+    +   A'.C'     +B'.C' 
+        A.B +B'.A' 
+    ____________________ 
+       (A+B'+1+A'+B').C'  
+    +   A.B +A'.B'        
+    ____________________ 
+       (    1      ). C'
+    +   A.B +A'.B'        
+    ____________________
+        A.B +A'.B'  + C'      (parcial 2)
+
+
+        A.B'+A'.B   + C       (parcial 1)
+        A.B +A'.B'  + C'      (parcial 2)
+    _________________________________
+        A.B'.C'+A'.B.C'+C.C'         
+    +   A.B'.A'.B'+A'.B.A'.B'+A'.B'.C
+        A.B'.A.B+A'.B.A.B+A.B.C      
+    _________________________________
+        A.B'.C'+A'.B.C'+ 0         
+    +   A.A'.B'.B'+A'.A'.B.B'+A'.B'.C
+        A.A.B'.B+A'.A.B.B+A.B.C      
+    _________________________________
+        A.B'.C'+A'.B.C'+ 0           
+    +    0  .B'   +A'  .  0  +A'.B'.C      
+        A.    0 +  0 .B  +A. B .C      
+    _________________________________
+       (A.B'   +A'.B).C'      -> (A .B'+A'.B) = (A xor  B)       
+    +  (A'.B'  + A.B).C       -> (A'.B'+A .B) = (A xnor B)
+    _________________________________
+       (   A xor  B ).C'
+    +  (   A xnor B ).C       -> (A xnor B)   = (A xor  B)'
+    _________________________________
+       (   A xor  B ) .C'                        
+    +  (   A xor  B )'.C      -> (A xor B)    = K
+    _________________________________
+                    K .C'                        
+    +               K'.C      -> (K.C'+K'.C)  = (K xor C)
+    _________________________________
+           K xor  C           ->  K = (A xor B) 
+
+       (A xor B) xor  C       ->  K = (A xor B) 
+
+  OBS.:
+    Verificar que a expressão acima é similar 
+    àquela obtida anteriormente para mintermos:
+
+    r = a^b^c   <=>   R = (A xor B) xor C
+
+______________________________________________________________________
+
+                  Resumo                   
+                                           
+                            Adição         
+                       a+b+v0 = [v1 r]     
+     a  b  vai-um    | vai-um   resultado 
+           anterior  | próximo
+   ------------------|--------------------
+0 |  0  0  0         |       0  0  ( 0)
+1 |  0  0  1         |       0  1  ( 1)
+2 |  0  1  0         |       0  1  ( 1)
+3 |  0  1  1         |       1  0  ( 2)
+4 |  1  0  0         |       0  1  ( 1)
+5 |  1  0  1         |       1  0  ( 2)
+6 |  1  1  0         |       1  0  ( 2)
+7 |  1  1  1         |       1  1  ( 3)
+  |------------------|--------------------
+  |------------------|--------------------
+  |                  |
+  |                  | v1 = {3,5,6,7}
+  |     SoP = 1      |
+  |                  | r  = {1,2,4,7}
+  |                  |
+  |------------------|--------------------
+  |------------------|--------------------
+  |                  |
+  |                  | V1 = {0,1,2,4}
+  |     PoS = 0      |
+  |                  | R  = {0,3,5,6}
+  |                  |
+
+ 
+

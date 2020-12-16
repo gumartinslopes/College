@@ -1,0 +1,29 @@
+class Main{
+  public static void bin2dec(String bin){
+    int dec = 0;
+    int expoente = 0;
+    for(int i = bin.length()-1; i >= 0; i--){
+      if(bin.charAt(i) == '1'){
+        dec += eleva(2, expoente);
+      }
+      expoente++;
+    }
+    System.out.println(bin + " em decimal vale " + dec);
+  }
+
+  public static int eleva(int base, int expoente){
+      int result;
+      if (expoente == 0)
+        base = 1;
+      else
+        for(int i = 1; i < expoente; i++){
+          base*=base;
+        }
+      return base;
+  }
+  
+  public static void main(String[] agrs){
+    String binario = "111";
+    bin2dec(binario);
+  }
+}

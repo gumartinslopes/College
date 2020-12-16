@@ -1,0 +1,83 @@
+Pontifícia Universidade Católica de Minas Gerais
+Curso de Ciência da Computação
+
+Lista para recuperação
+
+Entregar diagramas no Logisim e/ou JFlap,
+quando possível.
+
+Exercícios extras e opcionais
+
+
+01. ) Considerar o projeto de um multiplicador
+      de 2 bits (ab) por 2 bits (cd), cujas saídas (uv) 
+      serão limitadas módulo 4 a ser implementado 
+      apenas com portas lógicas simples:
+
+      a.) Qual a expressão SoP para o bit 1 (u)
+
+      b.) Qual a expressão PoS para o bit 0 (v)
+
+      c.) Qual a expressão SoP mais simplificada 
+          para o bit 0 (v)
+
+      d.) Qual a expressão PoS mais simplificada 
+          para o bit 1 (u) com
+
+02.) Montar dois flip-flops de maneira que
+     Ja = Qb' e Ka = Qb, Jb = Qa e Kb = Qa', 
+     e extrair a tabela de transições de estados.
+
+03.) Ligar as saídas de um flip-flop D a um multiplexador
+     de modo que Qa está na entrada 0 e Qa' está na entrada 1.
+     A saída do multiplexador está ligada à entrada Da.
+     Um sinal A será usado como seletor do multiplexador.
+     Fazer o diagrama de estados capaz de descrever o 
+     comportamento do circuito.
+
+04.) Montar um diagrama de estados de um circuito com 
+     duas entradas (ab) que apresente o seguinte comportamento: irá ou permanecerá no estado 1, 
+     se a=1 e b=0 ou se a=0, independente do valor de b; senão, 
+     estará ou irá para o estado 0. 
+
+05.) Dada a tabela de transições de estados abaixo,
+     determinar e implementar as expressões que o definem
+     em circuito baseado com flip-flops do tipo D
+
+     atual  próximo
+     Qa Qb   Qa Qb
+     0  0    0  1
+     0  1    1  1
+     1  0    0  0
+     1  1    1  0
+
+06.) Montar o circuito regido pelas as expressões abaixo
+     com dois flip-flops do tipo D e montar o diagrama
+     com as sequências de transições de estados equivalentes
+
+     Da = Qa'   e   Db = Qa xor Qb'
+
+07.) Montar uma máquina de Turing para se comportar
+     como um contador módulo-3, ou seja, a cada
+     3 entradas iguais a 1, deverá voltar ao estado 0.
+
+08.) Montar quatro flip-flops JK (ABCD) assincronamente
+     em configuração de "toggle", com clock inicial em A, 
+     e entradas dos seguintes recebendo as saídas positivas
+     dos anteriores. Uma porta NAND receberá os sinais de "toggle" 
+     e Qb e produz o sinal E.
+     
+09.) Quais as expressões resultantes da simplificação 
+     da tabela abaixo por mapa de Veitch-Karnaugh 
+     (X="don't care"=pode ser escolhido)
+
+     INPUT Qt Qt+1 J K
+       0    0  0   0 X
+       0    1  0   X 1
+       1    0  1   1 X
+       1    1  0   X 0
+
+10.) Montar quatro flip-flops T (DCBA) assincronamente
+     com clock inicial em D, e as entradas 
+     Tc=Qd',Tb=Qc' e Ta=Qb'.
+

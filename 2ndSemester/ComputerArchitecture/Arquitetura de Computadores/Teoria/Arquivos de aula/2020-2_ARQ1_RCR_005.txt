@@ -1,0 +1,101 @@
+2020-2_ARQ1_RCR_005
+
+Álgebra de Boole
+
+1. Simplificação de expressões
+
+a.) De Morgan
+
+ (x+y)' = x' . y'  (complementar cada variável e trocar a operação)
+
+ (x .y)' = x' + y'
+
+(x'+y)' = ???
+
+a = x' (substituir variável)
+
+(a+y)' = a' . y' = (x')' . y' = x . y'
+
+
+ b.) 
+ 
+ x + 0 = 0 + x = x
+ x + 1 = 1 + x = 1
+
+ x  . 0 = 0  . x = 0
+ x  . 1 = 1  . x = x
+
+ x' . y + x' + y
+ 
+(x'. y +   x' ) + y
+(x'. y + x'.1) + y
+ x'.(y + 1)    + y
+ (x'.   1   )    + y
+    x'            + y 
+    
+x'.y + y + x'  ->  (x'.y + y) + x'
+
+(x'.y +  y  )      + x'
+(x'.y + y.1)      + x'
+(x'    +  1  ). y  + x'
+(       1       . y) + x'
+          y           + x'
+          x'          + y
+          
+2. Universalidade das portas NAND e NOR
+
+    (x')'    ->   x
+
+De Morgan: 
+(p' + q')' -> p .  q
+(p' .  q')' -> p + q
+
+
+p . q -> (p.q)' -> p'+q'  => (p'+q')' -> p . q
+
+a = (p.q)  -> (a')' = a
+ 
+ ((p.q)')' -> (p'+q')' -> (p')' . (q')'    -> p . q
+
+s = nand ( p, p ) -> s = p'
+s = nor    ( p, p ) -> s = p'
+
+s = nand (nand(p,p), nand(q,q)) -> s = nand( p', q' ) = p+q
+
+nand ( p', q' ) -> (p' . q')' -> p + q
+
+s = nor    (nor(p,p)   ,  nor(q,q))    -> s = nor  ( p', q' ) = p .q
+
+nor   ( p', q' ) -> (p' + q')' -> p . q
+
+3. SoP e PoS
+
+                     SoP         PoS
+m   x y z    f (1,3,5,7) = F(0,2,4,6)
+0    0 0 0   0 
+1    0 0 1   1 
+2    0 1 0   0
+3    0 1 1   1
+4    1 0 0   0
+5    1 0 1   1 
+6    1 1 0   0
+7    1 1 1   1
+
+m1 = 0 0 1 = x'.y'.z       M0 = 0 0 0 = X + Y + Z
+m3 = 0 1 1 = x'.y .z       M2 = 0 1 0 = X + Y'+ Z
+m5 = 1 0 1 = x .y'.z       M4 = 1 0 0 = X'+ Y + Z
+m7 = 1 1 1 = x .y .z       M6 = 1 1 0 = X'+Y' + Z
+
+SoP ( m1, m3, m5, m7 ) = x'.y'.z + x'.y .z + x .y'.z + x .y . z
+PoS ( M0, M2, M4, M6 ) = (X + Y + Z).(X+Y'+Z).(X'+Y+Z ).(X'+Y'+Z)
+
+4.) 
+                SoP  SoP
+m   x y     xor    xnor
+0    0 0     0       1
+1    0 1     1       0
+2    1 0     1       0
+3    1 1     0       1
+
+xor  : SoP(1,2) = x'.y  + x.y'
+xnor: SoP(0,3) = x'.y' + x.y

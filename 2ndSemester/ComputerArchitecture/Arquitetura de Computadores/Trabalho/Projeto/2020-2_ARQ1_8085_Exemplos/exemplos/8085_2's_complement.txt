@@ -1,0 +1,21 @@
+// 2's COMPLEMENT OF AN 8-BIT NUMBER
+// The number to be complemented is stored in 0050
+// Answer is stored in 0051
+//
+MAIN:       NOP           // main ( ) {
+            LXI H,0050    //
+            MOV C,M       //   C = MEM[0050]; // option: 0=by DCR, 1=by INR
+            LDA 0051      //   A = MEM[0051];
+            DCR C         //   C = C-1;
+            JNZ ELSE_1    //   if ( flag[Z] ) {
+            CMA           //      A = ~A;
+            INR A         //      A = A+1;
+            JMP ENDIF_1   //   }
+ELSE_1:                   //   else {
+            DCR A         //      A = A-1;
+            CMA           //      A = ~A
+ENDIF_1:                  //   }
+            STA 0052      //   MEM[0052] = A
+            HLT           // }
+//
+// DATA

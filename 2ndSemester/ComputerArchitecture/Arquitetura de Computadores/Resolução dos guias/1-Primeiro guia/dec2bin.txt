@@ -1,0 +1,24 @@
+class dec2bin{
+  public static void dec2bin(int dec){
+    String bin = new String();
+    for(int i = dec; i > 0; i = i/2){
+      if(i%2 == 0){
+        bin+='0';
+      } else {
+        bin +='1';
+      }
+    }
+    
+    System.out.println(inverte(bin) +" corresponde a " + dec + " em binário");
+  }
+  public static String inverte(String normal){
+    String invertido = new String();
+    for(int i = 0; i < normal.length(); i++){
+      invertido+= normal.charAt(normal.length() - i - 1);
+    }
+    return invertido;
+  }
+  public static void main(String[] agrs){
+    dec2bin(54);
+  }
+}

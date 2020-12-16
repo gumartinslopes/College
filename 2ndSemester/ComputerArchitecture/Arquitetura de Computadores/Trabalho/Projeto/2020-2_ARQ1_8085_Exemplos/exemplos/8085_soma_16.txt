@@ -1,0 +1,25 @@
+// Addition of two 8bit numbers;Sum: 16 bits
+// Manually store 1st no in the memory location 0050
+// Manually store 2nd no in the memory location 0051
+// Result is stored in 0052, & 0053
+
+MAIN:       NOP            // main ( ) {
+	    LXI H,0050     //   HL = 0050;
+	    MVI C,00       //   C  = 0;
+	    MOV A,M        //   A  = MEM[HL];
+	    INX H          //   HL = HL+1;
+	    ADD M          //   A  = A+MEM[HL];
+	    JNC ENDIF      //   if ( flag[CY] ){ // (CarrY_out)
+	    INR C          //      C = C+1;
+ENDIF:      NOP            //   }
+            STA 0053       //   MEM[0053] = A;
+	    MOV A,C        //   A  = C;
+	    STA 0052       //   MEM[0052] = A;
+	    HLT            //
+END:        NOP            // }
+
+DATA:                      // DADOS
+0050:                      // dado_1
+0051:                      // dado_2
+0052:                      // resultado_HI
+0053:                      // resultado_LOW

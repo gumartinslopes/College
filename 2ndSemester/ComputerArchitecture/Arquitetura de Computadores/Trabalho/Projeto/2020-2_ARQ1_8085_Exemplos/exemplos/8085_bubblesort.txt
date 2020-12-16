@@ -1,0 +1,25 @@
+//Store from memory location C050 five consecutive nos to be sorted in ascending orde
+
+MAIN:               NOP          // main ( ) {
+                    MVI D,05	 // D = 05;
+WHILE_1:            NOP          // while (D>0) {
+                    LXI H,C050   //
+                    MVI C,05	 //   C = 05;
+WHILE_2:            NOP          //   while (C>0)
+                    MOV A,M      //     A = MEM [HL];
+                    INX H        //     HL = HL+1;
+                    MOV B,M      //     B = MEM [HL];
+                    CMP B        //     test = ((A-B)<0);
+                    JM  Y        //     if ( flag[M] ) {
+                    MOV M,A      //        MEM [HL] = A;
+                    DCX H        //        HL = HL-1;
+                    MOV M,B      //        MEM [HL] = B;
+                    INX H        //        HL = HL+1;
+END_IF1 :           NOP          //     }
+                    DCR C        //     C = C-1; 
+                    JNZ WHILE_2  //   }
+END_WHILE2:         NOP          //   
+                    DCR D        //   D = D-1;
+                    JNZ WHILE_1  // }
+END_WHILE1:         NOP            
+                    HLT

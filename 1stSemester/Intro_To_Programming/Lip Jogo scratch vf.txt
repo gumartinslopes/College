@@ -1,0 +1,21 @@
+	Versão final jogo 2pong com Placar de líderes multiplayer
+
+Link do jogo : https://scratch.mit.edu/projects/398488615/
+
+Link para o vídeo:https://www.youtube.com/watch?v=kjTqlGO02Ks&feature=youtu.be
+
+
+Grupo: 
+	Gustavo Martins 
+	João Pedro de Castro Ribeiro
+	Felipe Antonio Sousa Gomes
+
+
+Auto avaliação: 
+nota :15/15
+O jogo construído apresentou todos os requisitos, sendo eles o próprio jogo com suporte a multiplayer,o vídeo feito, os atores internos
+um ator tradutor um ator relacionado à ciência da computação e além disso três atores para serem 
+divulgadores de outros tipos de ciência, no caso os ganhadores do nobel por seus trabalhos na área da astronomia.
+
+Tendo isso em vista que o trabalho seguiu os requisitos básicos e traz em sí features extras que contribuem para o aprendizado e a extensão do 
+conhecimento além da área da computação, atribuímos a pontuação de 15 pontos + 10 pontos extras em nossa auto avaliação.

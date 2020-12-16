@@ -1,0 +1,15 @@
+;Este programa le um valor do acumulador e printa na tela o seu quadrado
+ 
+Start:	IN		; Le n -> acumulador
+	BRP  Done  	; o programa termina se n < 0.
+	ADD  value  	; adiciona a soma ao acumulador	
+	STO value	;guarda o valor inicial
+Square:
+	MULT value	; pega o valor e multiplica por ele mesmo encontrando seu quadrado
+	STO  value      ;guarda o valor  
+
+Done:	LDA  value 	; carrega o valor
+	OUT 		; escreve o quadrado do valor
+	HLT  		; para o programa
+
+value:	.data 2 0 ; 2-byte location where sum is stored

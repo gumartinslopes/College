@@ -1,0 +1,104 @@
+#! /usr/local/iverilog/bin/vvp
+:ivl_version "11.0 (devel)" "(s20150603-642-g3bdb50da)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "vhdl_textio";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0000000001134840 .scope module, "Exemplo_0701" "Exemplo_0701" 2 48;
+ .timescale 0 0;
+v0000000001190bc0_0 .var "sAndNand", 0 0;
+v00000000011908a0_0 .var "sOrNor", 0 0;
+v00000000011901c0_0 .var "st", 0 0;
+o000000000114b398 .functor BUFZ 1, C4<z>; HiZ drive
+v0000000001190940_0 .net "w", 0 0, o000000000114b398;  0 drivers
+v0000000001190c60_0 .var "x", 0 0;
+v0000000001190440_0 .var "y", 0 0;
+RS_000000000114b1e8 .resolv tri, L_0000000001142b50, L_0000000001142a70;
+v0000000001190260_0 .net8 "z", 0 0, RS_000000000114b1e8;  2 drivers
+S_00000000011349d0 .scope module, "MUX1" "mux" 2 58, 2 16 0, S_0000000001134840;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 1 "sf";
+    .port_info 1 /INPUT 1 "a";
+    .port_info 2 /INPUT 1 "b";
+    .port_info 3 /INPUT 1 "selectT";
+    .port_info 4 /INPUT 1 "select1";
+    .port_info 5 /INPUT 1 "select2";
+L_00000000010fe070 .functor AND 1, v0000000001190c60_0, v0000000001190bc0_0, C4<1>, C4<1>;
+L_00000000010fe0e0 .functor NAND 1, v0000000001190440_0, v0000000001190bc0_0, C4<1>, C4<1>;
+L_0000000001135240 .functor NAND 1, L_00000000010fe070, L_00000000010fe0e0, C4<1>, C4<1>;
+L_0000000001142920 .functor NAND 1, L_0000000001135240, L_0000000001135240, C4<1>, C4<1>;
+L_0000000001142df0 .functor NOR 1, v0000000001190c60_0, v00000000011908a0_0, C4<0>, C4<0>;
+L_0000000001142ca0 .functor OR 1, v0000000001190440_0, v00000000011908a0_0, C4<0>, C4<0>;
+L_0000000001142b50 .functor NOR 1, L_0000000001142df0, L_0000000001142ca0, C4<0>, C4<0>;
+L_0000000001142a00 .functor NOR 1, L_0000000001135240, RS_000000000114b1e8, C4<0>, C4<0>;
+L_0000000001142e60 .functor NAND 1, L_0000000001142920, v00000000011901c0_0, C4<1>, C4<1>;
+L_00000000011427d0 .functor NAND 1, L_0000000001142a00, v00000000011901c0_0, C4<1>, C4<1>;
+L_0000000001142a70 .functor NAND 1, L_0000000001142e60, L_00000000011427d0, C4<1>, C4<1>;
+v00000000010fe720_0 .net "a", 0 0, v0000000001190c60_0;  1 drivers
+v00000000010fe7c0_0 .net "b", 0 0, v0000000001190440_0;  1 drivers
+v00000000010fe860_0 .net "sAN", 0 0, L_0000000001142920;  1 drivers
+v00000000010fe900_0 .net "sON", 0 0, L_0000000001142a00;  1 drivers
+v00000000010fe9a0_0 .net "sa", 0 0, L_00000000010fe070;  1 drivers
+v00000000010fea40_0 .net "sb", 0 0, L_00000000010fe0e0;  1 drivers
+v0000000001190800_0 .net "sc", 0 0, L_0000000001135240;  1 drivers
+v0000000001190da0_0 .net "sd", 0 0, L_0000000001142df0;  1 drivers
+v0000000001190ee0_0 .net "se", 0 0, L_0000000001142ca0;  1 drivers
+v00000000011909e0_0 .net "select1", 0 0, v0000000001190bc0_0;  1 drivers
+v00000000011904e0_0 .net "select2", 0 0, v00000000011908a0_0;  1 drivers
+v0000000001190e40_0 .net "selectT", 0 0, v00000000011901c0_0;  1 drivers
+v0000000001190620_0 .net8 "sf", 0 0, RS_000000000114b1e8;  alias, 2 drivers
+v0000000001190a80_0 .net "sf1", 0 0, L_0000000001142e60;  1 drivers
+v00000000011906c0_0 .net "sf2", 0 0, L_00000000011427d0;  1 drivers
+S_00000000010fdd50 .scope begin, "main" "main" 2 61, 2 61 0, S_0000000001134840;
+ .timescale 0 0;
+S_00000000010fdee0 .scope module, "modulo" "f7" 2 57, 2 9 0, S_0000000001134840;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 1 "s";
+    .port_info 1 /INPUT 1 "a";
+    .port_info 2 /INPUT 1 "b";
+v0000000001190760_0 .net "a", 0 0, v0000000001190c60_0;  alias, 1 drivers
+v0000000001190f80_0 .net "b", 0 0, v0000000001190440_0;  alias, 1 drivers
+v0000000001190080_0 .net "s", 0 0, o000000000114b398;  alias, 0 drivers
+    .scope S_0000000001134840;
+T_0 ;
+    %fork t_1, S_00000000010fdd50;
+    %jmp t_0;
+    .scope S_00000000010fdd50;
+t_1 ;
+    %vpi_call 2 62 "$display", "Exemplo_0703 - Gustavo Martins Lopes da Costa - 690773" {0 0 0};
+    %vpi_call 2 63 "$display", "Test LU's module" {0 0 0};
+    %vpi_call 2 64 "$display", "   x    y    s   sAnd/Nand sOr/nor  z" {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000000001190c60_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0000000001190440_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000000001190bc0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000000011908a0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000000011901c0_0, 0, 1;
+    %delay 1, 0;
+    %vpi_call 2 71 "$monitor", "%4b %4b %4b %4b %4b %4b", v0000000001190c60_0, v0000000001190440_0, v00000000011901c0_0, v0000000001190bc0_0, v00000000011908a0_0, v0000000001190260_0 {0 0 0};
+    %delay 1, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000000011901c0_0, 0, 1;
+    %delay 1, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0000000001190bc0_0, 0, 1;
+    %delay 1, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000000011908a0_0, 0, 1;
+    %end;
+    .scope S_0000000001134840;
+t_0 %join;
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "Exemplo_0703.v";

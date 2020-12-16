@@ -1,0 +1,16 @@
+//SUBTRACAO E SOMA
+
+// os dados 1 2 e 3 foram guardados em :
+// 0050 0051 e 0053 respectivamente
+
+             LXI H,0050  //   HL = 0050;
+             MOV A,M     //   A  = MEM[HL];
+             INX H          //movemos para o endereco do dado 02
+             SUB M        //subtraimos
+             STA 0052    //guardamos a subtracao em 0052
+          
+             LXI H,0052 //carregamos o 0052
+             INX H        //movemos para o endereco do dado 3
+             ADD M       //somamos 01(M) com  02
+             STA   0054//guardamos o resultado de   d1+ d2 - d3
+             HLT

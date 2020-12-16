@@ -1,0 +1,250 @@
+2020-2_ARQ1_RCR_008
+
+Operações lógicas
+
+                (')  (')    (.)   (+)            complementares 
+                (~)  (~)    (&)   (|)   (^)    (~&)   (~|)   (~^)
+                                                                
+termo      a b  NOT  NOT    AND    OR   XOR    NAND    NOR    XNOR 
+  0        0 0   1    1      0     0     0       1      1      1
+  1        0 1   1    0      0     1     1       1      0      0
+  2        1 0   0    1      0     1     1       1      0      0
+  3        1 1   0    0      1     1     0       0      0      1
+                           (01)  (07)  (06)    (14)   (08)   (09) 
+                 a'   b'    a.b   a+b   a^b  ~(a.b) ~(a+b) ~(a^b)
+
+mintermos (=1)  0,1  0,2     3   1,2,3  1,2   0,1,2    0     0,3 
+MAXTERMOS (=0)  2,3  1,3   0,1,2   0    0,3     3    1,2,3   1,2
+
+OBS.: mintermo -> posição em que a linha na tabela-verdade é igual a 1
+      MAXTERMO -> posição em que a linha na tabela-verdade é igual a 0
+
+______________________________________________________________________
+
+Circuitos combinacionais
+
+Unidade Lógica e Aritmética (ULA)
+
+Somadores e subtratores
+
+01. Somador
+
+a.) Somador de dois bits ("meia-soma" ou "meio-somador")
+
+                           soma
+m mintermos MAXTERMOS  a b (a+b) = s1 s0
+0  (a'.b')   (A +B )   0 0  0+0  =  0  0
+1  (a'.b )   (A +B')   0 1  0+1  =  0  1
+2  (a .b')   (A'+B )   1 0  1+0  =  0  1
+3  (a .b )   (A'+B')   1 1  1+1  =  1  0
+
+Forma normal disjuntiva canônica (cDNF)
+(saídas definidas por linhas com mintermos iguais a um)
+
+Soma de Produtos ( SoP )
+
+Considerar os termos na tabela com valor igual a 1
+
+s1 = f1 (a, b) = 1 = mintermo  { 3 }   =    a.b
+s0 = f0 (a, b) = 1 = mintermos {1,2}   = a'.b+a.b'
+
+Expressões com as saídas definidas por mintermos:
+
+s1 =    a . b    = a & b = a and b
+s0 = a'.b + a.b' = a ^ b = a xor b (não é canônica!)
+
+Notações semelhantes
+
+s1 = f1 (a, b) = a & b =      a.b      = a and b = and (a, b)
+s0 = f0 (a, b) = a ^ b = (a'.b + a.b') = a xor b = xor (a, b)
+
+Verilog
+
+module HA ( output s1, output s0, input a, input b );
+  xor XOR_1 ( s0, a, b );
+  and AND_1 ( s1, a, b );
+endmodule
+
+module HA ( output s1, output s0, input a, input b );
+  assign s0 = a ^ b;
+  assign s1 = a & b;
+endmodule
+
+
+Forma normal conjuntiva canônica (cCNF)
+(saídas definidas por linhas com MAXTERMOS iguais a zero)
+
+Produto de Somas ( PoS )
+
+Considerar os termos na tabela com valor igual a 0
+
+S1 = F1 (A, B) = 0 = MAXTERMOA { 0,1,2 } = (A +B ).(A +B').(A'+B )
+S0 = F0 (A, B) = 0 = MAXTERMOS  { 0,3 }  = (A'+B').(A +B )
+
+
+b.) Somador de três bits (somador completo em cascata)
+
+          SoP SoP                SoP SoP
+m a b c   s1  s0       m a b c   s1  s0
+0 0 0 0 = 0   0        0 0+0+0 = 0   0
+1 0 0 1 = 0   1        1 0+0+1 = 0   1
+2 0 1 0 = 0   1        2 0+1+0 = 0   1
+3 0 1 1 = 1   0        3 0+1+1 = 1   0
+4 1 0 0 = 0   1        4 1+0+0 = 0   1
+5 1 0 1 = 1   0        5 1+0+1 = 1   0
+6 1 1 0 = 1   0        6 1+1+0 = 1   0
+7 1 1 1 = 1   1        7 1+1+1 = 1   1
+
+                       3         5         6         7
+s1 = SoP(3,5,6,7) = a'.b .c + a .b'.c  + a.b .c' + a.b.c
+
+                       1         2         4         7
+s0 = SoP(1,2,4,7) = a'.b'.c + a'.b .c' + a.b'.c' + a.b.c
+
+             __________        __________
+            |          |      |          |      // em evidência
+s1 =  a'.b .c  + a .b'.c  + a .b .c' + a .b .c
+   = (a'.b     + a.b').c  +     (a.b).(c'+c)
+   = (a'.b+a.b').c        + (a.b).(c'+c)        // negação
+   =    (a^b)   .c        + (a.b).   1          // identidade
+   =    (a^b)   .c        + (a.b)
+
+            ______________________________
+           |          _________           |
+           |         |         |          |     // distribuição
+s0 = a'.b'.c + a'.b .c' + a.b'.c' + a .b .c
+   = a'.b'.c +  (a'.b + a.b').c'  + a .b .c
+   = (a'.b'+a.b).c  +  (a'.b+a.b').c'
+   =  (a xnor b).c  +    (a xor b).c'
+   =  (a^b)'.c      +    (a^b).c'
+
+   OBS.:
+     a xor  b = (a'.b+a.b') = m {1,2} = (a^b)
+     a xnor b = (a'.b'+a.b) = m {0,3} = (a^b)'
+
+     se fizer (a^b) = k e substituir 
+
+s0 =    k'.c        +      k.c'
+s0 =    k^c
+
+     e se retornar o valor substituído
+
+s0 = (a^b)^c
+
+    logo,
+
+s1 = (a^b).c + (a.b)
+s0 = (a^b)^c
+
+Relação de recorrência
+
+    Supor a existência de uma primeira parcela
+
+  s1  = (a0.b0)
+    0
+  s0  = (a0^b0)
+    0
+    
+    a segunda parcela será
+
+  s1  = (a1^b1).s1  + (a1.b1)
+    1             0
+  s0  = (a1^b1)^s1
+    1             0
+    
+    e a seguinte
+
+  s1  = (a2^b2).s1  + (a2.b2)
+    2             1
+  s0  = (a2^b2)^s1
+    2             1
+    
+    e assim por diante, para mais bits,
+    o que se poderá resumir pela relação de recorrência
+
+  a + b + s1    = s1  s0  <- para todos os bits no intervalo [n:0]
+   n   n    n-1     n   n
+                             por definição, o primeiro s1  = 0
+                                                         0
+                             e se considerar o último  s1  = s0
+                                                         n    (n+1)
+       resposta = { s0     s0   s0     s0     ... s0   }
+                     (n+1)  (n)  (n-1)  (n-2)      (0)
+
+
+02. Subtrator
+
+a.) Subtrator de dois bits ("meia-diferença")
+
+                            diferença 
+n mintermos MAXTERMOS  a b   s1 s0
+0 ( a'.b' ) ( A +B  )  0-0 =  0  0 ( 0)
+1 ( a'.b  ) ( A +B' )  0-1 =  1  1 (-1)
+2 ( a .b' ) ( A'+B  )  1-0 =  0  1 (+1)
+3 ( a .b  ) ( A'+B' )  1-1 =  0  0 ( 0)
+
+Por mintermos:
+                            (1)
+   s1 = m(1)   = SoP(1)   = a'.b
+
+                            (1)    (2)
+   s0 = m(1,2) = SoP(1,2) = a'.b + a.b' = a^b
+
+   
+b.) Subtrator de três bits (diferença completa)
+
+                                diferença
+n mintermos  MAXTERMOS   a-b-c  s1 s0
+0 (a'.b'.c') (A +B +C )  0 0 0   0  0 ( 0)
+1 (a'.b'.c ) (A +B +C')  0 0 1   1  1 (-1)
+2 (a'.b .c') (A +B'+C )  0 1 0   1  1 (-1)
+3 (a'.b .c ) (A +B'+C')  0 1 1   1  0 (-2)
+4 (a .b'.c') (A'+B +C )  1 0 0   0  1 (+1)
+5 (a .b'.c ) (A'+B +C')  1 0 1   0  0 ( 0)
+6 (a .b .c') (A'+B'+C )  1 1 0   0  0 ( 0)
+7 (a .b .c ) (A'+B'+C')  1 1 1   1  1 (-1)
+
+Por mintermos:
+                                       (1)      (2)      (3)      (7)
+   s1 = m(1,2,3,7) = SoP(1,2,3,7) = a'.b'.c + a'.b.c' + a'.b.c + a.b.c
+
+                                       (1)      (2)      (4)      (7)
+   s0 = m(1,2,4,7) = SoP(1,2,4,7) = a'.b'.c + a'.b.c' + a.b'.c'+ a.b.c
+
+Por MAXTERMOS
+                                       (0)      (4)      (5)      (6)
+   S1 = M(0,4,5,6) = PoS(0,4,5,6) = (A+B+C).(A'+B+C ).(A'+B+C').(A'+B'+C)
+
+                                       (0)      (3)      (5)      (6)
+   S0 = M(0,3,5,6) = PoS(0,3,5,6) = (A+B+C).(A+B'+C').(A'+B+C').(A'+B'+C)
+
+
+Ao desenvolver as expressões 
+
+Por mintermos:
+            ___________________
+           |                   |
+   s1 = a'.b'.c + a'.b.c' + a'.b.c + a.b.c
+                     |________| |_______|
+                     
+      = (b'+b).a'.c + (c'+c).a'.b + (a'+a).b.c
+
+      = (  1 ).a'.c + (  1 ).a'.b + (  1 ).b.c
+
+      = a'.c + a'.b + b.c
+
+            ________          ________
+           |        |        |        |
+   s0 = a'.b'.c + a'.b.c' + a.b'.c'+ a.b.c
+
+      = a'.(b'.c + b.c' ) + a.(b'.c'+ b.c)
+
+      = a'.(    b^c     ) + a.(    b^c   )'
+
+      = a ^(    b^c     ) 
+
+
+
+_____________________________________________________
+
+

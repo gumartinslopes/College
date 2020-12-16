@@ -1,0 +1,18 @@
+// Fibonacci Series Generation
+// To run the Program simply load at memory location C050=01,C051=01
+MAIN:                NOP            // main ( ) {
+                     MVI C,09       //   C  = 09;
+                     LXI H,0050     //   HL = 0050; // (HL=MAR)                       	//Memory Pointer
+DO1:                 NOP            //   do{
+                     MOV A,M        //     A  = MEM[HL];
+                     INX H          //     HL = HL+1;
+                     MOV B,M        //     B  = MEM[HL];
+                     INX H          //     HL = HL+1;
+                     ADD B          //     A  = A+B;
+                     DAA            //
+                     MOV M,A        //     MEM[HL] = A;
+                     DCX H          //     HL = HL-1;
+                     DCR C          //     C  = C-1;
+                     JNZ DO1        //   }
+                     NOP            //   while (! flag[Z] );
+                     HLT

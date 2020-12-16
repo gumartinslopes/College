@@ -1,0 +1,147 @@
+2020-2_ARQ1_RCR_003:
+
+Birkana
+
+   0    1   2   3   4   5   6   7   8   9   F   255
+
+   |    |\  |/  |>  |   |\  |/  |>  |   |\  |>  <|>
+   |    |   |   |   |\  |\  |\  |\  |/  |/  |>  <|>
+
+
+Representação de números em ponto flutuante
+
+1. Representação mínima
+
+    13.25 (10) = 1101.01 (2)
+
+    Notação científica
+
+     13.25     * 10 ** 0 = 13.25  *  1 = 13.25
+       1.325   * 10 ** 1 =  1.325 * 10 = 13.25
+
+     1101.01    * 2 ** 0 = 1101.01
+     110.101    * 2 ** 1 = 1101.01
+     11.0101    * 2 ** 2 = 1101.01
+     1.10101    * 2 ** 3 = 1101.01
+
+     0. 110101 * 2 ** 4 = 1101.01
+         mantissa   potência
+
+     Sinal    Expoente  .   Mantissa
+    |     |             |              |
+       0       _100          110101
+
+    Tabela para expoentes
+    4 bits de representação = 16 valores possíveis
+    metade negativos + metade positivos
+       0 = -              1 = +
+
+    0000   -8
+    0001   -7
+    0010   -6
+    0011   -5
+    0100   -4
+    0101   -3
+    0110   -2
+    0111   -1    7-8 = -1
+
+    1000    0   <-    2 ** (bits) / 2 = 16 / 2 = 8 (zero central)
+
+    1001   +1    9-8 =+1
+    1010   +2
+    1011   +3
+    1100   +4
+    1101   +5
+    1110   +6
+    1111   +7
+
+     Sinal    Expoente  .  Mantissa
+    |      |            |             |
+       0        1100        110101
+
+       s         e            m
+       1   +     4      +     6          = 11 bits, no mínimo
+
+            S     (E-corte)
+    N = (-1)  * 2               * 0.mantissa
+
+                   e - 1
+    corte    =  2
+                  (E - corte)
+    potência =  2
+
+
+    Exemplo:
+
+    S = 0
+    E = 1100 = +12
+    e = 4
+    corte = 2 ** (e-1)  = 2 ** (4-1) = 2** (3) = 8
+
+            0    (12-8)                   4
+    N = (-1)  * 2       * 0.110101 = 1 * 2  * 0.110101 = 01101.01 (2)
+
+
+2. IEEE-754
+
+    -Inf  -> infinito negativo
+    NaN   -> Not_a_Number
+    +Inf  -> infinito positivo
+
+     Sinal    Expoente  .  Mantissa
+    |      |            |                                  |
+       0      1000 0011    110 1010 0000 0000 0000  0000
+       1   +      8     +             23                    = 32 bits fixos
+
+    corte para 8 bits = 127
+
+    potência  = +4
+
+    expoente = 127+4 = 131 = 128+2+1 =  1000 0011 (2)
+    "excesso de 127"
+
+    Sinal    Expoente   .   Mantissa
+   |     |              |                                  |
+      0      1000 0011    _ 10 1010 0000 0000 0000 0000 0
+      1  +       8      +                23                 = 32 bits fixos
+
+      0      0000 0000  . 0 00 0000 0000 0000 0000 0000     = ZERO
+
+
+    1 * 2 ** 0        = 0.1  * 2 ** 1 = 2 ** (-1) * 2 ** (+1) = 2 ** 0 = 1 (10)
+    101 * 2 ** 0    = 0.101  * 2 ** 3 =  5 (10)
+    10011 * 2 ** 0 = 0.10011 * 2 ** 5 = 19 (10)
+
+    Não normalizada
+                            s     (E-126)
+    N                 = (-1)  *  2       * 0.mantissa
+       IEEE-754
+
+    Normalizada
+                            s     (E-127)
+    N                 = (-1)  *  2       * 1.mantissa
+       IEEE-754
+
+
+
+       
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+    
+     
+   

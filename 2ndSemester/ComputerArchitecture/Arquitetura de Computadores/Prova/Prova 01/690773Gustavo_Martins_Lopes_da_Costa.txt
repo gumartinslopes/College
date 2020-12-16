@@ -1,0 +1,239 @@
+Pontifícia Universidade Católica de Minas Gerais
+Curso de Ciência da Computação
+AC1 - AVALIAÇÃO 01 - Data: 17/09/2020
+
+Nome: Gustavo Martins Lopes da Costa Matrícula: 690773
+
+
+Instruções
+
+Preencher e reenviar.
+
+Haverá apenas três (3) tentativas para postar as respostas.
+
+Escolher a opção correta. Se não houver, marcar X e justificar sua resposta.
+
+01  02  03  04  05  06  07  08  09  10  11  12  13  14  15  16  17  18  19  20
+[b] [a] [d] [5] [a] [d] [c] [e] [e] [b] [b] [c] [c] [d] [b] [a] [e] [e] [c] [c]
+
+01.) O número 2223222322322223322332(4), é equivalente em hexadecimal a:
+[ ] a) ABABAEBAEBE
+
+[x] b) ABABAEABEBE
+
+[ ] c) ABABABEBEBE
+
+[ ] d) ABADAEABEBE
+
+[ ] e) ABACAEABEBE
+
+02.) O valor decimal correspondente ao número em octal 103725 tem:
+[x] a) 2 algarismos repetidos
+
+[ ] b) 3 algarismos iguais
+
+[ ] c) 3 algarismos iguais e vizinhos
+
+[ ] d) 3 algarismos diferentes
+
+[ ] e) 3 algarismos iguais e separados
+
+03.) O correspondente na base 4 ao número octal 3102 é:
+[ ] a) 120012
+
+[ ] b) 120012
+
+[ ] c) 120112
+
+[x] d) 121002
+
+[ ] e) 122002
+
+04.) Com 11 bits é possível representar todos os valores inteiros com sinal no intervalo
+[ ] a) de -1023 a +2047
+
+[ ] b) de -1047 a +2048
+
+[x] c) de -2049 a +1027
+
+[ ] d) de -2047 a +2048
+
+[ ] e) de -2048 a +2049
+
+05.) O caractere 'C' vale o mesmo que
+[x] a) 67 em decimal
+
+[ ] b) 104 em octal
+
+[ ] c) 99 em decimal
+
+[ ] d) 50 em hexadecimal
+
+[ ] e) 12 em decimal
+
+06.) O código do dígito '4' vale o mesmo que
+[ ] a) 42 em hexadecimal
+
+[ ] b) 62 em octal
+
+[ ] c) 54 em decimal
+
+[x] d) 0310 em quaternário
+
+[ ] e) 00110110 em binário
+
+07.) O complemento de um do valor inteiro 17 em um byte é igual a
+[ ] a) 00010001
+
+[ ] b) 00010111
+
+[c] c) 11101110
+
+[ ] d) 11101111
+
+[ ] e) 10001000
+
+08.) O número negativo (-10) em complemento de 2 representado em um byte vale
+[ ] a) 00001010
+
+[ ] b) 10001010
+
+[ ] c) 10100000
+
+[ ] d) 111101011
+
+[x] e) 11110110
+
+09.) A diferença entre os valores 00100011(2) e 174(8) é igual a 
+[ ] a) 10101111(2)
+
+[ ] b) 2223(4)
+
+[ ] c) 147(8)
+
+[] d) -87(10)
+
+[x] e) A7(16)
+
+10.) O valor decimal correspondente ao número binário 100,011 é
+[ ] a) 4,125
+
+[x] b) 4,375
+
+[ ] c) 4,5
+
+[ ] d) 4,625
+
+[ ] e) 4,75
+
+11.) A tabela verdade para a expressão em Verilog (P | Q) & (~ Q) será igual a
+[ ] a) 0100
+
+[x] b) 0010
+
+[ ] c) 0110
+
+[ ] d) 1010
+
+[ ] e) 0001
+
+12.) A negação da proposição ((X==0) && (Y<=0)) é o mesmo que
+[ ] a) (X!=0) && (Y>=0)
+
+[ ] b) ! (X==0) || !(Y>0)
+
+[x] c) (X!=0) && !(Y<=0)
+
+[ ] d) !(X==0) || !(Y<=0)
+
+[ ] e) !((X==0) || !(Y<=0))
+
+13.) A tabela verdade de duas variáveis p e q é 0 1 0 1, é o mesmo que
+[ ] a) OR(AND(NOT(p),q),NAND(p,q))
+
+[ ] b) OR(NAND(p,q),AND(p,q))
+
+[x] c) OR(AND(p,NOT(q)),AND(p,q))
+
+[ ] d) OR(AND(p,NOT(q)),NAND(p,q))
+
+[ ] e) OR(AND(NOT(p),q),AND(p,q) )
+
+14.) Qual das afirmações abaixo será sempre falsa?
+[ ] a) P || P
+
+[ ] b) ! P && ! P
+
+[ ] c) P || ! P
+
+[x] d) ! P && P
+
+[ ] e) P && P
+
+15.) A porta lógica equivalente à afirmação "pelo menos um igual a um" é
+[ ] a) NAND
+
+[x] b) OR
+
+[ ] c) XOR
+
+[ ] d) NOR
+
+[ ] e) XNOR
+
+16.) A afirmação "apenas um igual a um" para três variáveis ocorrerá nos mintermos
+[x] a) m(1,2,4)
+
+[ ] b) m(1,3,4)
+
+[ ] c) m(1,3,7)
+
+[ ] d) m(2,3,4)
+
+[ ] e) m(1,3,5)
+
+17.) A expressão SoP(1,4,6,7) equivale a
+[ ] a) 01001110(2)
+
+[ ] b) 4D(16)
+
+[ ] c) ~a&~b&c|a&~c|a&b (Verilog)
+
+[] d) (a+c)(a+b')(a+b+c)
+
+[x] e) a'b'c+a'b'c'+abc'+abc
+
+18.) A expressão SoP(0,3) representa o mesmo que os mintermos
+[ ] a) x'y+x y'
+
+[ ] b) x'y'+x'y
+
+[ ] c) x y'+x y
+
+[ ] d) x'y'+x y'
+
+[x] e) x'y'+x y
+
+19.) A tabela-verdade equivalente aos mintermos x'y'z+x'y z'+x y'z'+xyz é
+[ ] a) 01100101
+
+[ ] b) 11010010
+
+[x] c) 01101001
+
+[ ] d) 10100110
+
+[ ] e) 00110101
+
+20.) A expressão or((a xor c), not (nor(b',d')) é equivalente a
+[ ] a) PoS(0,10)
+
+[ ] b) 0110 1110
+
+[x] c) a'.c + b.d + a.c'   
+
+[ ] d) (A+C')(A'+C)(B'+D')
+
+[ ] e) SoP(1,2,3,5,6,7,8,9,11,12,13,14,15)
+
+//resposta encontrada a partir da simplificação de  not (nor(b',d')) que resulta em (b.d) após isso bastou encontrar que a tabela verdade de (a'.c) + ( a.c') = a xor c. 

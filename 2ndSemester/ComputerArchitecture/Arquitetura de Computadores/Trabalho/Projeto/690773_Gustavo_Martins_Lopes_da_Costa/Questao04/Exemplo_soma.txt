@@ -1,0 +1,14 @@
+;O programa a seguir le varios numeros, guardando sua soma ate que a entrada seja negativa
+
+
+Start:	IN		; Le n -> acumulador
+	BRP  Done  	; o programa termina se n < 0.
+	ADD sum  	; adiciona a soma ao acumulador
+	STO  sum 	; store the new sum
+	BRA  Start	; volta e lê o novo numero 
+
+Done:	LDA  sum 	; carrega a soma final
+	OUT 		; escreve a soma final
+	HLT  		; para o programa
+
+sum:	.data 2 0 ; 2-byte location where sum is stored

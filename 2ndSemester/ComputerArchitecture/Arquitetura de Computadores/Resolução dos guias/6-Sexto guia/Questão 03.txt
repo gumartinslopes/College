@@ -1,0 +1,15 @@
+Guia 06 Questão 03
+       1            3           6          7          11      15
+a)(x'.y'.w'.z)+(x'.y'.w.z)+(x'.y.w.z')+(x'.y.w.z)+(x.w.z.y')+(x.w.y.z) = simplificado :(x'.y'.w'.z)+(x'.y.w)
+
+        0           2           3           5            9          13
+b)(x'.w'.y'.z')+(x'.w.z'.y')+(x'.w.z.y')+(x'.w'.y.z)+(x.w'.y'.z)+(x.w'.y.z)= simplificado : (x'.w.z'.y')+(x.w'.y'.z)
+
+        0            1           2            3          5            8          10           12
+c)(x'.y'.w'.z)+(x'.w.z'.y')+(x'.w.z.y')+(x'.w'.y.z)+(x.w'.y'.z')+ (x.w'.y'.z')+(x.w.y'.z')+(x.w'.y.z')= simplificado : (x'.w.z'.y')+(x'.w.z.y')+(x.w'.y.z')
+
+        2             4          5           8          10          12          13
+d)(x'.w.z.y')+(x'.w'.y.z')+(x'.w'.y.z)+(x.w'.y'.z')+(x.w.y'.z')+(x.w'.y.z')+(x.w'.y.z)= simplificado :(x'.w.z.y')+(x.w'.y.z')
+
+         0             1          2         7              9        11         13        15
+e)(x'.w'.y'.z')+(x'.w.z'.y')+(x'.w.z.y')+(x'.y.w.z)+(x.w'.y'.z)+(x.w.z.y')+(x.w'.y.z)+(x.w.y.z)= simplificado : (y'.w.z)+(x'.w.z.y')+(x'.y.w.z)

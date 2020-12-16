@@ -1,0 +1,13 @@
+// os dados 1  e 2 foram guardados em :
+// 0050 e 0051 respectivamente
+
+             LXI H,0050  	//   HL = 0050;
+             MOV A,M     	//   A  = MEM[HL];
+             ADD M       	//somamos 0050(M) com ele mesmo = 2* 0050
+             STA 0050    	//guardamos a multiplicacao em 0052
+            
+              LXI H,0050 	//carregamos o 0050 = 2 * 0050
+              INX H      	//movemos para o endereco do dado 2
+             ADD M
+             STA   0054 	//guardamos a soma dos 2 numeros em 0054
+             HLT

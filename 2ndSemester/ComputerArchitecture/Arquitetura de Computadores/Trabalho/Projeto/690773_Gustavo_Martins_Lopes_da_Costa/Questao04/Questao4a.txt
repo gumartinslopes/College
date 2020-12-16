@@ -1,0 +1,28 @@
+;Este programa le 2 valores e mostra o resultado conforme 
+;a tabela verdade da NAND
+
+
+Start:	IN		; Le n -> acumulador
+	ADD value	;adicionamos ao acumulador
+	STO value	; guardamos em value
+
+	IN 		;le o segundo valor 
+	AND value	; fazemos a operacao de and
+	STO valueAnd	;guardamos
+
+nand:	
+	NOT valueAnd	;negamos o valor da and transformando em uma NAND
+	STO valueNand	;guardamos o valor em valueNand
+	
+Done:	
+	LDA valueNand
+	OUT        ;printamos o valor na tela
+	
+	HLT	   ;fim do programa
+
+
+value:	.data 2 0 
+
+valueAnd: .data 2 0
+
+valueNand: .data 2 0

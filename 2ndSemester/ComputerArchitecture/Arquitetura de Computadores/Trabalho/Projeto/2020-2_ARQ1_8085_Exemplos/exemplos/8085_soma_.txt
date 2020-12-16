@@ -1,0 +1,13 @@
+// Addition of two 8bit numbers
+// Manually store 1st no in the memory location 0050
+// Manually store 2nd no in the memory location 0051
+// Result is stored in 0052
+
+MAIN:        NOP         // main ( ) {
+             LXI H,0050  //   HL = 0050;
+             MOV A,M     //   A  = MEM[HL];
+             INX H       //   HL = HL+1;
+             ADD M       //   A  = A+MEM[HL];
+             STA 0052    //   MEM[0052] = A;
+             HLT
+END:                     // }

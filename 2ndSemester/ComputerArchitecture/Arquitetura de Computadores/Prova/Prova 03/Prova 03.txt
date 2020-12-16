@@ -1,0 +1,349 @@
+Pontifícia Universidade Católica de Minas Gerais
+Curso de Ciência da Computação
+AC1 - AVALIAÇÃO 03 -  Data: 11/12/2020
+
+Nome: Gustavo Martins Lopes da Costa              Matrícula: 6 9 0 7 7 3
+                                                             a b c d e f
+
+Instruções                                  Tempo previsto: 110m + Extra:  40m
+
+Preencher e enviar para a tarefa 2020-2_ARQ1_A03 no Canvas.
+
+Haverá apenas três (3) tentativas para postar as respostas.
+Favor enviar pelo menos uma vez até às 12:00h.
+
+Escolher apenas opção considerada correta.
+
+Se não houver, JUSTIFICAR suas respostas ao final.
+
+
+Respostas
+Favor não alterar o formato do gabarito.
+
+01  02	03  04  05  06  07  08	09  10
+[b] [c] [d] [b] [a] [a] [d] [c] [a] [d]
+
+11  12	13  14  15  16	17  18	19  20
+[b] [e] [e] [c] [d] [c] [a] [c] [a] [c]
+
+Questões
+
+01. "Stack Machine" é um modelo computacional no qual as instruções
+    lidam com operandos e resultados em pilha.
+    As afirmativas abaixo relacionam-se às máquinas desse tipo:
+
+    I   - O acesso aos operandos é rápido.
+    II  - Compiladores são mais complexos para se construir.
+    III - Podem omitir a etapa de busca de operandos durante a execução.
+
+    Após a análise dessas afirmativas pode-se concluir que 
+
+[ ] a.) I  e II     são válidas
+[x] b.) I  e III    são válidas
+[ ] c.) II e III    são válidas
+[ ] d.) I, II e III sao válidas
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+02. O código abaixo se aplica a uma máquina com modelo computacional
+    baseado em acumulador.
+    Considerar A, B, C, D, E como endereços de memória.
+
+    load  A
+    add   B
+    store E
+    load  C
+    add   D
+    mul   E
+    store E
+
+    É correto afirmar que:
+
+[ ] a.) O código equivalente em máquina do tipo pilha 
+        terá menos instruções.
+[ ] b.) O código equivalente em máquina do tipo registrador-memória,
+        com dois registradores disponíveis, resultado em um deles,
+        terá mais instruções, se tiverem apenas dois operandos.
+[x] c.) O código equivalente em máquina do tipo registrador-memória,
+        com dois registradores disponíveis, resultado em um deles,
+        terá mais instruções, se tiverem apenas três operandos.
+[ ] d.) O código equivalente em máquina do tipo registrador-memória,
+        com dois registradores disponíveis, resultado em um deles,
+        terá menos instruções, se tiverem apenas três operandos.
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+03. Considerar o código (C) abaixo para se obter a soma de valores
+    em uma matriz com 8x4 elementos.
+
+    int sumOfArray ( int n, int array[ ][4] )
+    {
+        int x, t, sum = 0;
+        for ( x = 0; x < n; x=x+1 )
+            for ( y = 0; y < 4; y=y+1 )
+                sum = sum + a[i][j];
+        return ( sum );
+    }
+
+    Supor uma cache com um tamanho de bloco igual a 4 palavras
+    de 4 bytes cada. Se toda referência inicial a um bloco 
+    resultar em um "miss", incluindo o primeiro; no melhor caso, 
+    a taxa de acertos ("hits") será de 
+
+[ ] a.) 75%
+[ ] b.) 50%
+[ ] c.) 25%
+[x] d.) 12.5%
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+04. Considerar o código (8085) abaixo envolvendo os pares de
+    registradores HL e DE.
+
+    LHLD  C050
+    XCHG
+    LHLD  C052
+    XCHG
+    HLT
+
+    Sobre as afirmativas a seguir, é correto afirmar que
+
+    I   - Há apenas instruções com modo de endereçamento implícito.
+    II  - Haverá troca de valores apenas nos 2 bytes menos significativos.
+    III - Há instruções com tamanho maior que 2 bytes.
+ 
+[ ] a.) apenas I   é verdadeira
+[x] b.) apenas II  é verdadeira
+[ ] c.) apenas III é verdadeira
+[ ] d.) todas    são verdadeiras
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+05. Sobre as diferenças entre conjuntos de instruções CISC 
+    pode-se afirmar que
+
+[x] a.) as instruções são complexas, mas simples de decodificar
+[ ] b.) os modos de endereçamento são mais simples
+[ ] c.) por serem mais complexas, aceitam menos tipos de dados
+[ ] d.) têm menos registradores de uso geral, porque usam mais a memória
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+06. As afirmativas abaixo tratam de unidades de controle 
+    do tipo "hardwired".
+
+    I   - A lógica de circuitos é fixa e corresponde a expressões lógicas
+          para gerar os sinais de controle.
+    II  - O controle é mais rápido do que a forma "softwired".
+    III - Servem de base para arquiteturas do tipo CISC.
+
+    É correto afirmar que 
+
+[x] a.) I  e II     são verdadeiras
+[ ] b.) I  e III    são verdadeiras
+[ ] c.) II e II     são verdadeiras
+[ ] d.) I, II e III são verdadeiras
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+07. Dentre as afirmativas abaixo sobre funções das unidades de controle
+    são corretas
+
+    1. coordenação da sequência de movimentos de dados entre
+       componentes do processador e de suas sub-unidades
+    2. geração de sinais de controle sem a necessidade de sinais
+       ou comandos externos
+    3. organização das execuções de etapas para a busca, decodificação
+       e execução de instruções
+    4. controle da unidade lógica e aritmética, dos buffers de periféricos
+       e dos registradores
+
+[ ] a.) 1 e 2
+[ ] b.) 1 e 3
+[ ] c.) 2 e 4
+[x] d.) 3 e 4
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+08. Sobre a hierarquia de memória pode-se afirmar que
+
+[ ] a.) as memórias externas têm velocidade e custos maiores
+[ ] b.) as memórias internas são diretamente controladas 
+        por todos os núcleos de um processador
+[x] c.) as memórias cache em geral são estáticas enquanto 
+        a memória principal costumam ser dinâmicas 
+[ ] d.) as memórias ópticas são mais rápidas e mais baratas
+        que as memórias magnéticas
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+09. Considerar as diferenças entre registradores e 
+    memórias cache
+
+    1. caches são usadas durante os processos de leitura
+       e escritas em disco
+    2. registradores armazenam localmente dados e instruções
+       que estiverem sendo efetivamente processados
+    3. caches reduzem o tempo médio para acesso 
+       à memória
+    4. registradores permitem operar com mais de uma instrução
+       por ciclo de clock
+    
+    É correto afirmar que
+
+[x] a.) 1, 2 e 3 são verdadeiras
+[ ] b.) 1, 2 e 4 são verdadeiras
+[ ] c.) 2, 3 e 4 são verdadeiras
+[ ] d.) todas    são verdadeiras
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+10. Considerar o tempo de resposta (tr) como a medida entre
+    o início e o término de uma instrução  e que pode depender
+
+    1. da sobrecarga do sistema operacional
+    2. de processos de entrada e saída
+    3. do acesso à memória
+
+    É correto afirmar então que sofre interferências de  
+
+[ ] a.) 1 e 2
+[ ] b.) 1 e 3
+[ ] c.) 2 e 3
+[x] d.) todos
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+11. A expressão F(A,B,C,D) = PoS (0,2,5,7,8,10,13,15) 
+    não de depende de
+
+[ ] a.) A e B
+[ ] b.) A e C
+[ ] c.) B e D
+[ ] d.) C e D
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+12. Supor a definição de uma nova relação binária pela
+    porta lógica (*) cuja expressão é a xor b'.
+
+    Considerar c = a * b e as relações abaixo:
+
+    1. x = b * c
+    2. y = a * c
+    3. z = a * b * c = 1
+
+    É correto afirmar que 
+
+[ ] a.) todas        são verdadeiras
+[ ] b.) apenas y e z são verdadeiras
+[ ] c.) apenas y e x são verdadeiras
+[ ] d.) apenas z e x são verdadeiras
+[x] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+13. Considerar um contador de Johnson de 4 estágios
+    com valor inicial igual a 0101. A sequência de 
+    contagem será igual a 
+
+[ ] a.) 5,10,13,6,11,2,9,4
+[ ] b.) 5,4,2,1,0,8,12,14
+[ ] c.) 5,2,1,0,8,12,14,15
+[ ] d.) 5,2,9,4,10,13,6,11
+[x] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+14. Se o tempo de propagação de uma porta XOR for o dobro
+    de uma porta AND/OR que é de 1.5 microssegundos, 
+    o tempo de propagação total de um somador de 4-bits
+    será em microssegundos igual a 
+
+[ ] a.) 30
+[ ] b.) 27
+[x] c.) 24
+[ ] d.) 18
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+15. Supor a adição de dois valores de 4-bits usando
+    aritmética com complemento de 2. Dadas as somas
+    abaixo, haverá OVERFLOW em 
+
+    1. 1111+0111
+    2. 1100+1100
+    3. 0111+0011
+
+[ ] a.) apenas em 1
+[ ] b.) apenas em 2
+[ ] c.) apenas em 3
+[x] d.) em 1, 2 e 3
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+16. Se a representação binária 0xC1B80000 equivaler a um
+    valor binário em ponto flutuante seu valor será igual a
+
+[ ] a.) -46.00
+[ ] b.) -23.00
+[x] c.) -11.50
+[ ] d.) -05.75
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+17. O sistema de equações binárias simultâneas
+    sobre as variáveis {a,b,c,d} terá solução 
+    com os respectivos valores abaixo
+ 
+    0 = ab
+    1 = ac+d
+    1 = a+b+c
+    0 = ab+c'd'
+
+[x] a.) {a=0,b=1,c=0,d=1}
+[ ] b.) {a=0,b=1,c=1,d=1}
+[ ] c.) {a=1,b=0,c=0,d=1} /*tambem uma solucao valida*/
+[ ] d.) {a=1,b=0,c=1,d=1}
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+18. A máquina de Turing abaixo deveria fazer o decremento
+    de qualquer valor oferecido à entrada.
+
+    1. e0,0,e0,0,R  4. e1,0,e1,0,L  7. __,_,__,_,_ 
+    2. e0,1,e0,1,R  5. __,_,__,_,_  8. e2,#,e3,#,S 
+    3. e0,#,e0,#,L  6. e1,#,e2,1,R
+
+    Que regras completariam a descrição correspondente?
+
+[ ] a.) 5. e1,1,e2,0,R  7. e2,0,e2,1,R
+[ ] b.) 5. e1,1,e1,0,R  7. e2,0,e2,1,R
+[x] c.) 5. e1,1,e2,0,R  7. e2,0,e2,#,S
+[ ] d.) 5. e1,1,e2,#,S  7. e2,0,e2,1,R
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+19. Três flip-flops do tipo D são montados sincronamente,
+    em série, de modo que 
+
+    D1 = entrada
+    D2 = Q1 xor Q3
+    D3 = Q2
+
+    Após lhes serem aplicadas as entradas 10010001,
+    os valores das saídas Q1Q2Q3 serão respectivamente 
+
+[x] a.) 111
+[ ] b.) 110
+[ ] c.) 101
+[ ] d.) 100
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+20. Dada a descrição do módulo Verilog abaixo
+
+    module circuit_01 ( output p, output q, input a, input b );
+      wire w1,w2,w3,w4;
+      nand N2 ( w2, a, w1 );
+      nand N5 ( p , w4,w4 );
+      nand N1 ( w1, a,  b );
+      nand N4 ( q , w2,w3 );
+      nand N3 ( w3, b, w1 );
+    endmodule
+
+    Se as entradas forem a=1 e b=1, 
+    as saídas p e q serão respectivamente iguais a 
+
+[ ] a.) 00
+[ ] b.) 01
+[x] c.) 10
+[ ] d.) 11
+[ ] e.) Nenhuma das afirmativas anteriores. Justificar.
+
+_______________________________________________________
+
+JUSTIFICATIVAS
+12 - Nenhuma das alternativas foi marcada visto que não há valores possíveis de dedução da resposta.
+
+13 - Nenhuma das afirmativas está correta nesta questão visto que a contagem de jhonson segue uma cascata e nenhuma das alternativas a representa corretamente.
+Portanto se tivessemos um caso de contagem a partir do 0101 deveriamos ter 0001, 0000 e recomeçar 1000, 1100, 1110 e assim por diante.

@@ -1,0 +1,6 @@
+Atual                   Proximo
+Qa | Qb                 Qa | Qb
+0  | 0                  1 | 0
+1  | 0                  1 | 1
+1  | 1                  0 | 1
+0  | 1                  0 | 0

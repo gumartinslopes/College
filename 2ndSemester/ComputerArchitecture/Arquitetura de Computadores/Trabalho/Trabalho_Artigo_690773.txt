@@ -1,0 +1,104 @@
+690773 Gustavo Martins Lopes da Costa 
+
+
+
+
+Questão 01-Leitura de artigos
+-------------------------------------------------------------------- ||-------------------------------------------------------------------------------------
+
+
+
+
+Questão 02-Identificação do padrão de referências
+fonte de pesquisa: http://portal.pucminas.br/biblioteca/documentos/citacoes-referencias.pdf
+-------------------------------------------------------------------- ||-------------------------------------------------------------------------------------
+
+
+
+
+
+Questão 03- Definir e caracterizar :
+
+
+-> ASIC: Application Specific Integrated Circuits, implementação de circuitos integrados criados para desenvolver tarefas
+específicas em determinado âmbito, tal como chips para celulares, calculadoras, entre outros.Possuem alto tempo de 
+desenvolvimento, custo de frabricação elevado e necessitam de equipamento específico para a realização de cada projeto. Por 
+outro lado possuem alto desempenho e baixo consumo de energia.
+
+-> ASSP: Application Specific Standart Product, são circuitos tal como os ASICs mas tem seu propósito voltado para um âmbito 
+um pouco mais geral, porém ainda assim bem especificado, como um chip de interfaces USB ou reconhecedores de touch screen.
+
+-> SPLDs:  São classificados Dispositivos de Lógica Programável Simples aqueles que possuem número de gates menor ou igual 
+a 600. Circuitos desse tipo possuem em sua constituição arranjos lógicos de ANDs e ORs e flip flops em seus outputs
+dependendo do modelo. Dentre suas características principais podemos citar o o custo baixo e o desempenho elevado.
+
+-> CPLDs: São classificados Dispositivos Complexos de lógica programável aqueles que são formados por um conjuto de outros PLDs
+em um único chip que possui blocos lógicos que se comunicam um com o outro através de interconexões programáveis. Detre suas 
+características principais podemos citar o melhor desempenho e baixo custo devido à uma melhor área de integração que essa arquitetura
+proporciona, sendo cada bloco lógico equivalente a um SPLD. 
+
+-> SOC : System on a Chip ou sistema em um chip é um chip que compõe processador e memória, em alguns casos placa de vídeo,por seu pequeno tamanho 
+e boa performance para tarefas corriqueiras são muito utilizados para dispositivos mobile como tablets, celulares e o recente console de videogame Nintendo Switch. Em geral utilizam uma arquitetura própria chamada RISC, que favorece um conjunto menor
+de instruções mas que levam aproximadamente a mesma quantidade de tempo para serem executadas. Apesar das vantagens a compatilibilidade 
+de sistemas operacionais como o windows ainda não é totalmente plena o que restringe seu uso amplo aos devices movile.  
+
+-> FPGA: São classificados Arranjos Lógicos Programáveis em campo os circuitos programáveis que não possuem ANDs e ORs porém milhares de 
+unidades idênticas configuráveis de forma independentes e que podem ser interconectados a partir de uma matriz de trilhas condutoras e chaves
+também programáveis.
+
+
+
+-------------------------------------------------------------------- ||-------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+Questão 04- Diferenciar:
+-> PROM: Memórias de Apenas Leitura Programáveis a partir da queima de fusíveis internos, uma vez apagado o fuzível 
+ele não retornará ao estado 1.
+
+-> PAL: dispositivo que implementa funções lógicas através de arranjos ANDs e ORs sendo apenas AND programável. Apresenta
+um baixo custo.
+
+-> PLA: Programmable Logic Array foi o primeiro dispositivo a implementar funções lógicas definidas. Composto por ANDs e 
+ORs programáveis assim ele é adequado para soma de produtos SOP. Apesar disso apresenta alto custo.
+______________________________________________________________________________________________________________________________________
+-------|--custo--|------AND-------|---------OR-----------|------USO------|-----------vantagens----------|---------Desvantagens--------|
+_______|_________|________________|______________________|_______________|______________________________|_____________________________|
+PROM   |baixo	 |não programável |não programável	 |muito utilizado|É uma rom programável         |Ao queimar o fuzível se perde|
+_______|_________|________________|______________________|_______________|______________________________|_____________________________|
+PAL    |baixo	 |programável	  |não programável	 |muito utilizado|Baixo custo                   |Arranjos OR não programáveis |
+_______|_________|________________|______________________|_______________|______________________________|_____________________________|
+PLA    |alto	 |programável  	  |programável		 |pouco utilizado|Ambos os arranjos programáveis|Alto custo de produção       | 
+_______|_________|________________|______________________|_______________|______________________________|_____________________________|
+
+
+
+
+-------------------------------------------------------------------- ||-------------------------------------------------------------------------------------
+
+Questão 05- Diferenças entre CPLD e FPGA
+__________________________________________________________________________________________________________________________________________________________
+-----|--Componentes dos Blocos Lógicos--|--------------------------Estrutura------------------------------|---------conexões dos blocos lógicos-----------|
+_____|__________________________________|_________________________________________________________________|_______________________________________________|
+CPLDs|PLGs			        |dividida em blocos lógicos, interconexões e um switch de matriz  |interconexões que formam um barramento	  |		  
+_____|__________________________________|_________________________________________________________________|_______________________________________________|
+FPGAs|Unidades Lógicas idênticas        |dividida em duas unidades lógicas(matriz e arranjo bidimendional)|segmentos de trilha e computadores programáveis|
+_____|__________________________________|_________________________________________________________________|_______________________________________________|
+
+
+___________________________________________________________________________________________________________________________________________________________
+-----|Número de Flip Flops|Recursos de roteamento para funções aitméticas|Necessidade de reconfiguração|-Magnitude de uso-|Tempo de resposta|Flexibilidade |
+_____|____________________|______________________________________________|_____________________________|__________________|_________________|______________|
+CPLDs|ordem de 10^5       |                     Não possuem              |Não necessita		       |Pequenos projetos |Melhor           |Pior          |
+_____|____________________|______________________________________________|_____________________________|__________________|_________________|______________|
+FPGAs|ordem de 10^2       |		        Possuem	                 |Necessita		       |Grandes projetos  |Pior		    |Mwlhor	   |
+_____|____________________|______________________________________________|_____________________________|__________________|_________________|______________|
+
+
+
+
+

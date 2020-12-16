@@ -1,0 +1,258 @@
+Pontifícia Universidade Católica de Minas Gerais
+Curso de Ciência da Computação
+AC1 - AVALIAÇÃO 02 -  Data: 05/11/2020
+
+Nome: Gustavo Martins Lopes da Costa_______________  Matrícula:   6  9  0  7  7  3 
+                                                                  a  b  c  d  e  f
+
+Instruções                                  Tempo previsto: 110m + Extra:  40m
+
+Preencher e enviar para a tarefa 2020-2_ARQ1_A02 no Canvas.
+
+Haverá apenas três (3) tentativas para postar as respostas.
+Favor enviar pelo menos uma vez até às 12:20h.
+
+Escolher apenas opção considerada correta.
+
+Se não houver, JUSTIFICAR suas respostas ao final.
+
+
+Respostas
+Favor não alterar o formato do gabarito.
+
+01  02  03  04  05  06  07  08  09  10
+[b] [d] [b] [c] [b] [b] [c] [a] [b] [c]
+11  12  13  14  15  16	17  18  19  20
+[b] [d] [c] [d] [b] [c] [b] [c] [b] [a]
+
+
+01.) O número de flip-flops necessários para se construir
+     um contador crescente módulo N é
+
+[ ] a.) floor ( log2 (N-1) )
+[x] b.) ceil  ( log2 (N) )
+[ ] c.) floor ( log2 (N+1) )
+[ ] d.) ceil  ( log2 (N) + 1 )
+[ ] e.) outra resposta (JUSTIFICAR)
+
+02.) O número mínimo de portas lógicas necessário para
+     se controlar um contador crescente módulo 6
+     com flip-flops do tipo T ligados em sequência,
+     apenas com entradas de clock (CLK) e clear (CLR) é
+
+[ ] a.) 6
+[ ] b.) 5
+[ ] c.) 4
+[x] d.) 3
+[ ] e.) outra resposta (JUSTIFICAR)
+
+03.) A maior frequência atingida por um contador crescente com
+     4 flip-flops JK com tempo de propagação de 125 [ns]  é
+
+[ ] a.)  10 MHz
+[b] b.)  20 MHz
+[ ] c.)  50 MHz
+[ ] d.) 100 MHz
+[ ] e.) outra resposta (JUSTIFICAR)
+
+04.) Se um flip-flop SR em estado de "hold" com saída Q' = 1
+     receber apenas um pulso em nível alto na entrada S,
+     mantendo a entrada R em nível baixo, a saída Q irá
+
+[ ] a.) momentaneamente para 0 e voltará a 1
+[ ] b.) momentaneamente para 1 e voltará a 0
+[x] c.) comutar para 1
+[ ] d.) manter-se em 0
+[ ] e.) outra resposta (JUSTIFICAR)
+
+05.) Um contador em anel tem comportamento análogo a um
+
+[ ] a.) registrador de deslocamento circular para direita  (ROR)
+[x] b.) registrador de deslocamento circular para esquerda (ROL)
+[ ] c.) contador decrescente módulo 2N
+[ ] d.) contador crescente   módulo 2N
+[ ] e.) outra resposta (JUSTIFICAR)
+
+06.) Ao relacionar a primeira coluna com a segunda,
+     a sequência correspondente será igual a
+
+     A. registrador de deslocamento    1. para conversor paralelo-série
+     B. multiplexador                  2. seleção de endereço na memória
+     C. demultiplexador                3. seleção de operações na ALU
+
+[ ] a.) A1-B2-C3
+[x] b.) A1-B3-C2
+[ ] c.) A2-B3-C1
+[ ] d.) A3-B1-C2
+[ ] e.) outra resposta (JUSTIFICAR)
+
+Para as próximas questões, considerar o projeto de um multiplicador
+de 2 bits (ab) por 2 bits (cd), cujas saídas (uv) serão limitadas 
+módulo 4 a ser implementado apenas com portas lógicas simples.
+
+07.) Terá expressão SoP para o bit 1 (u) igual a
+
+[ ] a.) {6,7,9,A,D,F}
+[ ] b.) {6,7,9,B,C,E}
+[ ] c.) {6,7,9,B,D,E}
+[ ] d.) {6,7,9,A,C,F}
+[ ] e.) outra resposta (JUSTIFICAR)
+
+08.) Terá expressão PoS para o bit 0 (v) igual a
+
+[ ] a.) {0,1,2,3,4,6,8,9,A,B,C,E}
+[ ] b.) {0,1,2,3,4,5,8,9,A,B,C,E}
+[ ] c.) {0,1,2,3,4,6,7,9,A,B,C,E}
+[ ] d.) {0,1,2,3,4,5,7,9,A,B,C,E}
+[ ] e.) outra resposta (JUSTIFICAR)
+
+09.) Terá expressão SoP mais simplificada para o bit 0 (v) igual a
+
+[ ] a.) assign v = ~a & b & d;
+[ ] b.) assign v = ~a & d;
+[ ] c.) assign v =  a & b;
+[ ] d.) assign v =  b & d;
+[ ] e.) outra resposta (JUSTIFICAR)
+
+10.) Terá a expressão PoS mais simplificada para o bit 1 (u) com
+
+[ ] a.) 4 grupos de 4 e 1 grupo  de 1
+[ ] b.) 3 grupos de 4 e 1 grupo  de 1
+[ ] c.) 3 grupos de 4 e 2 grupos de 1
+[ ] d.) 2 grupos de 4 e 3 grupos de 1
+[ ] e.) outra resposta (JUSTIFICAR)
+
+11.) Dois flip-flops estão montados de maneira que
+     Ja = Qb' e Ka = Qb, Jb = Qa e Kb = Qa', após
+     um pulso de clear (CLR) e 243 pulsos de clock (CLK)
+     as saídas Qa e Qb serão respectivamente iguais a
+
+[ ] a.) 00
+[x] b.) 01
+[ ] c.) 10
+[ ] d.) 11
+[ ] e.) outra resposta (JUSTIFICAR)
+
+12.) As saídas de um flip-flop D estão ligadas a um multiplexador
+     de modo que Qa está na entrada 0 e Qa' está na entrada 1.
+     A saída do multiplexador está ligada à entrada Da.
+     Um sinal A será usado como seletor do multiplexador.
+     O diagrama de estados que descreve o comportamento do circuito
+     é tal que
+
+[ ] a.) se A=0, o circuito ficará em "hold", independente do clock
+[ ] b.) se A=0, o circuito irá para  "set" , após clear, no primeiro clock
+[ ] c.) se A=1, o circuito irá para "reset", após clear, no primeiro clock
+[x] d.) se A=1, o circuito ficará em "set" , independente do clock
+[ ] e.) outra resposta (JUSTIFICAR)
+
+13.) Um diagrama de estados de um circuito com duas entradas (ab) 
+     apresenta o seguinte comportamento: irá ou permanecerá no estado 1, 
+     se a=1 e b=0 ou se a=0, independente do valor de b; senão, 
+     estará ou irá para o estado 0. Esse circuito poderá ser
+     substituído por uma porta lógica
+
+[ ] a.) XOR
+[ ] b.) XNOR
+[x] c.) NAND
+[ ] d.) NOR
+[ ] e.) outra resposta (JUSTIFICAR)
+
+14.) Dada a tabela de transições de estados abaixo,
+     as expressões que definem o circuito baseado em 
+     flip-flops do tipo D são
+
+     atual  próximo
+     Qa Qb   Qa Qb
+     0  0    0  1
+     0  1    1  1
+     1  0    0  0
+     1  1    1  0
+
+[ ] a.) Da = b  e Db = a
+[ ] b.) Da = b  e Db = a'
+[ ] c.) Da = b' e Db = a
+[x] d.) Da = b' e Db = a'
+[ ] e.) outra resposta (JUSTIFICAR)
+
+15.) A sequência de transições de estados de
+     dois flip-flops tipo D estão montados
+     em um circuito síncrono regido pelas
+     expressões abaixo:
+
+     Da = Qa'   e   Db = Qa xor Qb'
+
+[ ] a.) 0-3-0
+[x] b.) 0-3-1-0
+[ ] c.) 0-3-2-1-0
+[ ] d.) 0-3-1-2-0
+[ ] e.) outra resposta (JUSTIFICAR)
+
+16.) Uma máquina de Turing deverá se comportar
+     como um contador módulo-3, ou seja, a cada
+     3 entradas iguais a 1, deverá voltar ao estado 0.
+     Para se fazer com que o estado final seja sempre 0,
+     quando não houver mais entradas,
+     as regras para fazer isso deverão ser iguais a
+
+[ ] a.) {q0,#,q0,#,S}, {q1,#,q0,#,S}, {q2,#,q0,#,S}
+[ ] b.) {q0,0,q0,#,S}, {q1,#,q0,#,S}, {q2,#,q0,#,L}
+[x] c.) {q0,1,q0,#,S}, {q1,#,q0,#,L}, {q2,#,q0,#,S}
+[ ] d.) {q0,#,q0,#,S}, {q1,#,q0,#,L}, {q2,#,q0,#,L}
+[ ] e.) outra resposta (JUSTIFICAR)
+
+17.) Quatro flip-flops JK (ABCD) estão montados assincronamente
+     em configuração de "toggle", com clock inicial em A, e
+     entradas dos seguintes recebendo as saídas positivas dos
+     anteriores. Uma porta NAND recebe os sinais de "toggle" e Qb
+     e produz o sinal E.
+     Se as saídas atuais forem ABCDE={11101}, as próximas serão
+
+[ ] a.) ABCDE={11100}
+[x] b.) ABCDE={11110}
+[ ] c.) ABCDE={01101}
+[ ] d.) ABCDE={01100}
+[ ] e.) outra resposta (JUSTIFICAR)
+
+18.) As expressões resultantes da simplificação da tabela abaixo
+     por mapa de Veitch-Karnaugh (X="don't care"=pode ser escolhido)
+     serão
+
+     INPUT Qt Qt+1 J K
+       0    0  0   0 X
+       0    1  0   X 1
+       1    0  1   1 X
+       1    1  0   X 0
+
+[ ] a.) J=INPUT' e K = INPUT'
+[ ] b.) J=INPUT' e K = INPUT
+[x] c.) J=INPUT  e K = INPUT'
+[ ] d.) J=INPUT  e K = INPUT
+[ ] e.) outra resposta (JUSTIFICAR)
+
+19.) Quatro flip-flops T (DCBA) estão montados assincronamente
+     com clock inicial em D, e as entradas Tc=Qd',Tb=Qc' e Ta=Qb'.
+     Se as saídas atuais forem ABCD={0110}, após 2 clocks
+     as próximas saídas serão
+
+[ ] a.) 1100
+[x] b.) 1000
+[ ] c.) 0100
+[ ] d.) 0010
+[ ] e.) outra resposta (JUSTIFICAR)
+
+20.) Um clock possui tm = ts = 2[s] e
+     é aplicado a um flip-flop JK configurado em "toggle".
+     O sinal de saída terá período [s] equivalente a
+
+[ ] a.) 1
+[ ] b.) 2
+[ ] c.) 4
+[x] d.) 8
+[ ] e.) outra resposta (JUSTIFICAR)
+
+__________________________________________________
+
+JUSTIFICATIVAS
+
+
