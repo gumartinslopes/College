@@ -12,7 +12,7 @@
 4. *}* -> Caminha blocos de texto (ou código) abaixo.
 5. *o*  -> Adiciona uma linha e entra no modo de inserção.
 6. *h j k l* -> Fazem o trabalho das teclas de seta respetivamente esquerda, cima, baixo direita.
-7. *\* * -> Encontra todas as instâncias da palavra que o cursor aponta.
+7. * -> Encontra todas as instâncias da palavra que o cursor aponta.
 ## Movimentação Horizontal
 1. *w* -> Avança para a primeira letra próxima palavra na linha.
 2. *b* -> Retorna para  primeira letra da palavra anterior.
