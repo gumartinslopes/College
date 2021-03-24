@@ -76,12 +76,13 @@ public class InternalSort{
 	}
 
 	public void sort(){
-
+		//implemented on extended classes
 	}
 
 	public void benchmarkAlgorithm(){
 		System.out.println("Total comparisons :" + comparisons);
 		System.out.println("Total internal movements: " + internalArrayMoves);
-		System.out.println("Sort time: " + (endTime + beginTime) + " milliseconds");
+		double totalTime = endTime - beginTime;
+		System.out.println("Sort time: " + totalTime + " milliseconds");
 	}
 }

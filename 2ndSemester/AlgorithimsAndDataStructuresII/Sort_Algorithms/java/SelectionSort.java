@@ -22,8 +22,6 @@ public class SelectionSort extends InternalSort{
 				swap(smaller, i);
 				mov++;
 			}
-			
-			
 		}
 		endTime = now();
 		comparisons = comp;
