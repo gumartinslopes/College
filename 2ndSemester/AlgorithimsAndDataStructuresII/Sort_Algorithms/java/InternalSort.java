@@ -42,15 +42,18 @@ public class InternalSort{
 		System.out.println("]");
 	}
 
-	public boolean isSorted(){
+	public void isSorted(){
 		boolean resp = true;
-		for(int i = 0; i < n; i++){
+		for(int i = 1; i < n; i++){
 			if(array[i] < array[i -1]){
 				i = n;		//finishes the loop
 				resp = false;
 			}
 		}
-		return resp;
+		if(resp)
+			System.out.println("Array succesfully sorted");
+		else
+			System.out.println("Array out of order");
 	}
 
 	public void generateAscendingArray(){
@@ -66,7 +69,7 @@ public class InternalSort{
 	public void generateRandomArray(){
 		Random rand = new Random();
 		for(int i = 0; i < n; i++){
-			array[i] = rand.nextInt()%100;
+			array[i] = Math.abs(rand.nextInt() % 100);
 		}
 	}
 
@@ -77,6 +80,21 @@ public class InternalSort{
 
 	public void sort(){
 		//implemented on extended classes
+	}
+
+	public int getBigger(){
+		int bigger = 0;
+		for(int i = 0; i < array.length; i++){
+			if(array[i] > bigger)
+				bigger = array[i];
+		}
+		return bigger;
+	}
+
+	public void copyArray(int[] input){
+		for(int i = 0; i < array.length; i++){
+			array[i] = input[i];
+		}
 	}
 
 	public void benchmarkAlgorithm(){

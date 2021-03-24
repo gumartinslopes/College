@@ -7,13 +7,15 @@ public class Main{
 		//algorithm = new RecursiveSelectionSort(10);
 		//algorithm = new InsertionSort(100000);
 		//algorithm = new MergeSort(100000);
-		algorithm = new QuickSort(100000);
+		//algorithm = new QuickSort(10);
 		//algorithm = new BubbleSort(100000);
 		//algorithm = new BufferedBubbleSort(100000);
-		
+		algorithm = new CountingSort(100000);
+
 		algorithm.generateRandomArray();
 		//algorithm.displayArray();
 		algorithm.sort();
+		//algorithm.isSorted();
 		algorithm.benchmarkAlgorithm();
 		//algorithm.displayArray();
 	}
