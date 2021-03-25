@@ -16,10 +16,8 @@ public class InsertionSort extends InternalSort{
 			int aux = array[i];
 			int j = i - 1;
 			while((j >= 0) && (array[j] > aux)){
-				if(array[j] > aux){
 					array[j + 1] = array[j];
 					j--;
-				}
 			}
 			array[j + 1] = aux;
 		}
