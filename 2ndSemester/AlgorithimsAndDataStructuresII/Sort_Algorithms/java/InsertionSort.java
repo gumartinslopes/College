@@ -10,21 +10,36 @@ public class InsertionSort extends InternalSort{
 	@Override
 	public void sort(){
 		beginTime = now();
-		int comp = 0, mov = 0;
-
 		for(int i = 1; i < n; i++){
 			int aux = array[i];
 			int j = i - 1;
 			while((j >= 0) && (array[j] > aux)){
 					array[j + 1] = array[j];
 					j--;
+					internalArrayMoves++;
+					comparisons++;
 			}
 			array[j + 1] = aux;
+			internalArrayMoves++;
 		}
+		endTime = now();	
+	}
 
-
-		endTime = now();
-		comparisons = comp;
-		internalArrayMoves = mov;
+	@Override
+	public void partialSort(int k){
+		beginTime = now();
+		for(int i = 1; i < n; i++){
+			int aux = array[i];
+			int j = (i < k) ? i - 1 : k - 1;
+			while(j >= 0 && array[j] > aux){
+				array[j + 1] = array[j];
+				j--;
+				internalArrayMoves++;
+				comparisons++;
+			}
+			array[j + 1] = aux;
+			internalArrayMoves++;
+		}
+		endTime = now();	
 	}
 }

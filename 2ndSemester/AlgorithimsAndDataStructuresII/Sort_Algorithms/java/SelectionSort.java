@@ -10,21 +10,30 @@ public class SelectionSort extends InternalSort{
 	@Override
 	public void sort(){
 		beginTime = now();
-		int comp = 0, mov = 0;
 		for(int i = 0; i < (n - 1); i++){
 			int smaller = i;
 			for(int j = (i + 1); j < n; j++){
-				comp++;
+				comparisons++;
 				if(array[smaller] > array[j])
 					smaller = j;
 			}
 			if(smaller != i){
 				swap(smaller, i);
-				mov++;
+				internalArrayMoves++;
 			}
 		}
 		endTime = now();
-		comparisons = comp;
-		internalArrayMoves = mov;
+	}
+
+	@Override
+	public void partialSort(int k){
+		for(int i = 0; i < k; i++){
+			int smaller = i;
+			for(int j = (i + 1); j < n; j++){
+				if(array[smaller] > array[j])
+					smaller = j;
+			}
+				swap(smaller, i);
+		}
 	}
 }

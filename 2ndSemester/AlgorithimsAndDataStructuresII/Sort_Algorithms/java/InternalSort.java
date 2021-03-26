@@ -5,6 +5,7 @@ public class InternalSort{
 	protected int n;	// array size
 	protected int comparisons, internalArrayMoves;
 	protected double beginTime, endTime;
+	
 
 	//constructors
 	public InternalSort(){
@@ -37,20 +38,36 @@ public class InternalSort{
 	public void displayArray(int k){
 		System.out.print("[");
 		for(int i = 0; i < k;i++){
-			System.out.print(array[i] + ", ");
+			System.out.print(array[i]);
+			if(i < k - 1)
+				System.out.print(", ");
 		}
 		System.out.println("]");
 	}
 
 	public void isSorted(){
-		boolean resp = true;
+		boolean result = true;
 		for(int i = 1; i < n; i++){
 			if(array[i] < array[i -1]){
 				i = n;		//finishes the loop
-				resp = false;
+				result = false;
 			}
 		}
-		if(resp)
+		if(result)
+			System.out.println("Array succesfully sorted");
+		else
+			System.out.println("Array out of order");
+	}
+
+	public void isSorted(int k){
+		boolean result = true;
+		for(int i = 1; i < k; i++){
+			if(array[i] < array[i -1]){
+				i = n;		//finishes the loop
+				result = false;
+			}
+		}
+		if(result)
 			System.out.println("Array succesfully sorted");
 		else
 			System.out.println("Array out of order");
@@ -79,6 +96,9 @@ public class InternalSort{
 	}
 
 	public void sort(){
+		//implemented on extended classes
+	}
+	public void partialSort(int k){
 		//implemented on extended classes
 	}
 

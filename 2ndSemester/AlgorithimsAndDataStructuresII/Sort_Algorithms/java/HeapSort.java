@@ -5,7 +5,7 @@ public class HeapSort extends InternalSort{
 	}
 
 	public HeapSort(int arraySize){
-		super(arraySize);
+		super(arraySize + 1);
 	}
 
 	@Override
@@ -18,6 +18,30 @@ public class HeapSort extends InternalSort{
 
 		//sorting
 		int size = n - 1;
+		while(size > 1){
+			swap(1, size--);
+			rebuild(size);
+		}
+		endTime = now();
+	}
+
+	@Override 
+	public void partialSort(int k){
+		beginTime = now();
+		//building the heap
+		for(int size = 2; size <= k; size++){
+			build(size);
+		}
+
+		for(int i = (k + 1); i <= n -1; i++){
+			if(array[i] < array[1]){
+				swap(i, 1);
+				rebuild(k);
+			}
+		}
+		
+		//sorting
+		int size = k;
 		while(size > 1){
 			swap(1, size--);
 			rebuild(size);
@@ -67,6 +91,18 @@ public class HeapSort extends InternalSort{
 		}
 		System.out.println("]");
 	}
+
+	@Override
+	public void displayArray(int k){
+		System.out.print("[");
+		for(int i = 1; i < k;i++){
+			System.out.print(array[i]);
+			if(i < k)
+				System.out.print(", ");
+		}
+		System.out.println("]");
+	}
+
 
 	@Override
 	public void generateAscendingArray(){

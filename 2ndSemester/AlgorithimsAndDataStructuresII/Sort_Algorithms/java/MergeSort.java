@@ -31,7 +31,7 @@ public class MergeSort extends InternalSort{
 		int[] arrayLeft = new int[nLeft + 1];
 		int[] arrayRight = new int[nRight + 1];
 
-		//final sentinel 
+		//sentinela final dos dois arrays
 		arrayLeft[nLeft] = arrayRight[nRight] = 0x7FFFFFFF;
 
 		int leftIndex, rightIndex, index;
