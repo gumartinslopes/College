@@ -1,0 +1,20 @@
+Questão 13
+Gustavo Martins Lopes da Costa 
+690773
+
+
+ ------- Funcionamento do algoritmo -------
+1- Um loop externo é feito percorrendo de 1 até n (n - 1 movimentações).
+2- Uma variável auxiliar recebe o valor do array na posição i.
+3- A variável j é criada.Porém, diferentemente do inserção padrão se i > k ele recebe k - 1, caso contrário i - 1.
+4- Enquanto j>=0 e o elemento na posição j for maior que a variável auxiliar os elementos são deslocados em um loop interno.
+5- Por fim a variável auxiliar é inserida na posição correta, igualmente à implementação do inserção original.
+
+
+ ------- Conclusão ------- 
+Melhor caso -> No melhor caso os 10 primeiros valores do array já estarão ordenados, ou seja faremos apenas 1
+comparação a cada loop externo, ou seja, n - 1 comparações que são theta(n - 1).
+
+Pior caso -> No pior caso os k primeiros elementos estarão ordenados de forma decrescente nas últimas kposições do array. 
+Visto que queremos ordenar os k primeiros elementos do array teremos uma complexidade linear theta(n - 1). 
+   
