@@ -45,6 +45,7 @@ public class PilhaFlex{
 		}
 	}
 	
+	//método que mostra a pilha ao contrário de forma recursiva
 	public void displayBackwards(){
 		System.out.println("Your stack backwards:");
 		displayBackwards(top);
@@ -56,6 +57,19 @@ public class PilhaFlex{
 			displayBackwards(c.next);
 		System.out.println("| " + c.element + " |");
 		
+	}
+	
+	public void iterativeDisplayBackwards(){
+		int j = 0;
+		int []elements = new int[count()];//array auxiliar com tamanho do número de elementos da stack
+		
+		for(int i = top; i != null; i = i.next)
+			elements[j++] = i.element;
+		
+		System.out.println("Your stack");
+		
+		for(int i = 0; i < elements.length; i++)
+			System.out.println("| " + elements[i] + " |");
 	}
 	
 	public int getSum(){
@@ -71,6 +85,7 @@ public class PilhaFlex{
 			n++;
 		System.out.println("The number of elements on your stack is " + n);
 	}
+	
 	//chamada inicial da soma por recursão
 	public int getRecursiveSum(){
 		return getRecursiveSum(top);
@@ -89,5 +104,18 @@ public class PilhaFlex{
 			if(biggest < i.element)
 				biggest = i.element;
 		return biggest;
+	}
+	
+	//método que retorna o maior valor contido na pilha de forma recursiva
+	public int getRecursiveBiggestElement(){
+		return getRecursiveBiggestElement(top);
+	}
+	public int getRecursiveBiggestElement(Cell i){
+			int biggest = 0;
+			if(i  != null){
+				int aux = getRecursiveBiggestElement(i.next);
+				biggest = (aux > i.element) ? aux : i.element;
+			}
+			return biggest;
 	}
 }
