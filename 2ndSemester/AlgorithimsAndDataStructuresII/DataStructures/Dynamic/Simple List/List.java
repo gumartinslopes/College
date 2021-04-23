@@ -17,8 +17,7 @@ public class List{
 
 	public int getLength(){
 		int counter = 0;
-		for(Cell i = first.next; i != null; i = i.next)
-			counter++;
+		for(Cell i = first.next; i != null; i = i.next, counter++);
 		return counter;
 	}
 

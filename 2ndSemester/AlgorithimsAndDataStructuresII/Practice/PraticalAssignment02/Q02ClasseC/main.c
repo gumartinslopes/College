@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 
 #define TOTAL_MUSIC_NUMBER 170625
 #define MAX_LINE_LENGTH 1000
@@ -9,7 +10,7 @@
 #define MAX_ID_LENGTH 25
 
 typedef struct{
-  char list[400];
+  char list[500];
   int list_length;
 }Artists_list;
 
@@ -25,8 +26,10 @@ typedef struct{
   char id[MAX_ID_LENGTH];
   char name[200];
   char key[200];
+  
   Artists_list artists;
   Date release_date;
+  
   double acousticness;
   double danceability;
   double energy;
@@ -43,39 +46,87 @@ typedef struct{
 
 
 //cabeçalhos das funções
+void displayAnswer(bool answer);
+void displayPlaylist(Music playlist[], int n);
+void createlog(char *filepath, int comp, int mov, double time);
+bool isSorted(Music playlist[], int n);
+void swap(Music playlist[], int a, int b);
 void ler(char* filepath,char** totalMusicList);
 void imprimir(Music *m);
 int standartInput(char input[MAX_PLAYLIST_LENGTH][MAX_ID_LENGTH]);
 void insertOnPlaylist(int insert_quantity, char idList[MAX_PLAYLIST_LENGTH][MAX_ID_LENGTH], char **totalMusicList, Music playlist[]);
+void readAtribute(int *stringIndex, char *infos, char* output);
 void cadastra(char data_without_formatation[],Music* m);
-void dataSplit(char* raw_info, char** formatted_data,int array_length);
 void insertDate(Date* d, char* not_formatted_date);
 void displayFormattedDate(Date* d);
-void insertArtist(Artists_list* a,char* not_formatted_list);
+void insertArtists(Artists_list* a,char* not_formatted_list);
 
 int main(){
   char idList[MAX_PLAYLIST_LENGTH][MAX_ID_LENGTH];//vetor que armazena os ids do input
-  int listed_id_quantity = standartInput(idList);
+  int playlist_length;  
   Music playlist[MAX_PLAYLIST_LENGTH];
-  
+  int mov = 0, comp = 0;
+  clock_t begin, end;
+  double execution_time;
+
   //alocacao do array de strings
   char **totalMusicList; 
   totalMusicList = (char**)malloc(sizeof(char*) * TOTAL_MUSIC_NUMBER);
-
+ 
   //alocacao das strings contidas no array
   for(int i = 0; i < TOTAL_MUSIC_NUMBER; i++)
     totalMusicList[i] = (char*)malloc(sizeof(char*) * MAX_LINE_LENGTH);
    
   ler("/tmp/data.csv", totalMusicList);
-  
-  insertOnPlaylist(listed_id_quantity, idList,totalMusicList, playlist);
-  
-  for(int i = 0;i < listed_id_quantity; i++){
-    imprimir(&playlist[i]); 
-  }
-  free(totalMusicList);
 
+  playlist_length = standartInput(idList);
+  insertOnPlaylist(playlist_length, idList,totalMusicList, playlist);
+
+  begin = clock(); 
+  displayPlaylist(playlist, playlist_length);
+  end = clock();
+  
+  execution_time = ((end - begin) / (double)CLOCKS_PER_SEC);
+
+  
+  free(totalMusicList);
   return 0;
+}
+
+void displayAnswer(bool answer){
+  if(answer == true)
+    printf("SIM\n");
+  else 
+    printf("NAO\n");
+}
+
+void displayPlaylist(Music playlist[], int n){
+  for(int i = 0; i < n; i++)
+    imprimir(&playlist[i]);
+}
+
+//funcao para documentacao do algorimto
+void createlog(char *filepath,int comp, int mov, double time){
+  FILE *fileptr = fopen(filepath, "w");
+  fprintf(fileptr, "690773\t%d\t%d\t%f",comp, mov, time); 
+  fclose(fileptr);
+}
+
+void swap(Music playlist[], int a, int b){
+  Music aux = playlist[a];
+  playlist[a] = playlist[b];
+  playlist[b] = aux;
+}
+
+bool isSorted(Music playlist[], int n){
+  bool result = true;
+  for(int i = 0; i < n - 1; i++){
+    if(strcmp(playlist[i].name, playlist[i + 1].name) > 0){
+      result = false;
+      i = n - 1;
+    }
+  }
+  return result;
 }
 
 void ler(char* filepath,char** totalMusicList){
@@ -102,8 +153,8 @@ void ler(char* filepath,char** totalMusicList){
 void imprimir(Music *m){
  printf("%s ## %s ## %s ## ", m->id, m->artists.list, m->name);
  displayFormattedDate(&m->release_date);
- printf(" ## %g ## %g ## %g ## %g ",m->acousticness, m->danceability, m->instrumentalness, m->liveness);
- printf("## %g ## %g ## %g ## %d \n", m->loudness, m->speechiness, m->energy, m->duration_ms); 
+ printf(" ## %lf ## %lg ## %lg ## %lg ",m->acousticness, m->danceability, m->instrumentalness, m->liveness);
+ printf("## %lg ## %lg ## %lg ## %d \n", m->loudness, m->speechiness, m->energy, m->duration_ms); 
 }
 
 //funcao de entrada de dados padronizada
@@ -141,80 +192,49 @@ void searchById(char id[MAX_ID_LENGTH], char **totalMusicList, char* resp){
 }
 
 //funcao que simula um construtor
-void cadastra(char *data_without_formatation,Music* m){
-  char **music_info;
-
-  music_info = (char**)malloc(sizeof(char*) * 19);
-  
+void cadastra(char *music_info, Music* m){
+  int lineIndex = 0; 
+  char fields[19][MAX_LINE_LENGTH];
+ 
+  //split dos atributos 
   for(int i = 0; i < 19; i++)
-    music_info[i] = (char*)malloc(sizeof(char) * 200);
-
-  dataSplit(data_without_formatation,music_info, 19);
-  m->valence = atof(music_info[0]);
-  m->year = atoi(music_info[1]);
-  m->acousticness = atof(music_info[2]);
-  insertArtist(&m->artists, music_info[3]);
-  m->danceability = atof(music_info[4]);
-  m->duration_ms = atof (music_info[5]);
-  m->energy = atof(music_info[6]);
-//m.explicity = atoi( music_info[7]);       //dado nao cadastrado
-  strcpy(m->id, music_info[8]);
-  m->instrumentalness = atof(music_info[9]);
-  strcpy(m->key, music_info[10]);
-  m->liveness = atof(music_info[11]);
-  m->loudness =  atof(music_info[12]);
-//m.mode = atoi(music_info[13]);               //dado nao cadastrado
-  strcpy(m->name, music_info[14]);
-  m->popularity = atoi(music_info[15]);
-  insertDate(&m->release_date,music_info[16]);
-  m->speechiness = atof(music_info[17]);
-  m->tempo = atof(music_info[18]);
-  free(music_info);
-}
-
-void dataSplit(char* raw_info, char** formatted_data, int array_length){
+    readAtribute(&lineIndex, music_info, fields[i]);
   
-  char aux[100];
-  int arrayIndex, stringIndex, auxIndex;
-  arrayIndex = stringIndex = auxIndex = 0;
-
-  while(arrayIndex < array_length){
-    //split padrao
-    if(raw_info[stringIndex] == 44 || raw_info[stringIndex] == '\0'){
-      strncpy(formatted_data[arrayIndex], aux, auxIndex);
-      formatted_data[arrayIndex][auxIndex] = '\0';
-      arrayIndex++;
-      auxIndex = 0;
-    }
-    
-   //verificacao de artista unico
-   else if(raw_info[stringIndex] == 91){
-    aux[auxIndex] = raw_info[stringIndex]; //acrescentamos o [
-      do{
-        auxIndex++;   
-        stringIndex++;
-        aux[auxIndex] = raw_info[stringIndex];  
-      }while(raw_info[stringIndex] != 93);
-      auxIndex++;
-    }
-
-   //filtro de aspas
-   else if(raw_info[stringIndex] == '"'){
-      stringIndex ++;//pulamos o "
-      while(raw_info[stringIndex] != '"'){
-        aux[auxIndex] = raw_info[stringIndex];
-        auxIndex++;
-        stringIndex++;
-      }
-    }
-        
-    else{
-      aux[auxIndex] = raw_info[stringIndex];
-      auxIndex++;
-    }
-    stringIndex++;
-  } 
+  //cadastro individual
+  m->valence = atof(fields[0]);
+  m->year = atoi(fields[1]);
+  m->acousticness = atof(fields[2]);
+  insertArtists(&m->artists,fields[3]);
+  m->danceability = atof(fields[4]);
+  m->duration_ms = atof(fields[5]);
+  m->energy = atof(fields[6]);
+  //explicit nao utilizado
+  strcpy(m->id,fields[8]);
+  m->instrumentalness = atof(fields[9]);
+  strcpy(m->key,fields[10]);
+  m->liveness = atof(fields[11]);
+  m->loudness = atof(fields[12]);
+  //mode nao utilizado
+  strcpy(m->name,fields[14]);
+  m->popularity = atoi(fields[15]);
+  insertDate(&m->release_date, fields[16]);
+  m->speechiness = atof(fields[17]);
+  m->tempo = atof(fields[18]);
 }
+
+//funcao que faz o split dos artibutos corretamente
+void readAtribute(int *stringIndex, char *infos, char* output){
+  int i = *stringIndex;
+  int j = 0;
+  while(infos[i] != '\0' && ((infos[i] != ',') || !(infos[i] == ',' && infos[i + 1] != ' '))){ //pulamos virgulas e quotes desnecessarios
+    if(infos[i] != '"') 
+      output[j++] = infos[i];  
+    i++;
+  }
+   output[j] = '\0';
+  *stringIndex = ++i;
+}
+
 
 //funcoes referente a manipulacao de datas  aaaa-mm-dd
 void insertDate(Date* d, char* not_formatted_date){
@@ -226,7 +246,7 @@ void insertDate(Date* d, char* not_formatted_date){
  d->year = atoi(year);
  
  if(not_formatted_date[4] != '-'){
-    strcpy(month,"00");
+    strcpy(month,"01");
  } 
 
  else{
@@ -235,7 +255,7 @@ void insertDate(Date* d, char* not_formatted_date){
  }
 
  if(not_formatted_date[7] != '-'){
-  strcpy(day,"00");
+  strcpy(day,"01");
  }
  else {
     day[0] = not_formatted_date[8];
@@ -251,7 +271,7 @@ void displayFormattedDate(Date* d){
     printf("%0*d/%0*d/%0*d", 2, d->day, 2, d->month, 4, d->year);
 }
 
-void insertArtist(Artists_list* a,char* input){
+void insertArtists(Artists_list* a,char* input){
   int i = 0;
   a->list_length = 0;
   while(i < strlen(input)){

@@ -1,12 +1,19 @@
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
-import java.io.IOException;
+import java.util.ArrayList;
+
+
 
 //classe principal do programa
 public class Main{
   public static int maxMusicNumber = 170653;
   public static int maxPlaylistSize = 500;
   public static int inputNumber = 0;
+  public static int totalComparisons;
+  public static int totalMoves;
 
   public static String[] totalMusicInfo = new String[maxMusicNumber];
   public static Music[] playlist = new Music[maxPlaylistSize];
@@ -15,10 +22,27 @@ public class Main{
     MyIO.setCharset("UTF-8");
     String filepath = "/tmp/data.csv";
     try{
-
-      String id = new String();
+      long initialTime = System.currentTimeMillis();
       totalMusicInfo = playlist[0].ler(filepath, maxMusicNumber);
+      standartInput();
       
+      for(int i = 0; i < inputNumber; i++)
+        playlist[i].imprimir();
+      long afterTime = System.currentTimeMillis();
+      long executionTime = afterTime - initialTime;
+      
+      createLog(executionTime,"690773_sequencial");
+    }
+
+    catch(Exception ex){
+      MyIO.println(ex.toString());
+      ex.printStackTrace();
+    }
+}
+
+  public static void standartInput(){ 
+     //registro de entrada padrao
+     String id = new String();
       do{
         id = MyIO.readLine();
         if(id.compareTo("FIM") != 0){
@@ -27,17 +51,14 @@ public class Main{
           inputNumber++;
         }
       }while(id.compareTo("FIM") != 0);
-
-      for(int i = 0; i < inputNumber; i++){
-        playlist[i].imprimir();
-      }
-    }
-    catch(Exception ex){
-      MyIO.println(ex.toString());
-      ex.printStackTrace();
-    }
   }
-  
+
+  public static void createLog(long executionTime, String filepath)throws IOException{
+    BufferedWriter bw = new BufferedWriter(new FileWriter(filepath));
+    bw.write("690773_sequencial.txt\t" + executionTime + "\t" + totalComparisons);
+    bw.close();
+  }
+
   //metodo que procura dentre todas as musicas a que possui determinado id
   public static String totalSearchById(String id){
     String resp = new String();
@@ -49,11 +70,10 @@ public class Main{
     }
     return resp;
   }
-
+ 
   public static void registrar(String dadosNaoFormatados){
-    String[] atributos = mySplit(dadosNaoFormatados, 19);     //total de 19 atributos lidos porem 2 nao serao registrados
-    trataNulidade(atributos);
-    
+    String[] atributos = dataSplit(dadosNaoFormatados, 19);     //total de 19 atributos lidos porem 2 nao serao registrados
+    trataNulidade(atributos); 
     playlist[inputNumber].setValence(Double.parseDouble(atributos[0]));
     playlist[inputNumber].setYear(Integer.parseInt(atributos[1]));
     playlist[inputNumber].setAcousticness(Double.parseDouble(atributos[2]));
@@ -70,8 +90,7 @@ public class Main{
     //skip mode
     playlist[inputNumber].setName(atributos[14]);
     playlist[inputNumber].setPopularity(Integer.parseInt(atributos[15]));
-    int[] data = playlist[inputNumber].getRelease_date().splitDate(atributos[16]);
-    playlist[inputNumber].setRelease_date(data[0], data[1], data[2]);
+    playlist[inputNumber].setRelease_date(atributos[16]);
     playlist[inputNumber].setSpeechiness(Double.parseDouble(atributos[17]));
     playlist[inputNumber].setTempo(Float.parseFloat(atributos[18]));
   }
@@ -83,43 +102,30 @@ public class Main{
     }
   }
 
-  public static String[] mySplit(String input, int arrayLength){
-    String aux = new String();
+  public static String[] dataSplit(String input, int arrayLength){
     String[] output = new String[arrayLength];
-    int i, j;
-    i = j = 0; 
-    while(i < input.length() && j < arrayLength){
-      if(i + 1 == input.length() || input.charAt(i) == 44){   //,
-        output[j] = aux;
-        aux = new String();
-        j++;
-      }
     
-      else if(input.charAt(i) == 34){
-        i++;
-        do{
-          aux += input.charAt(i);
-          i++;
-        }while(input.charAt(i) != 34  || (input.charAt(i) == 34 && input.charAt(i + 1) != 44));     // o loop para apenas quando tivermos um ",  
-      }
+    //tratamento de virgulas internas e dos artistas
+    String aux = input.replace(", ", "##");
+    aux = aux.replace("\"[", "[");
+    aux = aux.replace("]\"","]");
+    
+    output = aux.split(",");
+    //retratamento de virgulas
+    for(int i = 0; i < arrayLength; i++)
+      output[i] = output[i].replace("##", ", ");
 
-      else{
-        aux+= input.charAt(i);
-      }
-      i++;
-    }
     return output;
   }
 
 }
-
 //classe Music
 class Music{
   //17 atributos da classe
   private String id;
   private String name;
   private String key;
-  private SimpleArtistList artists = new SimpleArtistList();
+  private ArrayList<String> artists = new ArrayList<String>();
   private SimpleDate release_date;
   private double acousticness;
   private double danceability;
@@ -139,7 +145,7 @@ class Music{
 
   }
 
-  public Music(String id, String name, String key, String artistList, SimpleDate release_date, double acousticness, 
+  public Music(String id, String name, String key, String artistList, String release_date_string, double acousticness, 
    double danceability, double energy, int duration_ms, double instrumentalness, double valence,
    int popularity, float tempo, double liveness, double loudness, double speechiness, int year){
 
@@ -147,7 +153,7 @@ class Music{
     setName(name);
     setKey(key);
     setArtists(artistList);
-    setRelease_date(release_date.getYear(), release_date.getMonth(), release_date.getDay());
+    setRelease_date(release_date_string);
     setAcousticness(acousticness);
     setDanceability(danceability);
     setEnergy(energy);
@@ -178,9 +184,9 @@ class Music{
 
  
   public void imprimir(){
-    MyIO.print(getId() + " ## " + artists.getArtistsList() + " ## " + getName() + " ## " + release_date.getSimpleDateFormat());
-    MyIO.print(" ## " + getAcousticness() + " ## " + getDanceability() + " ## " + getInstrumentalness() + " ## " + getLiveness());
-    MyIO.println(" ## " + getLoudness() + " ## " + getSpeechiness() + " ## " + getEnergy() + " ## "+ getDuration_ms()); 
+    MyIO.print(getId() + " ## " + this.artists + " ## " + this.name + " ## " + release_date.getSimpleDateFormat());
+    MyIO.print(" ## " + this.acousticness + " ## " + this.danceability + " ## " + getInstrumentalness() + " ## " + this.liveness);
+    MyIO.println(" ## " + this.loudness + " ## " + this.speechiness + " ## " + this.energy + " ## "+ this.duration_ms); 
   }
 
   public Music clone(){
@@ -189,8 +195,8 @@ class Music{
     //copia de todos os atributos
     cloneMusic.id = this.id;
     cloneMusic.name = this.name;
-    cloneMusic.setArtists(this.artists.getArtistsList());
-    cloneMusic.release_date = new SimpleDate(this.release_date.getYear(), this.release_date.getMonth(), this.release_date.getDay());
+    cloneMusic.artists = this.artists;
+    cloneMusic.release_date = new SimpleDate(this.release_date.getYear() + "-" + this.release_date.getMonth() + "-" + this.release_date.getDay());
     cloneMusic.acousticness = this.acousticness;
     cloneMusic.danceability = this.danceability;
     cloneMusic.energy = this.energy;
@@ -207,6 +213,22 @@ class Music{
     return cloneMusic;
   }
 
+  //metodo auxiliar para a formatacao de artistas
+  public String formatArtists(String input){
+    String output = new String();
+    //tratamento de '
+    output = input.replace("['","[");
+    output = output.replace("']", "]");
+    output = output.replace("',", ",");
+    output = output.replace(" '", " ");
+    
+    //tratamento de []
+    output = output.replace("[","");
+    output = output.replace("]","");
+
+    return output;
+  }
+
   //metodos getters
   
   public String getId(){
@@ -221,7 +243,7 @@ class Music{
     return this.key;
   }
 
-  public SimpleArtistList getArtists(){
+  public ArrayList<String> getArtists(){
     return this.artists;
   }
   
@@ -293,11 +315,14 @@ class Music{
   }
 
   public void setArtists(String artistsList){
-   this.artists.insertArtists(artistsList); 
+    artistsList = formatArtists(artistsList);
+    String[] splittedList = artistsList.split(", "); 
+    for(int i = 0; i < splittedList.length; i++)
+      this.artists.add(splittedList[i]); 
   }
   
-  public void setRelease_date(int year, int month, int day){
-    this.release_date = new SimpleDate(year, month, day);
+  public void setRelease_date(String input){
+    this.release_date = new SimpleDate(input);
   }
   
   public void setAcousticness(double acousticness){
@@ -348,132 +373,41 @@ class Music{
     this.year = year;
   }
 }
-
-//classe criada para a manipulacao de artistas
-class SimpleArtistList{
-  private String []artists;
-  private int n;
-  
-  public SimpleArtistList(int size){
-    artists = new String[size];
-    n = 0;
-  }
-  
-  public SimpleArtistList(){
-    this(20);
-  }
-  
-  public void insertAtEnd(String artist){
-    if(n >= artists.length){
-      System.out.println("Impossivel inserir");
-    }
-    else{
-      artists[n] = artist;
-      n++;
-    }
-  }
-
-  public void insertArtists(String input){
-    input = input.replace("'","");  //remocao de '
-    String aux = new String();
-    int i = 0;
-    while(i < input.length()){
-      if(i + 1 == input.length() || input.charAt(i) == ','){
-        insertAtEnd(aux);
-        aux = new String();
-        i++;//pulando espaco em branco
-      }
-
-      else if((input.charAt(i) != '[' && input.charAt(i)!= ']') && (input.charAt(i)!= '"' || (input.charAt(i) == '"' && input.charAt(i + 1) != '"'))){
-        aux += input.charAt(i);
-      }
-      i++;
-     } 
-  }
-
-  public String getArtistsList(){
-    String output = new String();
-    output+= '[';
-    for(int i = 0; i < n; i++){
-      output+= artists[i];
-      if(i!= n - 1)
-        output +=", ";
-    }
-    output += ']';
-  return output;
-  }
-}
-
 //classe criada exclusivamente para simplificar a manipulacao de datas do tp 02
 class SimpleDate{
   private int day, month, year;
   
   public SimpleDate(){
-    this(01,01,01);
+    this("0001");
   }
 
-  public SimpleDate(int year){
-    this(year, 01,01);
-  }
-
-  public SimpleDate(int year,int month){
-    this(year, month, 01);
-  }
-
-  public SimpleDate(int year,int month, int day){
-    setYear(year);
-    setMonth(month);
-    setDay(day);
+  public SimpleDate(String dateString){
+    int[] dateInfos = splitDate(dateString); 
+    this.year = dateInfos[0];
+    this.month = dateInfos[1];
+    this.day = dateInfos[2];
   }
   
   public String getSimpleDateFormat(){
     return (String.format("%02d", getDay()) + "/" + String.format("%02d", getMonth()) + "/" + String.format("%04d",getYear()));
   }
- 
+
   public static int[] splitDate(String input){
     int[] output = new int[3];
-    String aux = new String();
-    input = input.replace("-","");
-    int i = 0; 
-    //verificacao da existencia de algum input
-    if(input.length() >= 4){
-      do{
-        aux += input.charAt(i);
-        i++;
-      }while(i < 4);
-    
-      output[0] = Integer.parseInt(aux);
-      aux = new String();
-    
-      if(i < input.length()){//verificacao da existencia de mes
-        while(i < 6){
-          aux+= input.charAt(i);
-          i++;
-        };
-      }
-      else{
-        aux ="01";
-      }
 
-      output[1] = Integer.parseInt(aux);
-      aux = new String();
-      
-      if(i < input.length()){//verificacao da existencia de dia
-        while(i < 8){
-          aux+= input.charAt(i);
-          i++;
-        };
-      }
-      else{
-        aux ="01";      
-      }
-
-      output[2] = Integer.parseInt(aux);
-    }
+    //apenas ano
+    if(input.length() == 4){
+      output[0] = Integer.parseInt(input);//ano
+      output[1] = 01;//mes 
+      output[2] = 01;//dia
+    } 
+    
+    //valores completos
     else{
-      output[0] = 1;
-      output[1] = 1;
-      output[2] = 1;
+      String[] auxData = input.split("-");
+      output[0] =  Integer.parseInt(auxData[0]);
+      output[1] =  Integer.parseInt(auxData[1]);
+      output[2] =  Integer.parseInt(auxData[2]);
     }
     return output;
   }
