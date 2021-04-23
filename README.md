@@ -1,5 +1,5 @@
 # The College :mortar_board:
-``This is the github repository for all the stuff I am studying at Puc Minas University. Fell free to see everything :)``
+**This is the github repository for all the stuff I am studying at the Computer Science course. Fell free to see everything :)**
 <br>
 ### Graduation Roadtrip:
 - [x] 1st semester.
