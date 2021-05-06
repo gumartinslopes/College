@@ -31,7 +31,7 @@ public class List{
 			insertLast(x);
 		else{
 			Cell i = first;
-			for(int j = 1; j < pos; j++,i = i.next);
+			for(int j = 1; j < pos; j++, i = i.next);
 			Cell aux = new Cell(x);
 			aux.next = i.next;
 			i.next = aux;
@@ -49,7 +49,7 @@ public class List{
 	public void removeFirst(){
 		if(first == last)
 			System.out.println("Lista vazia, impossível remover");
-		
+
 		else{
 			Cell aux = first;
 			first = first.next;
@@ -57,7 +57,7 @@ public class List{
 			aux.next = null;
 			aux = null;
 		}
-	}	
+	}
 
 	public void removePos(int pos){
 		int length = getLength();
@@ -69,7 +69,7 @@ public class List{
 			removeLast();
 		else{
 			Cell i = first;
-			int removed; 
+			int removed;
 			for(int j = 0; j < pos; j++, i = i.next);
 			Cell aux = i.next;
 			removed = aux.element;
@@ -79,7 +79,7 @@ public class List{
 			System.out.println(removed + " foi removido da posicao " + pos);
 		}
 	}
-	
+
 	public void removeLast(){
 		if(first == last)
 			System.out.println("Lista vazia, impossível remover");
@@ -101,7 +101,7 @@ public class List{
 		System.out.println(q.element + " foi removido da segunda posicao");
 		q = null;
 	}
-	
+
 	public void display(){
 		System.out.println("Sua lista:");
 		for(Cell i = first.next; i != last.next; i = i.next)
@@ -109,4 +109,3 @@ public class List{
 		System.out.println();
 	}
 }
-

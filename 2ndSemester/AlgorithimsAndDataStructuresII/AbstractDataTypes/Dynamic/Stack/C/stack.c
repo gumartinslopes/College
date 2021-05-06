@@ -1,48 +1,50 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <err.h>
 
-typedef struct Celula{
-  struct Celula *prox;
-  int elemento;
-}Celula;
-Celula *topo;
+typedef struct Cell{
+  int element;
+  struct Cell *next;
+}Cell;
+Cell *top;
 
 void start(){
-  topo = NULL;
+  top = NULL;
 }
 
-Celula *novaCelula(int x){
-  Celula *novo = (Celula*) malloc(sizeof(Celula));
-  novo->elemento = x;
-  novo->prox = NULL;
-  return novo;
+Cell *newCell(int x){
+  Cell *created = (Cell*)malloc(sizeof(Cell));
+  created->element = x;
+  created->next = NULL;
+  return created;
 }
 
 void mostrar(){
-  printf("\nSua pilha: \n");
-  for(Celula* i = topo;i != NULL; i = i->prox)
-    printf(" - %d \n", i->elemento);
+  printf("\nYour stack: \n");
+  for(Cell *i = top; i != NULL; i = i->next)
+    printf("%d ", i->element, ((i->next == NULL)? "\n" : " - "));
 }
 
 //inserção
 void push(int x){
-  Celula *aux = novaCelula(x);
-  aux->prox = topo;
-  topo = aux;
+  Cell *aux = newCell(x);
+  aux->next = top;
+  top = aux;
   aux = NULL;
 }
 
 //remoção
 int pop(){
-  if(topo == NULL)
-    errx(1, "Impossivel remover em uma pilha vazia");
-  int elemento = topo->elemento;
-  Celula * aux = topo;
-  topo = topo->prox;
-  aux->prox = NULL;
-  free(aux);
+  int removed = 0;
+  if(top == NULL)
+    printf("Pilha vazia impossivel remover");
+  else{
+  Cell *aux = top;
+  removed = aux->element;
+  top = top->next;
+  aux->next =NULL;
   aux = NULL;
+  }
+  return removed;
 }
 
 int main(){
