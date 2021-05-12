@@ -1,4 +1,4 @@
-# The College :mortar_board:
+# The College Repository :mortar_board:
 **This is the github repository for all the stuff I am studying at the Computer Science course. Fell free to see everything :)**
 <br>
 ### Graduation Roadtrip:
