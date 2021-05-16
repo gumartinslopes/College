@@ -50,6 +50,7 @@ public class List{
       System.out.println("Lista cheia");
     else{  
       System.out.println(x + " foi inserido no final da lista");
+      array_list[list_length++] = x;
     }
   }
 
