@@ -40,6 +40,24 @@ public class ExternalBinaryTree{
   public boolean search(char l){
     return ((getNode(l) == null) ? false : true);
   }
+ 
+  public boolean searchLength(int length){
+   return searchLength(length, root);
+  }
+
+  public boolean searchLength(int length, Node n){
+    boolean result = false;
+    if(n != null)
+      result = searchLength(length, n.subRoot) || searchLength(length, n.left) || searchLength(length, n.right);
+    return result;
+  }
+
+  public boolean searchLength(int length, SubNode sn){
+    boolean result = false;
+    if(sn != null)
+      result = (sn.getWord().length() == length) || searchLength(length, sn.sub_left) || searchLength(length, sn.sub_right);
+    return result;
+  }
 
   public Node getNode(char l){
     return getNode(l, root);

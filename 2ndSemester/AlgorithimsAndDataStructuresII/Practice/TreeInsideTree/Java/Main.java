@@ -11,6 +11,7 @@ public class Main{
       insertWords(ebt);
       ebt.removeWord("Belo Horizonte");
       ebt.display();
+      System.out.println(ebt.searchLength(5));
     } catch(Exception ex){
         ex.printStackTrace();
     }
