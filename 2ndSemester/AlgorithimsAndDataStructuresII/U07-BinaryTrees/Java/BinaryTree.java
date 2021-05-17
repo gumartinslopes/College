@@ -107,41 +107,41 @@ public class BinaryTree{
    return result;
   }
   
-  public void displayCentral(){
+  public void inorderDisplay(){
     System.out.println("Sua arvore:");
-    displayCentral(root);
+    inorderDisplay(root);
   }
   
-  public void displayCentral(Node n){
+  public void inorderDisplay(Node n){
     if(n != null){
-      displayCentral(n.leftChild);
+      inorderDisplay(n.leftChild);
       System.out.println(n.element + " ");
-      displayCentral(n.rightChild);
+      inorderDisplay(n.rightChild);
     }
   }
   
-  public void displayPos(){
+  public void postorderDisplay(){
     System.out.println("Sua arvore");
-    displayPos(root);
+    postorderDisplay(root);
   }
   
-  public void displayPos(Node n){
+  public void postorderDisplay(Node n){
     if(n != null){
-      displayPos(n.leftChild);
-      displayPos(n.rightChild);
+      postorderDisplay(n.leftChild);
+      postorderDisplay(n.rightChild);
       System.out.println(n.element + " ");
     }
   }
   
-  public void displayPre(){
-    displayPre(root);
+  public void preorderDisplay(){
+    preorderDisplay(root);
   }
   
-  public void displayPre(Node n){
+  public void preorderDisplay(Node n){
     if(n != null){
       System.out.println(n.element + " ");
-      displayPre(n.leftChild);
-      displayPre(n.rightChild);
+      preorderDisplay(n.leftChild);
+      preorderDisplay(n.rightChild);
     }
   }
   

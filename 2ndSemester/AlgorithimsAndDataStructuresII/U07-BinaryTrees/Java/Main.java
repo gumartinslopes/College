@@ -8,9 +8,9 @@ public class Main{
       t.insert(4);
 
       t.insert(11);
-      t.displayPre();
+      t.inorderDisplay();
       System.out.println("\n");
-      t2.displayPre();
+      t2.inorderDisplay();
      /* 
       System.out.println(t.search(7));
       System.out.println(t.search(24));
