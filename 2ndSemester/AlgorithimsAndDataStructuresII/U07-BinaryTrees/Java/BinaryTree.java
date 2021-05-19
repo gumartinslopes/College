@@ -12,15 +12,13 @@ public class BinaryTree{
     root = insert(x, root);
   }
   
-  public Node insert(int x, Node n)throws Exception{
+  public Node insert(int x, Node n){
     if(n == null)
       n = new Node(x);
-    else if(x < n.element)
+    else if(x <= n.element)
       n.leftChild = insert(x, n.leftChild);
-    else if(x > n.element)
+    else 
       n.rightChild = insert(x, n.rightChild);
-    else
-      throw new Exception("Valor ja existente na arvore!");
     return n;
   }
   
@@ -107,41 +105,41 @@ public class BinaryTree{
    return result;
   }
   
-  public void inorderDisplay(){
+  public void displayInOrder(){
     System.out.println("Sua arvore:");
-    inorderDisplay(root);
+    displayInOrder(root);
   }
   
-  public void inorderDisplay(Node n){
+  public void displayInOrder(Node n){
     if(n != null){
-      inorderDisplay(n.leftChild);
+      displayInOrder(n.leftChild);
       System.out.println(n.element + " ");
-      inorderDisplay(n.rightChild);
+      displayInOrder(n.rightChild);
     }
   }
   
-  public void postorderDisplay(){
+  public void displayPostOrder(){
     System.out.println("Sua arvore");
-    postorderDisplay(root);
+    displayPostOrder(root);
   }
   
-  public void postorderDisplay(Node n){
+  public void displayPostOrder(Node n){
     if(n != null){
-      postorderDisplay(n.leftChild);
-      postorderDisplay(n.rightChild);
+      displayPostOrder(n.leftChild);
+      displayPostOrder(n.rightChild);
       System.out.println(n.element + " ");
     }
   }
   
-  public void preorderDisplay(){
-    preorderDisplay(root);
+  public void displayPreOrder(){
+    displayPreOrder(root);
   }
   
-  public void preorderDisplay(Node n){
+  public void displayPreOrder(Node n){
     if(n != null){
       System.out.println(n.element + " ");
-      preorderDisplay(n.leftChild);
-      preorderDisplay(n.rightChild);
+      displayPreOrder(n.leftChild);
+      displayPreOrder(n.rightChild);
     }
   }
   
@@ -175,7 +173,34 @@ public class BinaryTree{
       sum = (n.element + getSum(n.leftChild) + getSum(n.rightChild));
     return sum;
   }
-
+  
+  public int getNumberOfNodes(){
+    return getNumberOfNodes(root);
+  }
+  
+  public int getNumberOfNodes(Node n){
+    int counter = 0;
+    if(n != null)
+      counter += 1 + getNumberOfNodes(n.rightChild) + getNumberOfNodes(n.leftChild); 
+    return counter;
+  }
+  
+  public int getHeight(){
+    return getHeight(0, root);
+  }
+    
+  public int getHeight(int height, Node n){
+    if(n == null)
+      height--;
+    
+    else {
+      int leftHeight = getHeight(height + 1, n.leftChild);
+      int rightHeight = getHeight(height + 1, n.rightChild);
+      height = (leftHeight > rightHeight)? leftHeight: rightHeight;
+    }
+    return height;
+  }
+  
   public int countEven(){
     return countEven(root);
   }

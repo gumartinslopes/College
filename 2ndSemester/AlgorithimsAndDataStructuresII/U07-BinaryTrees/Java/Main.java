@@ -1,40 +1,31 @@
+import java.util.Random;
 public class Main{
+  public static Random generator = new Random();
   public static void main(String[] args){
     BinaryTree t = new BinaryTree();
-    BinaryTree t2 = new BinaryTree();
-
     try{
-      t.insert(5);
-      t.insert(4);
-
-      t.insert(11);
-      t.inorderDisplay();
-      System.out.println("\n");
-      t2.inorderDisplay();
-     /* 
-      System.out.println(t.search(7));
-      System.out.println(t.search(24));
-      System.out.println("Sum -> "+ t.getSum());
-      System.out.println("Number of even values in your tree -> " + t.countEven());
-      System.out.println("Total number of odd values int your tree ->" + t.countOdds());
-      */
-      System.out.println(equalsTree(t, t2));
-      System.out.println(t.hasDivisible(11));
-      t.insert(11155);
-      System.out.println(t.getBiggest());
-      System.out.println(t.getSmallest());
-      t.displayCentral();
-      t.remove(11);
-      t.remove(4);
-      t.displayCentral();
+      insertValues(t, 100000);
+      //t.displayInOrder();
+      int height = t.getHeight();
+      int total = t.getNumberOfNodes();
+      System.out.println("\nAltura atual: " + height);
+      System.out.println("\nLog na base 2 do total de nodes atual:" + ((int)(Math.log(total) / Math.log(2))));
+      System.out.println("\nTotal de nodes: " + total);
     }catch(Exception ex){
       ex.printStackTrace();
     }
   }
   
+  public static void insertValues(BinaryTree bt, int quant)throws Exception{
+    for(int i = 0; i < quant; i++){  
+      bt.insert(Math.abs(generator.nextInt())%quant);
+    }
+  }
+
   public static boolean equalsTree(BinaryTree a,BinaryTree b){
     return equalsTree(a.root, b.root);
   }
+
   public static boolean equalsTree(Node na, Node nb){
     boolean result;
     if(na == null && nb == null)
