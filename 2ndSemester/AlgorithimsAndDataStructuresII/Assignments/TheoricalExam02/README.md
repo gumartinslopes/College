@@ -1,6 +1,6 @@
 # Questão 01
-Seja nossa classe Fila Flexível, faça um método R.E.C.U.R.S.I.V.O que recebe três objetos do tipo Fila e mostra na tela a soma 
-do primeiro elemento das três Filas, a do segundo, do terceiro e, assim, sucessivamente. 
+Seja nossa classe Fila Flexível, faça um método R.E.C.U.R.S.I.V.O que recebe três objetos do tipo Fila
+e mostra na tela a soma do primeiro elemento das três Filas, a do segundo, do terceiro e, assim, sucessivamente. 
 Lembre-se que as filas podem ter tamanhos distintos.
 
 ### Resposta:
