@@ -1,9 +1,9 @@
-# Unity 08 - Balanced Binary Trees 🌲
+# Unit 08 - Balanced Binary Trees 🌲
 
 Here you will find stuff about the implementations of balanced binary trees.
 </br>
 </br>
 
-Implementations
+*Implementations on this unit*
 - [ ] Avl Tree
 - [ ] Red Black tree  
