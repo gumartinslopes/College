@@ -5,5 +5,5 @@ Here you will find stuff about the implementations of balanced binary trees.
 </br>
 
 Implementations
-[ ] Avl Tree
-[ ] Red Black tree  
+- [ ] Avl Tree
+- [ ] Red Black tree  
