@@ -94,7 +94,23 @@ public class BinaryTree{
   }
 
   public void balance(){
+    if(root.left != null && root.right != null){
+      System.out.println("Balanced tree");
+    } 
 
+    else if(root.right != null){
+      if(root.right.right != null)
+        root = rotateLeft(root);
+      else
+        root = rotateRightLeft(root);
+    }
+
+    else{
+      if(root.left.right != null)
+        root = rotateLeftRight(root);
+      else
+        root = rotateRight(root);
+    }
   }
   
   public Node rotateRightLeft(Node n){
