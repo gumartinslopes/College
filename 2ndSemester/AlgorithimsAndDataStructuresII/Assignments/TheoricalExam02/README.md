@@ -27,7 +27,17 @@ Lembre-se que as filas podem ter tamanhos distintos.
   }
 ```
 
+<br />
+<br />
+<br />
+<br />
+<br />
+
 # Questão 02
+Faça um método que recebe um ponteiro Celula topo que aponta para o topo de uma Pilha Flexível e outro ponteiro Celula primeiro
+que aponta para o nó cabeça de uma Fila Flexível. O método retorna outro ponteiro para uma CelulaDupla último que aponta para
+a última célula de uma Lista Duplamente Encadeada. Esse método deve inserir de forma intercalada os elementos da pilha e da fila na lista. 
+A Pilha e a Fila não podem ser destruídas. Esse método não pode utilizar estruturas auxiliares nem métodos existentes nas estruturas.
 
 ### Reposta:
 ```
