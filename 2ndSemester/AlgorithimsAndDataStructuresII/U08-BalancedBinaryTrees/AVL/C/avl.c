@@ -121,7 +121,7 @@ void displayInOrder(){
   displayInOrderRec(root);
 }
 
-void getInputs(){
+void standartInput(){
   char input[32];
   bool finishedInput;
   do{
@@ -137,7 +137,7 @@ void getInputs(){
 int main(){
   start();
   system("clear");
-  getInputs();
-  displayPreOrder();
+  standartInput();
+  displayInOrder();
   return 0;
 }
