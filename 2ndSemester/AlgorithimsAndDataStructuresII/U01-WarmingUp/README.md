@@ -2,7 +2,7 @@
 
 **Here you will find the first warming up activities of AaDSII**
 
-*Algorithms Problems in this unit:*
+*Algorithmic problems in this unit:*
 - [x] Matrix.
 - [x] Comet.
 - [x] Miss Monica.
