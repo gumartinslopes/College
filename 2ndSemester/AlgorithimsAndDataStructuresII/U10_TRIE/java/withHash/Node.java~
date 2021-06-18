@@ -4,7 +4,11 @@ public class Node{
 	char []childrenTable;
 	public int final length;
 	
-	public Node(char element, int sigma){
+	public Node(){
+		this(' ');
+	}
+
+	public Node(char element){
 		this.element = element;
 		isLeaf = true;
 		length = 255;//ascii table size
@@ -20,7 +24,7 @@ public class Node{
 	}
 
 	public void insertTable(){
-		
+			
 	}
 
 	public void hash(){

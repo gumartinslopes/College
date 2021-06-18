@@ -27,7 +27,7 @@ class Palindromo{
   public static void main(String[] args){
     String entrada;
     do{
-      entrada = sc.nextLine();
+      entrada = sc.readLine();
 
       if(checkPalindromo(entrada))
         System.out.println("SIM");
