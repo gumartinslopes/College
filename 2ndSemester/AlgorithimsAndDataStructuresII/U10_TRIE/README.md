@@ -2,6 +2,6 @@
 
 *Here your'll find stuff about the TRIE implementation.*
 
-- [ ] Basic TRIE
-- [ ] TRIE P.A.T.R.I.C.I.A
-- [ ] Variations of the TRIE implementation  
+- [x] Basic TRIE
+- [x] TRIE P.A.T.R.I.C.I.A
+- [x] Variations of the TRIE implementation  

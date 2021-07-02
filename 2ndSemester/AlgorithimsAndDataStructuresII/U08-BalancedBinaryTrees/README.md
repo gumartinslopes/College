@@ -7,4 +7,4 @@ Here you will find stuff about the implementations of balanced binary trees.
 *Implementations on this unit*
 - [x] Balanced basic binary search tree implementation
 - [x] Avl Tree
-- [ ] Red Black tree  
+- [x] Red Black tree  

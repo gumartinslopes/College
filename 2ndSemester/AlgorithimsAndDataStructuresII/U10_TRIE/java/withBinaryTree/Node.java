@@ -1,8 +1,7 @@
 public class Node{
 	private char element;
 	public boolean isLeaf;
-	char []childrenTable;
-	public int final length;
+	public BinaryTree children;
 	
 	public Node(){
 		this(' ');
@@ -10,9 +9,8 @@ public class Node{
 
 	public Node(char element){
 		this.element = element;
-		isLeaf = true;
-		length = 255;//ascii table size
-		childrenTable = new char[sigma];
+		isLeaf = false;
+		children = new BinaryTree();
 	}
 
 	public void setElement(char element){
@@ -23,11 +21,7 @@ public class Node{
 		return this.element;
 	}
 
-	public void insertTable(){
-			
-	}
-
-	public void hash(){
-		return(int)x			
+	public static int hash(char x){
+		return (int)x;			
 	}
 }
