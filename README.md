@@ -3,7 +3,7 @@
 <br>
 ### Graduation Roadtrip:
 - [x] 1st semester.
-- [ ] 2nd semester. 
+- [x] 2nd semester. 
 - [ ] 3rd semester.
 - [ ] 4th semester.
 - [ ] 5th semester.
