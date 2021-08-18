@@ -5,7 +5,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class Book{
+public class Book implements Register{
     protected int idBook;
     protected String title;
     protected String author;
