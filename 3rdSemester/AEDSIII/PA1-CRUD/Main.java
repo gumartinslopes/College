@@ -12,6 +12,8 @@ public class Main {
 
       testCreate(arqLivros);
       testRead(arqLivros);
+      testDelete(arqLivros);
+      //testRead(arqLivros);
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -20,7 +22,7 @@ public class Main {
   }
 
   public static void testCreate(Arquivo<Livro> arqLivros)throws Exception{
-      System.out.println("***** C R E A T E *****");
+      System.out.println("-- C R E A T E --");
       //cadastro 
       Livro l1 = new Livro("Eu, Robô", "Isaac Asimov", "9788576572008", 14.90F);
       Livro l2 = new Livro("Eu Sou a Lenda", "Richard Matheson", "9788576572718", 21.99F);
@@ -29,13 +31,12 @@ public class Main {
       System.out.println("Livro com id: " + arqLivros.create(l1) + " criado");
       System.out.println("Livro com id: " + arqLivros.create(l2) + " criado");
       System.out.println("Livro com id: " + arqLivros.create(l3) + " criado");
-      System.out.println("\n*********************");
-      System.out.println("\n\n");
+      System.out.println("\n");
 
   }
 
   public static void testRead(Arquivo<Livro> arqLivros)throws Exception{
-      System.out.println("***** R E A D *****");
+      System.out.println("-- R E A D --");
       // leitura
       Livro readL1 = arqLivros.read(1);
       Livro readL2 = arqLivros.read(2);
@@ -44,7 +45,16 @@ public class Main {
       System.out.println(readL1);
       System.out.println(readL2);
       System.out.println(readL3);
-      System.out.println("\n*********************");
-      System.out.println("\n\n");
+      System.out.println("\n");
+  }
+
+  public static void testDelete(Arquivo<Livro> arqLivros)throws Exception{
+    System.out.println("-- D E L E T E --");
+      int removido = 2;
+      boolean remocao = (arqLivros.delete(removido));
+      if(remocao == false)
+        throw new Exception("Id" + removido +  " nao existente ou ja foi removido");
+      System.out.println(removido + " foi removido " + "com " + "exito\n");
+
   }
 }

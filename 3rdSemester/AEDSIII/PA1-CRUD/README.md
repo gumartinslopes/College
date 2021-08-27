@@ -9,14 +9,14 @@ O primeiro projeto de desafio individual da matéria fui a criação de um C.R.U
 - [ ]  Classe Arquivo
     - [x]  Construtor( )
     - [x]  Create( )
-    - [ ]  Read( )
+    - [x]  Read( )
     - [ ]  Update( )
-    - [ ]  Delete( )
+    - [x]  Delete( )
 - [ ]  Implementação de testes Básicos
     - [x]  Create( )
     - [x]  Read( )
     - [ ]  Update( )
-    - [ ]  Delete( )
+    - [x]  Delete( )
 - [x]  Interface Registro.
-- [x]  Estudar tipos genéricos e collections em java.
+- [x]  Estudar `tipos genéricos e collections em java`.
 - [x]  Estudar classe `RandomAccessFile`

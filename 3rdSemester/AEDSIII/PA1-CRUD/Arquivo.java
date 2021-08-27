@@ -29,7 +29,7 @@ public class Arquivo<T extends Registro> {
   }
   
   //--- Operações do Crud ---
-
+  
   public int create(T obj) throws Exception {
     arquivo.seek(0);
     int ultimoID = arquivo.readInt();
@@ -37,15 +37,18 @@ public class Arquivo<T extends Registro> {
     arquivo.seek(0);
     arquivo.writeInt(proximoID);
 
-    arquivo.seek(arquivo.length());
-
     obj.setID(proximoID);
     byte[] ba = obj.toByteArray();
-    arquivo.writeByte(' ');//lapide
-    arquivo.writeInt(ba.length);//tamanho do registro
-    arquivo.write(ba);
+    gravar(arquivo.length(), (byte)' ', ba.length, ba);
 
     return proximoID;
+  }
+
+  public void gravar(long pos, byte lapide, int len, byte[] ba)throws Exception{
+    arquivo.seek(pos);
+    arquivo.writeByte(lapide);
+    arquivo.writeInt(len);
+    arquivo.write(ba);
   }
 
   public T read(int idProcurado) throws Exception {
@@ -58,6 +61,7 @@ public class Arquivo<T extends Registro> {
       lapide = arquivo.readByte();
       tam = arquivo.readInt();
       if (lapide == ' ') {
+
         ba = new byte[tam];
         arquivo.read(ba);
         obj.fromByteArray(ba);
@@ -75,7 +79,30 @@ public class Arquivo<T extends Registro> {
     //construir
   }
 
-  public void delete(){
-    //construir
+  public boolean delete(int idRemovido)throws Exception{
+    arquivo.seek(TAMANHO_CABECALHO); 
+    byte lapide;
+    int tam;
+    boolean sucesso = false;
+    T obj = construtor.newInstance();
+    byte[] ba;
+    while (arquivo.getFilePointer() < arquivo.length()) {
+      lapide = arquivo.readByte();
+      tam = arquivo.readInt();
+      if (lapide == ' ') {
+        ba = new byte[tam];
+        arquivo.read(ba);
+        obj.fromByteArray(ba);
+        
+        if (obj.getID() == idRemovido){
+          arquivo.seek(arquivo.getFilePointer() - 4 - 1 - ba.length);//pos atual - sizeof(int) - sizeof(byte)
+          arquivo.writeByte('*');
+          sucesso = true;
+        }
+      } 
+      else
+        arquivo.skipBytes(tam);
+    }
+    return sucesso;
   }
 }
