@@ -29,7 +29,7 @@ public class Arquivo<T extends Registro> {
   }
   
   //--- Operações do Crud ---
-  
+  //criação
   public int create(T obj) throws Exception {
     arquivo.seek(0);
     int ultimoID = arquivo.readInt();
@@ -51,8 +51,9 @@ public class Arquivo<T extends Registro> {
     arquivo.write(ba);
   }
 
-  public T read(int idProcurado) throws Exception {
-    arquivo.seek(TAMANHO_CABECALHO); // pular o cabeçalho e se posicionar no primeiro registro
+  //leitura
+  public T read(int id) throws Exception{
+    arquivo.seek(TAMANHO_CABECALHO); 
     byte lapide;
     int tam;
     T obj = construtor.newInstance();
@@ -61,13 +62,15 @@ public class Arquivo<T extends Registro> {
       lapide = arquivo.readByte();
       tam = arquivo.readInt();
       if (lapide == ' ') {
-
         ba = new byte[tam];
         arquivo.read(ba);
         obj.fromByteArray(ba);
         
-        if (obj.getID() == idProcurado)
+        if (obj.getID() == id){
+          //voltamos para a posição do registro pesquisado
+          arquivo.seek(arquivo.getFilePointer() - 4 - 1 - ba.length);
           return obj;
+        }
       } 
       else
         arquivo.skipBytes(tam);
@@ -75,33 +78,33 @@ public class Arquivo<T extends Registro> {
     return null;
   }
 
-  public void update(){
-    //construir
+  //atualização
+  public boolean update(T novoObj)throws Exception{
+    T obj = read(novoObj.getID());
+    boolean sucesso = false;
+    if (obj != null){
+      byte[] baAntigo = obj.toByteArray(); 
+      byte[] baNovo = novoObj.toByteArray();
+
+      if(baAntigo.length <= baNovo.length)
+        gravar(arquivo.getFilePointer(), (byte)' ', baNovo.length, baNovo);
+
+      else {
+        delete(obj.getID());
+        gravar(arquivo.length(), (byte)' ', baNovo.length, baNovo);
+      }
+      sucesso = true;
+    }
+    return sucesso;
   }
 
+  //remoção
   public boolean delete(int idRemovido)throws Exception{
-    arquivo.seek(TAMANHO_CABECALHO); 
-    byte lapide;
-    int tam;
+    T obj = read(idRemovido);
     boolean sucesso = false;
-    T obj = construtor.newInstance();
-    byte[] ba;
-    while (arquivo.getFilePointer() < arquivo.length()) {
-      lapide = arquivo.readByte();
-      tam = arquivo.readInt();
-      if (lapide == ' ') {
-        ba = new byte[tam];
-        arquivo.read(ba);
-        obj.fromByteArray(ba);
-        
-        if (obj.getID() == idRemovido){
-          arquivo.seek(arquivo.getFilePointer() - 4 - 1 - ba.length);//pos atual - sizeof(int) - sizeof(byte)
-          arquivo.writeByte('*');
-          sucesso = true;
-        }
-      } 
-      else
-        arquivo.skipBytes(tam);
+    if (obj != null){
+        arquivo.writeByte('*');
+        sucesso = true;
     }
     return sucesso;
   }
