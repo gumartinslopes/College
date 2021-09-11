@@ -5,10 +5,10 @@
 - [x]  Implementar par chave endereço.
 - [ ]  Alterar métodos
     - [x] CREATE
-    - [ ] UPDATE
+    - [x] UPDATE
     - [x] DELETE
     - [x] READ
-- [ ]  Implementação do menu interativo.
+- [x]  Implementação do menu interativo.
 
  - **Nota**:
 Um registro possui na ordem os campos `lápide`, `indicador de tamanho` e `vetor de bytes`.
