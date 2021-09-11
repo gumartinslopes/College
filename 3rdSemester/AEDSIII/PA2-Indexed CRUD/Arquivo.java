@@ -12,6 +12,7 @@ public class Arquivo<T extends Registro> {
 
   public Arquivo(String nomeArquivo, Constructor<T> constr) throws Exception {
     File f = new File(diretorio);
+    f.delete();
     if (!f.exists()) {
       f.mkdir();
     }
@@ -60,7 +61,6 @@ public class Arquivo<T extends Registro> {
   }
 
   public long procuraEndereco(int id)throws Exception{
-    System.out.println("Id Procurado -> " + id);
     ParIDEndereco par = indiceDireto.read(id);
     long endereco = (par == null)?-1:par.getEndereco();
     return endereco;
@@ -120,5 +120,8 @@ public class Arquivo<T extends Registro> {
         sucesso = true;
     }
     return sucesso;
+  }
+  public void inspecionar(){
+    indiceDireto.print();
   }
 }

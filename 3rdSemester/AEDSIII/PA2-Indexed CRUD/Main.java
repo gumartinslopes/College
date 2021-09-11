@@ -1,81 +1,155 @@
-import java.io.File;
-
+import java.util.Scanner;
 public class Main {
+  public static Scanner console = new Scanner(System.in); 
+
   public static void main(String[] args) {
-    File f = new File("dados/livros/arquivo.db");
-    f.delete();
+    int opcao;
     Arquivo<Livro> arqLivros;
     try {
       arqLivros = new Arquivo<>("livros", Livro.class.getConstructor());
-
-      testCreate(arqLivros);
-      //testRead(arqLivros);
-      testUpdate(arqLivros); //descomente para testar
-      //testDelete(arqLivros);
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
+      do{
+        opcao = menu();
+      
+        switch (opcao) {
+          case 1: {
+            inclusao(arqLivros);
+          }
+           break;
+          case 2: {
+            System.out.println("\nBuscar");
+            busca(arqLivros);
+          }
+          break;
+          case 3: {
+            System.out.println("\nExcluir");
+            remocao(arqLivros);
+          }
+          break;
+          case 4: {
+            System.out.println("\nAlterar");
+            alteracao(arqLivros);
+          }
+          break;
+          case 5: {
+            System.out.println("\nInspecionar");
+            arqLivros.inspecionar();
+          }
+          break;
+          case 0:
+          break;
+          default:
+            System.out.println("Opção inválida");
+        }
+      }while(opcao!= 0);
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
+      ex.printStackTrace();
     }
   }
+  public static int menu(){
+    int opcao;
+    System.out.println("\n\n-------------------------------");
+    System.out.println("              MENU");
+    System.out.println("-------------------------------");
+    System.out.println("1 - Inserir");
+    System.out.println("2 - Buscar");
+    System.out.println("3 - Excluir");
+    System.out.println("4 - Alterar");
+    System.out.println("5 - Inspecionar IDs");
+    System.out.println("0 - Sair");
+    System.out.print("\n-> ");
+    try {
+      opcao = Integer.valueOf(console.nextLine());
+    } catch (NumberFormatException e) {
+      opcao = -1;
+    }
+    return opcao;
+  }
+  public static Livro getLivro()throws Exception{
+    String nome, autor, isbn;
+    float preco;
+    System.out.print("\nInsira o nome do livro: ");
+    nome = console.nextLine();
+    System.out.print("Insira o nome do autor: ");
+    autor = console.nextLine();
+    isbn = validaTamanho("Insira codigo isbn:", 13);
+    preco = leFloat("Insira o preco do livro: ");
+    return new Livro(nome, autor, isbn, preco);
+  }
+  public static void inclusao(Arquivo<Livro> arqLivros)throws Exception{
+    Livro novo;
+    System.out.println("\nIncluir");
+    novo = getLivro();
+    arqLivros.create(novo);
+    System.out.println(novo);
+  }
+  public static void busca(Arquivo<Livro> arqLivros)throws Exception{
+    int id = leInt("\nInsira id do livro a ser buscado: ");
+    Livro lido = arqLivros.read(id);
+    System.out.println(((lido != null)?lido:"\nLivro removido ou não existente"));
+  }
+  
 
-  public static void testCreate(Arquivo<Livro> arqLivros)throws Exception{
-      System.out.println("-- C R E A T E --");
-
-      Livro l1 = new Livro("Eu, Robô", "Isaac Asimov", "9788576572008", 14.90F);
-      Livro l2 = new Livro("Eu Sou a Lenda", "Richard Matheson", "9788576572718", 21.99F);
-      Livro l3 = new Livro("Duna", "Frank Herbert", "9788576571018", 56.00F);
-      arqLivros.create(l1);
-      arqLivros.create(l2);
-      arqLivros.create(l3);
-      //System.out.println("Livro com id: " + arqLivros.create(l1) + " criado");
-      //System.out.println("Livro com id: " + arqLivros.create(l2) + " criado");
-      //System.out.println("Livro com id: " + arqLivros.create(l3) + " criado");
-      //System.out.println("\n");
-
+  public static void remocao(Arquivo<Livro> arqLivros)throws Exception{
+    int id = leInt("Insira o id a ser removido: ");
+    boolean remocao = (arqLivros.delete(id));
+    if(remocao == false)
+      System.out.println("Id " + id +  " nao existente ou ja foi removido");
+    else
+      System.out.println(id + " foi removido " + "com " + "exito");
   }
 
-  public static void testRead(Arquivo<Livro> arqLivros)throws Exception{
-      System.out.println("-- R E A D --");
-
-      Livro []livrosLidos = new Livro[3];
-      livrosLidos[0] = arqLivros.read(1);
-      livrosLidos[1] = arqLivros.read(2);
-      livrosLidos[2] = arqLivros.read(3);
-      for(Livro livro : livrosLidos)
-        System.out.println(((livro != null)?livro:"\nLivro removido ou não existente"));
-      System.out.println("\n");
+  public static void alteracao(Arquivo<Livro> arqLivros)throws Exception{
+    int id = leInt("\nInsira o id do livro a ser alterado: ");
+    Livro l = getLivro();
+    l.setID(id);
+    if(arqLivros.update(l))
+      System.out.println("Alteracao bem sucedida");
+    else 
+      System.out.println("Falha na alteracao");
   }
 
-  public static void testUpdate(Arquivo<Livro> arqLivros)throws Exception{
-    System.out.println("-- U P D A T E --");
-    System.out.println("Antes da operação");
-    testRead(arqLivros);
-    
-    
-    Livro l3Update = new Livro("Duna", "Frank Herbert", "9788576571018", 20.00F);
-    l3Update.setID(3);
-    boolean atualizacao = arqLivros.update(l3Update);
-
-    if(atualizacao == false)
-        throw new Exception("Id " + l3Update.getID() +  " nao existente");
-      System.out.println("Id " + l3Update.getID() + " foi atualizado " + "com " + "exito\n");
-    
-    System.out.println("Após a operação");
-    testRead(arqLivros);
+  public static int leInt(String mensagem){
+    int input = 0;
+    boolean inputValido = false;
+    System.out.print(mensagem);
+    do{
+      try {
+        input = Integer.valueOf(console.nextLine());
+        inputValido = true;
+      } catch (NumberFormatException e) {
+        System.out.print("\nEntrada invalida! Por favor insira novamente: ");
+      }
+    }while(!inputValido);
+    return input;
   }
 
-  public static void testDelete(Arquivo<Livro> arqLivros)throws Exception{
-    System.out.println("-- D E L E T E --");
-      System.out.println("Antes da operação");
-      testRead(arqLivros);
-      
-      int removido = 2;
-      boolean remocao = (arqLivros.delete(removido));
-      if(remocao == false)
-        throw new Exception("Id " + removido +  " nao existente ou ja foi removido");
-      System.out.println(removido + " foi removido " + "com " + "exito\n");
-      
-      System.out.println("Após a operação");
-      testRead(arqLivros);
+  public static float leFloat(String mensagem){
+    float input = 0;
+    boolean inputValido = false;
+    System.out.print(mensagem);
+    do{
+      try {
+        input = Float.valueOf(console.nextLine());
+        inputValido = true;
+      } catch (NumberFormatException e) {
+        System.out.print("\nEntrada invalido! Por favor insira novamente: ");
+      }
+    }while(!inputValido);
+    return input;
+  }
+
+  public static String validaTamanho(String mensagem, int len){
+    String input;
+    boolean inputValido = false;
+    System.out.print(mensagem);
+    do{
+      input = console.nextLine();
+      if(input.length() == len)
+        inputValido = true;
+      else      
+        System.out.print("\nEntrada invalida! Por favor insira novamente(com tamanho " +len+ "): ");
+    }while(!inputValido);
+    return input;
   }
 }
