@@ -16,6 +16,9 @@ class Pessoa{
             quantidade++;
         }
         Pessoa(string Nome, int diaDoNascimento, int mesDoNascimento){
+            setNome(Nome);
+            setDia(diaDoNascimento);
+            setMes(mesDoNascimento);
             quantidade++;
         }
         ~Pessoa(){
