@@ -27,7 +27,9 @@ visitaRecursivo(Vertice vertice){
 	contagemTempo++;
 	vertice.tempoInicio = contagemTempo;
 	for(filho em vertice.filhos)
-		if(filho)
+		if(filho.cor != "Preto")
+			visitaRecursivo(filho)	
+	vertice.cor = "Preto"
 	vertice.tempoFim= contagemTempo;
 }
 
