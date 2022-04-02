@@ -1,16 +1,10 @@
 #include <iostream>
 #include "./header files/grafo.hpp"
-#include "./header files/matriz_adjacencia.hpp"
+#include "./header files/matriz.hpp"
 using namespace std;
 
-void teste_matriz(){
-    MatrizAdjacencia *ma = new MatrizAdjacencia(10);
-    ma->print_matriz();
-    delete ma;
-}
-
 void teste_grafos(){
-    Grafo g = Grafo(10, false);
+    Grafo g = Grafo(10, true, true);
     g.add_vertice("v1");
     g.add_vertice("v2");
     g.add_vertice("v3");
