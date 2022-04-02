@@ -102,7 +102,8 @@ void Grafo::log(){
     std::cout << "Quantidade de vertices inseridas no grafo: " << this->qtd_atual_vertices << std::endl;
     this->print_lista_vertices();
     this->matriz_adj->print_matriz();
-    this->matriz_peso->print_matriz();
+    if(this->ponderado)
+        this->matriz_peso->print_matriz();
 }
 
 void Grafo::print_lista_vertices(){
