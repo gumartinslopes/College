@@ -5,7 +5,7 @@
 - [x] 1st semester.
 - [x] 2nd semester. 
 - [x] 3rd semester.
-- [ ] 4th semester.
+- [x] 4th semester.
 - [ ] 5th semester.
 - [ ] 6th semester.
 - [ ] 7th semester.
