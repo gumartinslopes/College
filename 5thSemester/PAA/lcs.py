@@ -1,6 +1,6 @@
 # LCS Problem
 # Given two sequences a and b find the longest common
-# subsequence between the two sequences
+# subsequence between the two sequences.
 
 def build_matrix(str_a, str_b):
     matrix = [[] for k in range(len(a) + 1)]
