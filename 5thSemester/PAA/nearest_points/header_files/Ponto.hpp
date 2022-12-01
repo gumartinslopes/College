@@ -3,6 +3,6 @@
 
 struct Ponto{
     std::string rotulo;
-    int x;
-    int y;
+    float x;
+    float y;
 };
