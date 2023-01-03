@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <ctime>
+#include <chrono>
 #include <climits>
 #include <algorithm>
 
@@ -10,31 +11,55 @@
 #include "resultado.hpp"
 #include "mergesort.hpp"
 
-#define N 10000000
+using namespace std::chrono;
+
 
 //cabecalhos das funcoes
 void visualiza_espaco(Ponto espaco[], int n);
 void visualiza_resultado(Resultado r);
+void teste(int n);
 void inicializa_espaco(Ponto espaco[], int n);
 int compare_x(const void* a, const void *b);
 int compare_y(const void* a, const void *b);
 float distancia_euclidiana(Ponto* p1, Ponto* p2);
-Resultado closest_bf(Ponto espaco[], int n);
+Resultado par_mais_proximo_bf(Ponto espaco[], int n);
 Resultado closest_dq(Ponto espaco[], int n);
 
 
 int main(){
-    Ponto* espaco = new Ponto[N];
-    inicializa_espaco(espaco, N);
-    //visualiza_espaco(espaco, N);
-
-    Resultado r_dq = closest_dq(espaco, N);
-    //Resultado r_bf = closest_bf(espaco, N);
-    visualiza_resultado(r_dq);
-    //visualiza_resultado(r_bf);
-    std::cout <<"CABO" << std::endl; 
-    delete[] espaco;
+    teste(10);
+    teste(100);
+    teste(1000);
+    teste(10000);
+    teste(100000);
+    //teste(1000000);
     return 0;
+}
+
+void teste(int n){
+    Ponto* espaco = new Ponto[n];
+    inicializa_espaco(espaco, n);
+    auto start_bf = steady_clock::now();
+    Resultado r_bf = par_mais_proximo_bf(espaco, n);
+    auto fim_bf = steady_clock::now();
+
+    auto start_dq = steady_clock::now();
+    Resultado r_dq = closest_dq(espaco, n);
+    auto fim_dq = steady_clock::now();
+
+    auto elapsed_dq = fim_dq - start_dq;
+    auto elapsed_bf = fim_bf - start_bf;
+
+    std::cout << "************ Teste com  " << n << " instancias ************" << std::endl;
+    std::cout << "A solucao divide and conquer durou: " << duration_cast<milliseconds>(elapsed_dq).count() << " milissegundos"<< std::endl;
+    std::cout << "A solucao bruteforce durou: " << duration_cast<milliseconds>(elapsed_bf).count() <<  " milissegundos" << std::endl;
+    std::cout<< "Resultado Divide and Conquer" <<std::endl;
+    visualiza_resultado(r_dq);
+    std::cout<< "Resultado Brute Force" <<std::endl;
+    visualiza_resultado(r_bf);
+
+    std::cout << "\n\n\n"<< std::endl;
+    delete[] espaco;
 }
 
 void visualiza_espaco(Ponto espaco[], int n){
@@ -65,19 +90,13 @@ float distancia_euclidiana(Ponto* p1, Ponto* p2){
 }
 
 //solucao O(n^2) utilizando a técnica de Bruteforce
-Resultado closest_bf(Ponto espaco[], int n){
+Resultado par_mais_proximo_bf(Ponto espaco[], int n){
     Resultado r;
     Resultado pr;
     float min_delta = INT_MAX;
     for(int i = 0; i < n - 1; i++){
         for(int j = i + 1 ; j < n; j++){
             float delta = distancia_euclidiana(&espaco[i], &espaco[j]);
-            // pr.distancia = delta;
-            // pr.p1_x = espaco[i].x;
-            // pr.p2_x = espaco[j].x;
-            // pr.p1_y = espaco[i].y;
-            // pr.p2_y = espaco[j].y;
-            // visualiza_resultado(pr);
             if(delta < min_delta){
                 min_delta = delta;
                 r.distancia = delta;
@@ -92,26 +111,26 @@ Resultado closest_bf(Ponto espaco[], int n){
 }
 
 
-Resultado closest_no_limite(Ponto limite[], int n, float delta) 
+//Encontrando os pontos mais próximos dentro da delimitação
+Resultado closest_no_limite(Ponto pontos_limite[], int n, float distancia_limite) 
 { 
     Resultado r;
     r.distancia = INT_MAX;
-    float min = delta; // Initialize the minimum distance as d 
-    qsort(limite, n, sizeof(Ponto), compare_y); 
+    float min = distancia_limite;
+    //reordenamos o vetor
+    mergesort(pontos_limite, n, false); 
   
-    // Pick all points one by one and try the next points till the difference 
-    // between y coordinates is smaller than d. 
-    // This is a proven fact that this loop runs at most 6 times 
+    //Sua complexidade é O(1) pois irá executar em no máximo 6 vezes.
     for (int i = 0; i < n; i++) 
-        for (int j = i+1; j < n && (limite[j].y - limite[i].y) < min; j++) {
-            float dist = distancia_euclidiana(&limite[i], &limite[j]);
+        for (int j = i+1; j < n && (pontos_limite[j].y - pontos_limite[i].y) < min; j++) {
+            float dist = distancia_euclidiana(&pontos_limite[i], &pontos_limite[j]);
             if (dist < min){
                 min = dist;
                 r.distancia = dist;
-                r.p1_x = limite[i].x;
-                r.p1_y = limite[i].y;
-                r.p2_x = limite[j].x;
-                r.p2_y = limite[j].y;
+                r.p1_x = pontos_limite[i].x;
+                r.p1_y = pontos_limite[i].y;
+                r.p2_x = pontos_limite[j].x;
+                r.p2_y = pontos_limite[j].y;
             } 
         }
     return r; 
@@ -120,7 +139,7 @@ Resultado closest_no_limite(Ponto limite[], int n, float delta)
 Resultado closest_dq_rec(Ponto espaco[], int n){
     //caso base eh trivial de resolver com bruteforce
     if (n <= 3) 
-        return closest_bf(espaco, n); 
+        return par_mais_proximo_bf(espaco, n); 
     Resultado r;  
     int meio = n/2; 
     //obtendo os resultados das duas particoes
@@ -145,8 +164,6 @@ Resultado closest_dq_rec(Ponto espaco[], int n){
 
 Resultado closest_dq(Ponto espaco[], int n){
     //para essa solucao eh necessario que o espaco esteja ordenado
-    //trocar para mergesort
-    qsort(espaco,n, sizeof(Ponto), compare_x);
-    
+    mergesort(espaco, n, true);
     return closest_dq_rec(espaco, n);
 }
