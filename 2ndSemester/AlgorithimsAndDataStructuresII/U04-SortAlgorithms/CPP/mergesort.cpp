@@ -32,7 +32,7 @@ void merge(int arr[], int begin, int mid, int end){
     //Intercalacao propriamente dita
     for (left_index = right_index = 0, index = begin; index <= end; index++){
         arr[index] = (left[left_index] <= right[right_index]) ? left[left_index++] : right[right_index++];
-}
+    }
     delete[] left; 
     delete[] right; 
 }

@@ -8,8 +8,8 @@ using namespace std;
 class Pessoa{
     private:
         string nome;
-        int diaNascimento;//Domínio do dia 1 a 31
-        int mesNascimento;//Domínio do mes 1 a 12
+        int diaNascimento;//Domï¿½nio do dia 1 a 31
+        int mesNascimento;//Domï¿½nio do mes 1 a 12
     public:
         static int quantidade;
         Pessoa(){
@@ -60,8 +60,8 @@ class Pessoa{
         }
         virtual void le(){}
        virtual void escreve(){
-            cout << "\n A pessoa cadastrada é " << getNome();
-            cout << ", ela nasceu no dia "<< getDia() << " do mês " << getMes();
+            cout << "\n A pessoa cadastrada ï¿½ " << getNome();
+            cout << ", ela nasceu no dia "<< getDia() << " do mï¿½s " << getMes();
         }
 };
 
@@ -85,18 +85,18 @@ class Cliente : public Pessoa{
 
             cout << "\nPor favor insira o nome do cliente "; cin >> nome;
             setNome(nome);
-            cout << "\nInsira o número do mês de nascimento "; cin >> mes;
+            cout << "\nInsira o nï¿½mero do mï¿½s de nascimento "; cin >> mes;
             setMes(mes);
             cout << "\nAgora insira a data de nascimento "; cin >> dia;
             setDia(dia);
-            cout << "\nInsira o limite de crédito do seu cliente " ; cin >> limite;
+            cout << "\nInsira o limite de crï¿½dito do seu cliente " ; cin >> limite;
             setlimite(limite);
             cout << "\n Um cliente foi criado!" <<  endl;
         }
         void escreve(){
-            cout << "\n\t O nome do cliente é " << getNome();
-            cout << ", ele nasceu no dia "<< getDia() << " do mês " << getMes() << endl;
-            cout <<"\tE seu limite de crédito é " << getLimite();
+            cout << "\n\t O nome do cliente ï¿½ " << getNome();
+            cout << ", ele nasceu no dia "<< getDia() << " do mï¿½s " << getMes() << endl;
+            cout <<"\tE seu limite de crï¿½dito ï¿½ " << getLimite();
         }
         bool creditoAprovado(float compra){
             bool aprovado = true;
@@ -124,20 +124,20 @@ class Funcionario : public Pessoa{
             dia;
             float salBruto;
 
-            cout << "\nPor favor insira o nome do funcionário: "; cin >> nome;
+            cout << "\nPor favor insira o nome do funcionï¿½rio: "; cin >> nome;
             setNome(nome);
-            cout << "\nInsira o número do mês de nascimento: "; cin >> mes;
+            cout << "\nInsira o nï¿½mero do mï¿½s de nascimento: "; cin >> mes;
             setMes(mes);
             cout << "\nAgora insira a data de nascimento: "; cin >> dia;
             setDia(dia);
-            cout << "\nInsira o seu salário bruto: "; cin >> salBruto;
+            cout << "\nInsira o seu salï¿½rio bruto: "; cin >> salBruto;
             setSalario(salBruto);
-            cout << "\n Um funcionário foi criado!" <<  endl;
+            cout << "\n Um funcionï¿½rio foi criado!" <<  endl;
         }
         void escreve(){
-            cout << "\n\t O nome do funcionário é " << getNome();
-            cout << ", ele nasceu no dia "<< getDia() << " do mês " << getMes() << endl;
-            cout << "\t E seu salário é R$" << getSalario() << endl;
+            cout << "\n\t O nome do funcionï¿½rio ï¿½ " << getNome();
+            cout << ", ele nasceu no dia "<< getDia() << " do mï¿½s " << getMes() << endl;
+            cout << "\t E seu salï¿½rio ï¿½ R$" << getSalario() << endl;
         }
         float salarioLiquido(){
             float INSS = (getSalario() * 8) / 100;
@@ -153,7 +153,7 @@ class Funcionario : public Pessoa{
 class passouDoLimite{
     public:
         void mensagem(){
-            cout<<"\nVocê excedeu o limite de usuários\n";
+            cout<<"\nVocï¿½ excedeu o limite de usuï¿½rios\n";
         }
 };
 void pulaLinha(int l){
@@ -176,23 +176,23 @@ void listaFuncionario(Funcionario* F[]){
     }
 }
 void listaGeral(Cliente* c[], Funcionario* f[]){
-    cout << "\tEsses são os seus clientes cadastrados" << endl;
+    cout << "\tEsses sï¿½o os seus clientes cadastrados" << endl;
         listaCliente(c);
         pulaLinha(1);
-    cout << "\tEsses são os seus funcionários cadastrados" << endl;
+    cout << "\tEsses sï¿½o os seus funcionï¿½rios cadastrados" << endl;
         listaFuncionario(f);
         pulaLinha(1);
 }
 
 void pesquisaAniversariante(Pessoa* P[]){
-    cout << "\t\tAniversariante do Mês"<< endl;
+    cout << "\t\tAniversariante do Mï¿½s"<< endl;
     int mes = 0;
                  do{
-                     cout << "Insira o mês que você quer pesquisar ";cin >> mes;
+                     cout << "Insira o mï¿½s que vocï¿½ quer pesquisar ";cin >> mes;
                   if(mes >12 || mes < 1)
-                        cout << "valor inválido"<< endl;
+                        cout << "valor invï¿½lido"<< endl;
                  }while(mes >12 || mes < 1);
-                 cout << "Estes são os aniversariantes do mes " << mes << " ";
+                 cout << "Estes sï¿½o os aniversariantes do mes " << mes << " ";
 
                  for(int i = 0; i < Pessoa::quantidade;i++){
                     int meuMes = P[i]->getMes();
@@ -232,13 +232,13 @@ void consultaAprovacao(Cliente* C[]){
     float valorCompra;
     int quantC = Cliente::quantidadeCliente;
     if(quantC > 0){
-                cout << "\nQual o valor da compra que o último cliente cadastrado que fazer? " ;cin >> valorCompra;
+                cout << "\nQual o valor da compra que o ï¿½ltimo cliente cadastrado que fazer? " ;cin >> valorCompra;
                 bool aprovado = C[quantC-1]->creditoAprovado(valorCompra);
 
                 if(aprovado == true)
                     cout << "\tA compra pode ser efetuada!"<<endl;
                 else
-                    cout <<"\a\tA compra não pode ser efetuada com sucesso, por favor verifique a sua conta!"<<endl;
+                    cout <<"\a\tA compra nï¿½o pode ser efetuada com sucesso, por favor verifique a sua conta!"<<endl;
             }
             else
                 cout <<"\aNenhum cliente foi cadastrado!"<< endl;
@@ -247,7 +247,7 @@ void consultaAprovacao(Cliente* C[]){
 void cadastraFuncionario(Funcionario* F[], Pessoa* P[]){
      int quantF = Funcionario::quantidadeFuncionario;
      int quantT = Pessoa::quantidade;
-    cout << "\t\tCadastrar Funcionário" << endl;
+    cout << "\t\tCadastrar Funcionï¿½rio" << endl;
 
     try{
         if(quantF > MAX)
@@ -275,9 +275,9 @@ void consultaSalario(Funcionario* F[]){
     char escolha2;
     float salarioLiq;
     bool validado = false;
-    cout << "Você gostaria de informar um percentual padrão para o inss?";
+    cout << "Vocï¿½ gostaria de informar um percentual padrï¿½o para o inss?";
         do{
-            cout << "\nDigite s para sim ou n para não";cin >> escolha2;
+            cout << "\nDigite s para sim ou n para nï¿½o";cin >> escolha2;
                 if(escolha2 == 's'){
                     cout << "insira o valor do inss";cin >> valorInss;
                     salarioLiq = F[quantF-1]->salarioLiquido(valorInss);
@@ -288,31 +288,31 @@ void consultaSalario(Funcionario* F[]){
                     salarioLiq = F[quantF-1]->salarioLiquido();
                     validado = true;
                 }
-                else cout << "\aValor inválido, tente novamente por favor"<< endl;
+                else cout << "\aValor invï¿½lido, tente novamente por favor"<< endl;
 
                 }while(validado == false);
-                 cout << "O salário líquido do funcionário "<< F[quantF-1]->getNome() << " é R$" << salarioLiq;
+                 cout << "O salï¿½rio lï¿½quido do funcionï¿½rio "<< F[quantF-1]->getNome() << " ï¿½ R$" << salarioLiq;
 }
 int menu(){
   setlocale(LC_ALL,"Portuguese");
   int escolha;
   do{
     cout << "\n\t\tMenu Principal" << endl;
-    cout << "\n Para listar todos os usuários aperte 1" << endl;
-    cout << " Para Pesquisar o aniversáriante do mês pressione 2" << endl;
+    cout << "\n Para listar todos os usuï¿½rios aperte 1" << endl;
+    cout << " Para Pesquisar o aniversï¿½riante do mï¿½s pressione 2" << endl;
         pulaLinha(1);
     cout << " Para cadastrar um cliente pressione 3" << endl;
-    cout << " Para consultar uma aprovação pressione 4"<< endl;
+    cout << " Para consultar uma aprovaï¿½ï¿½o pressione 4"<< endl;
     cout << " Para listar todos os clientes pressione 5" << endl;
         pulaLinha(1);
-    cout << " Para cadastrar um funcionário pressione 6" << endl;
-    cout << " Para calcular o salário de um funcionário pressione 7" << endl;
-    cout << " Para listar os funcionários pressione 8" << endl;
+    cout << " Para cadastrar um funcionario pressione 6" << endl;
+    cout << " Para calcular o salario de um funcionario pressione 7" << endl;
+    cout << " Para listar os funcionarios pressione 8" << endl;
         pulaLinha(1);
     cout << " Para sair do programa pressione 0" << endl;
     cout << " Sua escolha: "; cin >> escolha;
     if(escolha < 0 || escolha > 8)
-        cout << "\n\t\t\t\aValor inválido, por favor insira novamente!" << endl;
+        cout << "\n\t\t\t\aValor invaido, por favor insira novamente!" << endl;
   }while(escolha < 0 || escolha > 8);
   return escolha;
 };
@@ -354,7 +354,7 @@ int main()
             break;
             }
             case 4:{
-                cout << "\t\tConsultando Aprovação" << endl;
+                cout << "\t\tConsultando Aprovacao" << endl;
                 consultaAprovacao(C);
             break;
             }
@@ -368,14 +368,13 @@ int main()
             break;
             }
             case 7:{
-
-                cout << "Consultar Salário";
+                cout << "Consultar Salario";
                 consultaSalario(F);
             break;
             }
 
             case 8:{
-                cout << "\t\tListar funcionários"<< endl;
+                cout << "\t\tListar funcionarios"<< endl;
                 listaFuncionario(F);
             break;
             }
