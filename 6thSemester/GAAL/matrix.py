@@ -42,9 +42,8 @@ def soma_matrizes(m1, m2):
             soma[i][j] = m1[i][j] + m2[i][j]
     return soma
 
-m1 = np.random.randint(1,100, size = (2,3))
-m2 = np.random.randint(1,100, size = (2,3))
-m3 = np.random.randint(1,100, size = (3,2))
+m1 = [[1,1],[-1,-1]]
+m2 = [[-1,-1], [1,1]]
 
 print("Matriz 1")
 print(m1, end = "\n\n")
@@ -52,15 +51,5 @@ print(m1, end = "\n\n")
 print("Matriz 2")
 print(m2, end = "\n\n")
 
-print("Matriz 3")
-print(m3, end = "\n\n")
-
-print("Matriz 1 multiplicada pelo escalar 5")
-print(multiplicacao_escalar(m1, 5), end = "\n\n")
-
-print("Matriz 1 somada com a matriz 2")
-print(soma_matrizes(m1, m2))
-m1 = [[1,3],[2,-1]]
-m3 = [[0,1], [2,3]]
-print("Matriz 1 multiplicada com a matriz 3") 
-print(multiplica_matrizes(m1, m3))
+print("Matriz 1 multiplicada com a matriz 2") 
+print(multiplica_matrizes(m1, m2))
