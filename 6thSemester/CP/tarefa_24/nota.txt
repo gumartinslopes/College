@@ -1,0 +1,15 @@
+Passo 1
+    - Tempo da execução do código: 1.822 segundos
+
+Passo 2
+    - Tempo da execução do código: 0.219988 segundos
+
+Passo 3
+    - Tempo da execução do código: 0.56 segundos
+
+Passo 4 
+    - Tempo da execução do código: 0.453 segundos
+    
+Passo 5
+    - Tempo da execução do função de soma: 0.899863 segundos
+    - Tempo da execução da função de copy:  0.000768 segundos

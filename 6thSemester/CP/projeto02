@@ -1,0 +1,1 @@
+scp mm_cuda.cu roda.sh SUAMATRICULA@parcode.icei.pucminas.br:/home/SUAMATRICULA
