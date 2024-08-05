@@ -7,8 +7,8 @@
 - [x] 3rd semester.
 - [x] 4th semester.
 - [x] 5th semester.
-- [ ] 6th semester.
-- [ ] 7th semester.
-- [ ] Graduation semester :man_student:
+- [x] 6th semester.
+- [x] 7th semester.
+- [x] Graduation semester :man_student:
 <br>
 
